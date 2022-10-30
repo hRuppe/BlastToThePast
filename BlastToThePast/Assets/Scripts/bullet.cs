@@ -29,6 +29,14 @@ public class bullet : MonoBehaviour
         {
             // Do dmg through game manager
         }
-        Destroy(gameObject);
+
+        // Sticks the arrow into the object
+        transform.position = transform.position + (transform.forward * 1.25f);
+
+        // Parents the arrow to the other object so it moves with them
+        gameObject.transform.parent = other.gameObject.transform;
+
+        // Disables the collider so it doesn't collide again
+        GetComponent<CapsuleCollider>().enabled = false;
     }
 }
