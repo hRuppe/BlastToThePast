@@ -18,10 +18,10 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] float dmgFlashDelay;
 
     [Header("---- Gun Stats ----")]
-    [SerializeField] int fireRate;
+    [SerializeField] int shootDelay;
 
     bool isShooting;
-    [SerializeField] bool playerInRange; 
+    bool playerInRange; 
 
     void Start()
     {
@@ -44,8 +44,12 @@ public class enemyAI : MonoBehaviour, IDamage
     public void TakeDamage(int dmg)
     {
         HP -= dmg;
-
         StartCoroutine(FlashDamage()); 
+
+        if (HP <= 0)
+        {
+            Destroy(gameObject); 
+        }
     }
 
     IEnumerator FlashDamage()
@@ -59,7 +63,7 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         isShooting = true;
         Instantiate(bullet, bulletSpawnPos.position, transform.rotation);
-        yield return new WaitForSeconds(fireRate);
+        yield return new WaitForSeconds(shootDelay);
         isShooting = false; 
     }
 

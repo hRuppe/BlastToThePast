@@ -285,8 +285,7 @@ MonoBehaviour:
   bulletSpawnPos: {fileID: 8219991642003547946}
   HP: 3
   dmgFlashDelay: 0.1
-  fireRate: 1
-  playerInRange: 0
+  shootDelay: 1
 --- !u!95 &371036039657421895
 Animator:
   serializedVersion: 4

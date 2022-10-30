@@ -6,7 +6,6 @@ public class bullet : MonoBehaviour
 {
     [Header("---- Components ----")]
     [SerializeField] Rigidbody rb;
-    //[SerializeField] GameObject playerRef; Use when game manager is set up
 
     [Header("---- Bullet Stats ----")]
     [SerializeField] float bulletSpeed;
@@ -16,18 +15,13 @@ public class bullet : MonoBehaviour
     void Start()
     {
         rb.velocity =  transform.forward * bulletSpeed; // Use instead of trans.forward when game manager is set up with player (playerRef.transform.position - transform.position)
+        Destroy(gameObject, bulletTimer); 
     }
 
     void Update()
     {
-        StartCoroutine(DestroyBullet()); 
     }
 
-    IEnumerator DestroyBullet()
-    {
-        yield return new WaitForSeconds(bulletTimer);
-        Destroy(gameObject); 
-    }
 
     private void OnTriggerEnter(Collider other)
     {
