@@ -1368,6 +1368,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy1
       objectReference: {fileID: 0}
+    - target: {fileID: 371036039657422009, guid: 9764131e28a2349478efe55fe739e1d3, type: 3}
+      propertyPath: m_AutoBraking
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 371036039657422010, guid: 9764131e28a2349478efe55fe739e1d3, type: 3}
       propertyPath: tempPlayer
       value: 
