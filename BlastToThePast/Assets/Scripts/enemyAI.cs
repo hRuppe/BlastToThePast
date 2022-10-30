@@ -1,6 +1,8 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -25,7 +27,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void Start()
     {
-        
+       
     }
 
     void Update()
@@ -69,6 +71,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     public void OnTriggerEnter(Collider other)
     {
+        Console.WriteLine("Collided with: " + other.name);
         if (other.tag == "Player")
         {
             playerInRange = true;
