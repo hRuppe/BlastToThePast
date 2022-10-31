@@ -11,19 +11,20 @@ public class enemyAI : MonoBehaviour, IDamage
     [Header("---- Components ----")]
     [SerializeField] SkinnedMeshRenderer model;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] GameObject tempPlayer; // Use until player & game manager are ready
+    [SerializeField] GameObject tempPlayer; // Use game manager when available
     [SerializeField] GameObject bullet;
     [SerializeField] Transform bulletSpawnPos; 
 
     [Header("---- Enemy Stats ----")]
-    [SerializeField] int HP;
-    [SerializeField] float dmgFlashDelay;
+    [Range(1, 100)][SerializeField] int HP;
+    [Range(0, 5)][SerializeField] float playerFaceSpeed; 
 
     [Header("---- Gun Stats ----")]
-    [SerializeField] int shootDelay;
+    [Range(1, 5)][SerializeField] int shootDelay;
 
     bool isShooting;
-    bool playerInRange; 
+    bool playerInRange;
+    Vector3 playerDir; 
 
     void Start()
     {
@@ -32,15 +33,24 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void Update()
     {
-        agent.SetDestination(tempPlayer.transform.position);
+        agent.SetDestination(tempPlayer.transform.position); // Use game manager when available
 
         if (playerInRange)
         {
+            FacePlayer(); 
             if (!isShooting)
             {
                 StartCoroutine(Shoot());
             }
         }
+    }
+
+    void FacePlayer()
+    {
+        playerDir = tempPlayer.transform.position - transform.position; // Use game manager when available
+        playerDir.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(playerDir); 
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, playerFaceSpeed * Time.deltaTime); // Use game manager when available
     }
 
     public void TakeDamage(int dmg)
@@ -57,7 +67,7 @@ public class enemyAI : MonoBehaviour, IDamage
     IEnumerator FlashDamage()
     {
         model.material.color = Color.red; 
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.15f);
         model.material.color = Color.white; 
     }
 

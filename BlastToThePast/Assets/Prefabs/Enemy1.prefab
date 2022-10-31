@@ -283,9 +283,9 @@ MonoBehaviour:
   tempPlayer: {fileID: 0}
   bullet: {fileID: 5441798788371574306, guid: 21646ccc963a3e14da6143d809ddfb46, type: 3}
   bulletSpawnPos: {fileID: 8219991642003547946}
-  HP: 3
-  dmgFlashDelay: 0.1
-  shootDelay: 1
+  HP: 5
+  playerFaceSpeed: 2
+  shootDelay: 2
 --- !u!195 &371036039657422009
 NavMeshAgent:
   m_ObjectHideFlags: 0

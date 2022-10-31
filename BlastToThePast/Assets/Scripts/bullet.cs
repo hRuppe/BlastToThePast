@@ -8,13 +8,13 @@ public class bullet : MonoBehaviour
     [SerializeField] Rigidbody rb;
 
     [Header("---- Bullet Stats ----")]
-    [SerializeField] float bulletSpeed;
-    [SerializeField] int bulletDmg;
-    [SerializeField] float bulletTimer; 
+    [Range(5, 50)][SerializeField] float bulletSpeed;
+    [Range(1, 100)][SerializeField] int bulletDmg;
+    [Range(5, 25)][SerializeField] float bulletTimer; 
 
     void Start()
     {
-        rb.velocity =  transform.forward * bulletSpeed; // Use instead of trans.forward when game manager is set up with player (playerRef.transform.position - transform.position)
+        rb.velocity =  transform.forward * bulletSpeed; // Use instead of trans.forward when game manager is set up with player: (playerRef.transform.position - transform.position)
         Destroy(gameObject, bulletTimer); 
     }
 
