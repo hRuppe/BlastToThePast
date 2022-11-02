@@ -104,5 +104,7 @@ public class playerController : MonoBehaviour
     public void damage(int damageValue)
     {
         playerHealth -= damageValue;
+
+        StartCoroutine(gameManager.instance.playerDamageFlash()); 
     }
 }

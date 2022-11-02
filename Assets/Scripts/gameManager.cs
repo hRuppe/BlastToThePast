@@ -12,6 +12,7 @@ public class gameManager : MonoBehaviour
     public playerController playerScript; // Player script tracker
 
     [Header("----- UI -----")]
+    public GameObject playerDmgFlash; // UI element when player takes damage
     public GameObject pauseMenu; //UI element for the pause screen
 
     public bool isPaused;
@@ -50,5 +51,12 @@ public class gameManager : MonoBehaviour
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public IEnumerator playerDamageFlash()
+    {
+        playerDmgFlash.SetActive(true); 
+        yield return new WaitForSeconds(.1f);
+        playerDmgFlash.SetActive(false);
     }
 }
