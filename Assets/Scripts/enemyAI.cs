@@ -27,7 +27,8 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void Start()
     {
-       
+        gameManager.instance.enemiesToKill++; //Increment the enemy count on spawn
+        gameManager.instance.updateUI(); //Update the UI
     }
 
     void Update()
@@ -59,6 +60,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
+            gameManager.instance.updateEnemyNumber(); //Decrement enemy number on kill
             Destroy(gameObject); 
         }
     }

@@ -27,6 +27,7 @@ public class playerController : MonoBehaviour
 
     private int jumpTimes;
     private float playerCurrentSpeed;
+    int OrigHP;
 
 
     private bool isShooting = false;
@@ -34,6 +35,8 @@ public class playerController : MonoBehaviour
     private void Start()
     {
         playerCurrentSpeed = playerBaseSpeed;
+        OrigHP = playerHealth;
+        respawn();
     }
 
     void Update()
@@ -106,5 +109,20 @@ public class playerController : MonoBehaviour
         playerHealth -= damageValue;
 
         StartCoroutine(gameManager.instance.playerDamageFlash()); 
+
+        if(playerHealth <= 0)
+        {
+            gameManager.instance.playerDeadMenu.SetActive(true);
+            gameManager.instance.pause();
+        }    
+    }
+
+    public void respawn()
+    {
+        controller.enabled = false;
+        playerHealth = OrigHP;
+        transform.position = gameManager.instance.spawnPos.transform.position;
+        gameManager.instance.playerDeadMenu.SetActive(false);
+        controller.enabled = true;
     }
 }
