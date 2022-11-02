@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23fa65f3c1feab04789766c7345d1fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSens: 80
-  verticalSens: 80
+  horizontalSens: 300
+  verticalSens: 300
   verticalConstraintMin: -90
   verticalConstraintMax: 90
   invertY: 0

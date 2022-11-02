@@ -11,7 +11,6 @@ public class enemyAI : MonoBehaviour, IDamage
     [Header("---- Components ----")]
     [SerializeField] SkinnedMeshRenderer model;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] GameObject tempPlayer; // Use game manager when available
     [SerializeField] GameObject bullet;
     [SerializeField] Transform bulletSpawnPos; 
 
@@ -33,7 +32,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void Update()
     {
-        agent.SetDestination(tempPlayer.transform.position); // Use game manager when available
+        agent.SetDestination(gameManager.instance.player.transform.position); 
 
         if (playerInRange)
         {
@@ -47,10 +46,10 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void FacePlayer()
     {
-        playerDir = tempPlayer.transform.position - transform.position; // Use game manager when available
+        playerDir = gameManager.instance.player.transform.position - transform.position; 
         playerDir.y = 0;
         Quaternion rotation = Quaternion.LookRotation(playerDir); 
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, playerFaceSpeed * Time.deltaTime); // Use game manager when available
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, playerFaceSpeed * Time.deltaTime); 
     }
 
     public void TakeDamage(int dmg)

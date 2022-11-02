@@ -280,7 +280,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 371036039661580869}
   agent: {fileID: 371036039657422009}
-  tempPlayer: {fileID: 0}
   bullet: {fileID: 5441798788371574306, guid: 21646ccc963a3e14da6143d809ddfb46, type: 3}
   bulletSpawnPos: {fileID: 8219991642003547946}
   HP: 5
