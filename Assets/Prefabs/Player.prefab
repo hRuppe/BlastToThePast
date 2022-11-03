@@ -195,14 +195,14 @@ MonoBehaviour:
   controller: {fileID: 4348394794709640343}
   arrow: {fileID: 8778150636216473605, guid: a22d5b02b8a55c042a32dd6af19ede31, type: 3}
   shootPos: {fileID: 4348394793739231654}
-  playerHealth: 10
+  playerHealth: 50
   playerBaseSpeed: 5
   playerSprintMod: 1.75
   jumpHeight: 12
   gravityValue: 35
   jumpMax: 2
-  fireRate: 1
-  shootRange: 15
+  fireRate: 3
+  shootRange: 20
   weaponDamage: 1
   jumpTimes: 0
 --- !u!23 &4348394794709640341

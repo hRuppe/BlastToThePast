@@ -282,7 +282,7 @@ MonoBehaviour:
   agent: {fileID: 371036039657422009}
   bullet: {fileID: 5441798788371574306, guid: 21646ccc963a3e14da6143d809ddfb46, type: 3}
   bulletSpawnPos: {fileID: 8219991642003547946}
-  HP: 3
+  HP: 4
   playerFaceSpeed: 2
   shootDelay: 3
 --- !u!195 &371036039657422009
@@ -352,7 +352,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 15
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &371036039650047053
 GameObject:

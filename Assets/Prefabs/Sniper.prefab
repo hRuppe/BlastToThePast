@@ -866,9 +866,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1012627375222382210}
-  m_LocalRotation: {x: -0, y: 0.8797825, z: -0, w: 0.47537652}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -48.09, y: 15.46, z: 41.96}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1012627375222026444}
@@ -876,7 +876,7 @@ Transform:
   - {fileID: 8735007096972447113}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 123.232, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1012627375212975641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -894,8 +894,8 @@ MonoBehaviour:
   bullet: {fileID: 5441798788371574306, guid: 21646ccc963a3e14da6143d809ddfb46, type: 3}
   bulletSpawnPos: {fileID: 8735007096972447113}
   HP: 2
-  playerFaceSpeed: 2
-  shootDelay: 3
+  playerFaceSpeed: 3
+  shootDelay: 2
 --- !u!195 &1012627375212975642
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -963,7 +963,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 30
+  m_Radius: 50
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1012627375222382318
 GameObject:

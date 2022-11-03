@@ -10,7 +10,7 @@ public class playerController : MonoBehaviour
     [SerializeField] Transform shootPos;
 
     [Header("----- Player Stats -----")]
-    [Range(0, 10)] [SerializeField] int playerHealth;
+    [Range(0, 50)] [SerializeField] int playerHealth;
     [Range(1, 5)] [SerializeField] float playerBaseSpeed; 
     [Range(1.5f, 5)] [SerializeField] float playerSprintMod;
     [Range(8, 20)] [SerializeField] float jumpHeight;
@@ -18,9 +18,9 @@ public class playerController : MonoBehaviour
     [Range(1, 3)] [SerializeField] int jumpMax;
 
     [Header("----- Weapon Stats -----")]
-    [Range(0.5f, 100)] [SerializeField] float fireRate; // Value represents bullets per second
+    [Range(0.5f, 3)] [SerializeField] float fireRate; // Value represents bullets per second
     [Range(1, 300)] [SerializeField] float shootRange;
-    [Range(0.25f, 100)] [SerializeField] int weaponDamage;
+    [Range(0, 100)] [SerializeField] int weaponDamage;
 
     private Vector3 move;
     private Vector3 playerVelocity;
@@ -89,6 +89,7 @@ public class playerController : MonoBehaviour
         if (!isShooting && Input.GetButton("Shoot"))
         {
             isShooting = true;
+            Debug.Log("Shot fired");
 
             // GameObject newArrow = Instantiate(arrow, shootPos.position, transform.rotation);
 
