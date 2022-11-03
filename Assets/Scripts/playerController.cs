@@ -25,7 +25,8 @@ public class playerController : MonoBehaviour
     private Vector3 move;
     private Vector3 playerVelocity;
 
-    private int jumpTimes;
+    [SerializeField] private int jumpTimes;
+    private int origJumpsMax; // Wall jump
     private float playerCurrentSpeed;
     int OrigHP;
 
@@ -36,6 +37,7 @@ public class playerController : MonoBehaviour
     {
         playerCurrentSpeed = playerBaseSpeed;
         OrigHP = playerHealth;
+        origJumpsMax = jumpMax; // Wall jump
         respawn();
     }
 
@@ -124,5 +126,34 @@ public class playerController : MonoBehaviour
         transform.position = gameManager.instance.spawnPos.transform.position;
         gameManager.instance.playerDeadMenu.SetActive(false);
         controller.enabled = true;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    { 
+        AddWallJump(other);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        TakeWallJumpAway(other);
+    }
+
+    private void AddWallJump(Collider other)
+    {
+        if (other.tag == "Wall")
+        {
+            jumpTimes--;
+        }
+    }
+
+    private void TakeWallJumpAway(Collider other)
+    {
+        if (other.tag == "Wall")
+        {
+            if (jumpMax > origJumpsMax)
+            {
+                jumpTimes++;
+            }
+        }
     }
 }
