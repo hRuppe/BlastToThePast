@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23fa65f3c1feab04789766c7345d1fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSens: 350
-  verticalSens: 350
+  horizontalSens: 150
+  verticalSens: 150
   verticalConstraintMin: -90
   verticalConstraintMax: 90
   invertY: 0
@@ -195,14 +195,14 @@ MonoBehaviour:
   controller: {fileID: 4348394794709640343}
   arrow: {fileID: 8778150636216473605, guid: a22d5b02b8a55c042a32dd6af19ede31, type: 3}
   shootPos: {fileID: 4348394793739231654}
-  playerHealth: 50
-  playerBaseSpeed: 5
+  playerHealth: 20
+  playerBaseSpeed: 5.5
   playerSprintMod: 1.75
   jumpHeight: 12
   gravityValue: 35
   jumpMax: 2
   fireRate: 3
-  shootRange: 20
+  shootRange: 16
   weaponDamage: 1
   jumpTimes: 0
 --- !u!23 &4348394794709640341

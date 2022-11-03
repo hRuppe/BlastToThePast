@@ -836,7 +836,7 @@ Transform:
   m_GameObject: {fileID: 2594949670355331976}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -41.182117, y: 45.398617, z: -88.04274}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2594949670355420614}
@@ -861,7 +861,7 @@ MonoBehaviour:
   agent: {fileID: 2594949670347957008}
   bullet: {fileID: 4549919629550166347, guid: 5a31791dac6d69d4b928f40be17d9134, type: 3}
   bulletSpawnPos: {fileID: 5996109072551884931}
-  HP: 2
+  HP: 7
   playerFaceSpeed: 3
   shootDelay: 2
 --- !u!195 &2594949670347957008
@@ -874,7 +874,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 160
@@ -931,7 +931,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 50
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2594949670355332068
 GameObject:

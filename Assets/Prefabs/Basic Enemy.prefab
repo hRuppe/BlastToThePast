@@ -284,7 +284,7 @@ MonoBehaviour:
   bulletSpawnPos: {fileID: 8219991642003547946}
   HP: 4
   playerFaceSpeed: 2
-  shootDelay: 3
+  shootDelay: 2
 --- !u!195 &371036039657422009
 NavMeshAgent:
   m_ObjectHideFlags: 0
