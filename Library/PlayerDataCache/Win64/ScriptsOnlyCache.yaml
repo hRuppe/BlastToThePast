@@ -1232,4 +1232,4 @@ ScriptsOnlyBuild:
   platform: 19
   scenePathNames:
   - Assets/Scenes/Build.unity
-  playerPath: C:/Users/ruppe/Downloads/Prototype/BlastToThePast.exe
+  playerPath: C:/Users/mrtlc/Desktop/BlastToThePast - Builds/BlastToThePast.exe
