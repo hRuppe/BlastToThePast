@@ -16,10 +16,13 @@ public class enemyAI : MonoBehaviour, IDamage
 
     [Header("---- Enemy Stats ----")]
     [Range(1, 100)][SerializeField] int HP;
-    [Range(0, 5)][SerializeField] float playerFaceSpeed; 
+    [Range(0, 5)][SerializeField] float playerFaceSpeed;
+    [SerializeField] int fieldOfView;
 
     [Header("---- Gun Stats ----")]
     [Range(1, 5)][SerializeField] int shootDelay;
+
+    public bool playerCanBeSeen;
 
     bool isShooting;
     bool playerInRange;
@@ -33,9 +36,10 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void Update()
     {
-        agent.SetDestination(gameManager.instance.player.transform.position); 
+        if (CheckFOV())
+            agent.SetDestination(gameManager.instance.player.transform.position); 
 
-        if (playerInRange)
+        if (playerInRange && CheckFOV())
         {
             FacePlayer(); 
             if (!isShooting)
@@ -65,6 +69,38 @@ public class enemyAI : MonoBehaviour, IDamage
         }
     }
 
+    // Desc: Checks if the player is within the FOV and checks for obstacles
+    // Returns: True if a player can be seen, false if player cannot be seen
+    bool CheckFOV()
+    {
+        return CheckAngleToPlayer() && !CheckForObstacles();
+    }
+
+    // Desc: Checks if the angle between the enemy and the player player is within the enemy FOV value
+    // Returns: True if a player is within the FOV and vision range, False if the player isn't
+    bool CheckAngleToPlayer()
+    {
+        Vector3 playerDirection = Vector3.Normalize(gameManager.instance.player.transform.position - transform.position);
+        Debug.Log(Vector3.Angle(transform.forward, playerDirection));
+        return (Vector3.Angle(transform.forward, playerDirection) <= fieldOfView) && playerCanBeSeen;
+    }
+
+    // Desc: Uses a raycast to check for obstacles between the enemy and player
+    // Returns: True if there is an obstacle, False if there isn't an obstacle
+    bool CheckForObstacles()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, gameManager.instance.player.transform.position - transform.position, out hit))
+        {
+            if (hit.transform.CompareTag("Player"))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     IEnumerator FlashDamage()
     {
         model.material.color = Color.red; 
@@ -82,7 +118,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
     public void OnTriggerEnter(Collider other)
     {
-        Console.WriteLine("Collided with: " + other.name);
         if (other.tag == "Player")
         {
             playerInRange = true;
