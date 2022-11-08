@@ -28,21 +28,20 @@ public class playerController : MonoBehaviour
 
     private Vector3 move;
     private Vector3 playerVelocity;
-
-    [SerializeField] private int jumpTimes;
-    private int origJumpsMax; // Wall jump
+    private int jumpTimes;
+    private int origJumpsMax; // For wall jump
     private int OrigHP;
     private int selectedGun;
     private float playerCurrentSpeed;
-
     private bool isShooting = false;
+    public float soundEmitLevel; 
 
     private void Start()
     {
         playerCurrentSpeed = playerBaseSpeed;
         OrigHP = playerHealth;
-        origJumpsMax = jumpMax; // Wall jump
-        respawn();
+        origJumpsMax = jumpMax; // For wall jump
+        Respawn();
     }
 
     void Update()
@@ -74,6 +73,23 @@ public class playerController : MonoBehaviour
 
         playerVelocity.y -= gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+
+        // Check player movement for noise level
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+            if (!Input.GetButton("Sprint") && Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d"))
+            {
+                soundEmitLevel = .5f; 
+            }
+            else if (Input.GetButton("Sprint"))
+            {
+                soundEmitLevel = 1; 
+            }
+        }
+        else
+        {
+            soundEmitLevel = 0;
+        }
     }
 
     void PlayerSprint()
@@ -94,7 +110,6 @@ public class playerController : MonoBehaviour
         if (gunStatList.Count > 0 && !isShooting && Input.GetButton("Shoot"))
         {
             isShooting = true;
-            Debug.Log("Shot fired");
 
             // GameObject newArrow = Instantiate(arrow, shootPos.position, transform.rotation);
 
@@ -170,7 +185,7 @@ public class playerController : MonoBehaviour
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunStatList[selectedGun].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
     }
 
-    public void respawn()
+    public void Respawn()
     {
         controller.enabled = false;
         playerHealth = OrigHP;

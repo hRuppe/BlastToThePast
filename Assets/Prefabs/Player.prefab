@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23fa65f3c1feab04789766c7345d1fdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSens: 150
-  verticalSens: 150
+  horizontalSens: 300
+  verticalSens: 300
   verticalConstraintMin: -90
   verticalConstraintMax: 90
   invertY: 0
@@ -196,6 +196,7 @@ MonoBehaviour:
   controller: {fileID: 4348394794709640343}
   arrow: {fileID: 8778150636216473605, guid: a22d5b02b8a55c042a32dd6af19ede31, type: 3}
   shootPos: {fileID: 4348394793739231654}
+  soundTrigger: {fileID: 0}
   playerHealth: 20
   playerBaseSpeed: 5.5
   playerSprintMod: 1.75
@@ -208,7 +209,6 @@ MonoBehaviour:
   gunStatList: []
   hitEffect: {fileID: 0}
   gunModel: {fileID: 7495492988607187611}
-  jumpTimes: 0
 --- !u!23 &4348394794709640341
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -3,8 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.ShortcutManagement;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
@@ -23,8 +25,9 @@ public class enemyAI : MonoBehaviour, IDamage
     [Range(1, 5)][SerializeField] int shootDelay;
 
     public bool playerCanBeSeen;
-
+    public bool playerHeard; 
     bool isShooting;
+    bool isFighting; 
     bool playerInRange;
     Vector3 playerDir; 
 
@@ -37,16 +40,18 @@ public class enemyAI : MonoBehaviour, IDamage
     void Update()
     {
         if (CheckFOV())
-            agent.SetDestination(gameManager.instance.player.transform.position); 
+            agent.SetDestination(gameManager.instance.player.transform.position);
 
-        if (playerInRange && CheckFOV())
+        if (playerInRange && CheckFOV()) // Here's where I'm having the issue
         {
-            FacePlayer(); 
-            if (!isShooting)
+            FacePlayer();
+            if (!isShooting && CheckFOV())
             {
                 StartCoroutine(Shoot());
             }
         }
+
+        StartCoroutine(CheckOnNoise());
     }
 
     void FacePlayer()
@@ -76,12 +81,12 @@ public class enemyAI : MonoBehaviour, IDamage
         return CheckAngleToPlayer() && !CheckForObstacles();
     }
 
-    // Desc: Checks if the angle between the enemy and the player player is within the enemy FOV value
+    // Desc: Checks if the angle between the enemy and the player is within the enemy FOV value
     // Returns: True if a player is within the FOV and vision range, False if the player isn't
     bool CheckAngleToPlayer()
     {
         Vector3 playerDirection = Vector3.Normalize(gameManager.instance.player.transform.position - transform.position);
-        Debug.Log(Vector3.Angle(transform.forward, playerDirection));
+        //Debug.Log(Vector3.Angle(transform.forward, playerDirection));
         return (Vector3.Angle(transform.forward, playerDirection) <= fieldOfView) && playerCanBeSeen;
     }
 
@@ -99,6 +104,18 @@ public class enemyAI : MonoBehaviour, IDamage
         }
 
         return true;
+    }
+
+    // Desc: Checks that the player is not in FOV & if isHeard is true, sends the enemy to that heard position
+    IEnumerator CheckOnNoise()
+    {
+        if (playerHeard && !CheckFOV())
+        {
+            Vector3 playerDetectedPos = gameManager.instance.player.transform.position;
+            agent.SetDestination(playerDetectedPos);
+            yield return new WaitForSeconds(3); 
+            playerHeard = false; 
+        }
     }
 
     IEnumerator FlashDamage()
