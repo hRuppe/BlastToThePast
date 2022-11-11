@@ -15,7 +15,7 @@ public class playerController : MonoBehaviour
     [Range(1.5f, 5)] [SerializeField] float playerSprintMod;
     [Range(8, 20)] [SerializeField] float jumpHeight;
     [Range(0, 35)] [SerializeField] float gravityValue;
-    [Range(1, 3)] [SerializeField] int jumpMax;
+    [Range(1, 3)] [SerializeField] public int jumpMax;
 
     [Header("----- Weapon Stats -----")]
     [SerializeField] float shootRate; // Value represents bullets per second
@@ -28,19 +28,20 @@ public class playerController : MonoBehaviour
 
     private Vector3 move;
     private Vector3 playerVelocity;
-    private int jumpTimes;
-    private int origJumpsMax; // For wall jump
+    public int jumpTimes;
+    public int origJumpsMax;
     private int OrigHP;
     private int selectedGun;
     private float playerCurrentSpeed;
     private bool isShooting = false;
-    public float soundEmitLevel; 
 
     private void Start()
     {
-        playerCurrentSpeed = playerBaseSpeed;
+        // Store original values
         OrigHP = playerHealth;
-        origJumpsMax = jumpMax; // For wall jump
+        origJumpsMax = jumpMax;
+
+        playerCurrentSpeed = playerBaseSpeed;
         Respawn();
     }
 
@@ -73,23 +74,6 @@ public class playerController : MonoBehaviour
 
         playerVelocity.y -= gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
-
-        // Check player movement for noise level
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-        {
-            if (!Input.GetButton("Sprint") && Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d"))
-            {
-                soundEmitLevel = .5f; 
-            }
-            else if (Input.GetButton("Sprint"))
-            {
-                soundEmitLevel = 1; 
-            }
-        }
-        else
-        {
-            soundEmitLevel = 0;
-        }
     }
 
     void PlayerSprint()
@@ -194,32 +178,4 @@ public class playerController : MonoBehaviour
         controller.enabled = true;
     }
 
-    public void OnTriggerEnter(Collider other)
-    { 
-        AddWallJump(other);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        TakeWallJumpAway(other);
-    }
-
-    private void AddWallJump(Collider other)
-    {
-        if (other.tag == "Wall")
-        {
-            jumpTimes--;
-        }
-    }
-
-    private void TakeWallJumpAway(Collider other)
-    {
-        if (other.tag == "Wall")
-        {
-            if (jumpMax > origJumpsMax)
-            {
-                jumpTimes++;
-            }
-        }
-    }
 }

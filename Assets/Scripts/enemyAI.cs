@@ -1,9 +1,7 @@
-using JetBrains.Annotations;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.ShortcutManagement;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
@@ -14,49 +12,103 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] SkinnedMeshRenderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] GameObject bullet;
-    [SerializeField] Transform bulletSpawnPos; 
-
+    [SerializeField] Transform bulletSpawnPos;
+    [SerializeField] Animator anim;
+    [SerializeField] GameObject headPos;
+    
     [Header("---- Enemy Stats ----")]
     [Range(1, 100)][SerializeField] int HP;
-    [Range(0, 5)][SerializeField] float playerFaceSpeed;
-    [SerializeField] int fieldOfView;
+    [Range(0, 5)][SerializeField] float playerFaceSpeed; // Speed of the enemy turning to face player in range
+    [Range(1, 10)][SerializeField] int animLerpSpeed; // How fast the animation transitions happen
+    [Range(25, 75)][SerializeField] int sightAngle; // The angle that the player has to be under to be seen
+    [Range(0, 50)][SerializeField] int roamDist; // How far the enemy can roam from orig position
 
     [Header("---- Gun Stats ----")]
     [Range(1, 5)][SerializeField] int shootDelay;
 
-    public bool playerCanBeSeen;
-    public bool playerHeard; 
     bool isShooting;
-    bool isFighting; 
+    float origStoppingDist;
+    Vector3 startingPos;
     bool playerInRange;
-    Vector3 playerDir; 
+    Vector3 playerDir;
+    float origSpeed;
+    float angleToPlayer;
 
     void Start()
     {
+        // Store original values
+        origStoppingDist = agent.stoppingDistance;
+        origSpeed = agent.speed;
+        startingPos = transform.position;
+
         gameManager.instance.enemiesToKill++; //Increment the enemy count on spawn
         gameManager.instance.updateUI(); //Update the UI
     }
 
     void Update()
     {
-        if (CheckFOV())
-            agent.SetDestination(gameManager.instance.player.transform.position);
+        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agent.velocity.normalized.magnitude, Time.deltaTime * animLerpSpeed));
 
-        if (playerInRange && CheckFOV()) // Here's where I'm having the issue
+        if (agent.enabled)
         {
-            FacePlayer();
-            if (!isShooting && CheckFOV())
+            if (playerInRange)
             {
-                StartCoroutine(Shoot());
+
+                CanSeePlayer();
+            }
+            else if (agent.remainingDistance < 0.1f && agent.destination != gameManager.instance.player.transform.position)
+            {
+                Roam();
             }
         }
+    }
 
-        StartCoroutine(CheckOnNoise());
+    void CanSeePlayer()
+    {
+        playerDir = gameManager.instance.player.transform.position - headPos.transform.position;
+        angleToPlayer = Vector3.Angle(playerDir, transform.forward);
+
+        RaycastHit hit;
+        if (Physics.Raycast(headPos.transform.position, playerDir, out hit))
+        {
+            Debug.DrawRay(headPos.transform.position, playerDir);
+            // Checks that player is not behind an object and within the enemy fov
+            if (hit.collider.tag == "Player" && angleToPlayer <= sightAngle)
+            {
+                agent.stoppingDistance = origStoppingDist;
+                agent.SetDestination(gameManager.instance.player.transform.position);
+
+                // Prevents enemy from freezing up when you go the side of him in a fight - still happens if you go all the way behind him quickly
+                if (agent.remainingDistance < agent.stoppingDistance)
+                {
+                    FacePlayer();
+                }
+
+                if (!isShooting)
+                {
+                    StartCoroutine(Shoot());
+                }
+            }
+        }
+    }
+
+    void Roam()
+    {
+        agent.stoppingDistance = 0;
+
+        Vector3 randomPos = Random.insideUnitSphere * roamDist;
+        randomPos += startingPos;
+
+        NavMeshHit hit;
+
+        NavMesh.SamplePosition(new Vector3(randomPos.x, 0, randomPos.z), out hit, 1, 1);
+        NavMeshPath path = new NavMeshPath();
+        agent.CalculatePath(hit.position, path);
+        agent.SetPath(path);
     }
 
     void FacePlayer()
     {
-        playerDir = gameManager.instance.player.transform.position - transform.position; 
         playerDir.y = 0;
         Quaternion rotation = Quaternion.LookRotation(playerDir); 
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, playerFaceSpeed * Time.deltaTime); 
@@ -65,7 +117,8 @@ public class enemyAI : MonoBehaviour, IDamage
     public void TakeDamage(int dmg)
     {
         HP -= dmg;
-        StartCoroutine(FlashDamage()); 
+        StartCoroutine(FlashDamage());
+        agent.SetDestination(gameManager.instance.player.transform.position);
 
         if (HP <= 0)
         {
@@ -74,49 +127,7 @@ public class enemyAI : MonoBehaviour, IDamage
         }
     }
 
-    // Desc: Checks if the player is within the FOV and checks for obstacles
-    // Returns: True if a player can be seen, false if player cannot be seen
-    bool CheckFOV()
-    {
-        return CheckAngleToPlayer() && !CheckForObstacles();
-    }
 
-    // Desc: Checks if the angle between the enemy and the player is within the enemy FOV value
-    // Returns: True if a player is within the FOV and vision range, False if the player isn't
-    bool CheckAngleToPlayer()
-    {
-        Vector3 playerDirection = Vector3.Normalize(gameManager.instance.player.transform.position - transform.position);
-        //Debug.Log(Vector3.Angle(transform.forward, playerDirection));
-        return (Vector3.Angle(transform.forward, playerDirection) <= fieldOfView) && playerCanBeSeen;
-    }
-
-    // Desc: Uses a raycast to check for obstacles between the enemy and player
-    // Returns: True if there is an obstacle, False if there isn't an obstacle
-    bool CheckForObstacles()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, gameManager.instance.player.transform.position - transform.position, out hit))
-        {
-            if (hit.transform.CompareTag("Player"))
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    // Desc: Checks that the player is not in FOV & if isHeard is true, sends the enemy to that heard position
-    IEnumerator CheckOnNoise()
-    {
-        if (playerHeard && !CheckFOV())
-        {
-            Vector3 playerDetectedPos = gameManager.instance.player.transform.position;
-            agent.SetDestination(playerDetectedPos);
-            yield return new WaitForSeconds(3); 
-            playerHeard = false; 
-        }
-    }
 
     IEnumerator FlashDamage()
     {
@@ -128,7 +139,10 @@ public class enemyAI : MonoBehaviour, IDamage
     IEnumerator Shoot()
     {
         isShooting = true;
+        anim.SetTrigger("Shoot");
+
         Instantiate(bullet, bulletSpawnPos.position, transform.rotation);
+
         yield return new WaitForSeconds(shootDelay);
         isShooting = false; 
     }
