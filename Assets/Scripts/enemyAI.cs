@@ -53,7 +53,6 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             if (playerInRange)
             {
-
                 CanSeePlayer();
             }
             else if (agent.remainingDistance < 0.1f && agent.destination != gameManager.instance.player.transform.position)
@@ -118,6 +117,8 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         HP -= dmg;
         StartCoroutine(FlashDamage());
+        // Turn stopping distance to 0 so enemy goes exactly where he was shot from
+        agent.stoppingDistance = 0;
         agent.SetDestination(gameManager.instance.player.transform.position);
 
         if (HP <= 0)

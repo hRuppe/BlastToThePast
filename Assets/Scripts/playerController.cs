@@ -8,6 +8,9 @@ public class playerController : MonoBehaviour
     [SerializeField] CharacterController controller;
     [SerializeField] GameObject arrow; // This will eventually be determined by the weapon the player is holding
     [SerializeField] Transform shootPos;
+    [SerializeField] GameObject mine;
+    [SerializeField] GameObject gunModel;
+    [SerializeField] GameObject hitEffect;
 
     [Header("----- Player Stats -----")]
     [Range(0, 50)] [SerializeField] int playerHealth;
@@ -22,18 +25,20 @@ public class playerController : MonoBehaviour
     [SerializeField] float shootRange;
     [SerializeField] int shootDamage;
     [SerializeField] List<gunStats> gunStatList;
-    [SerializeField] GameObject hitEffect;
-    [SerializeField] GameObject gunModel;
-
+    [Range(1, 10)][SerializeField] int minePlaceDistance;
+    [Range(0, 10)][SerializeField] int mineCount;
+    [Range(1, 10)][SerializeField] float placeMineTimer;
 
     private Vector3 move;
     private Vector3 playerVelocity;
-    public int jumpTimes;
-    public int origJumpsMax;
+    [HideInInspector] public int jumpTimes;
+    [HideInInspector] public int origJumpsMax;
     private int OrigHP;
     private int selectedGun;
     private float playerCurrentSpeed;
-    private bool isShooting = false;
+    private bool isShooting;
+    bool isPlacingMine;
+
 
     private void Start()
     {
@@ -50,6 +55,7 @@ public class playerController : MonoBehaviour
         PlayerMove();
         PlayerSprint();
         StartCoroutine(Shoot());
+        StartCoroutine(PlaceMine()); 
         GunSelect();
     }
 
@@ -111,13 +117,29 @@ public class playerController : MonoBehaviour
         }
     }
 
+    IEnumerator PlaceMine()
+    {
+        if (Input.GetButtonDown("Place Trap") && !isPlacingMine && mineCount > 0)
+        {
+            isPlacingMine = true;
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(.5f, .5f)), out hit, minePlaceDistance))
+            {
+                Instantiate(mine, hit.point, mine.transform.rotation);
+                mineCount--;
+            }
+            yield return new WaitForSeconds(placeMineTimer);
+            isPlacingMine = false;
+        }
+    }
+
     public void damage(int damageValue)
     {
         playerHealth -= damageValue;
+        StartCoroutine(gameManager.instance.playerDamageFlash());
+        UpdatePlayerHPBar();
 
-        StartCoroutine(gameManager.instance.playerDamageFlash()); 
-
-        if(playerHealth <= 0)
+        if (playerHealth <= 0)
         {
             gameManager.instance.playerDeadMenu.SetActive(true);
             gameManager.instance.pause();
@@ -173,9 +195,15 @@ public class playerController : MonoBehaviour
     {
         controller.enabled = false;
         playerHealth = OrigHP;
+        UpdatePlayerHPBar();
         transform.position = gameManager.instance.spawnPos.transform.position;
         gameManager.instance.playerDeadMenu.SetActive(false);
         controller.enabled = true;
+    }
+
+    public void UpdatePlayerHPBar()
+    {
+        gameManager.instance.healthBar.fillAmount = (float)playerHealth / (float)OrigHP; 
     }
 
 }

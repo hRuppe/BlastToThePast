@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Spawn Pos
   - Wall
+  - Enemy
   layers:
   - Default
   - TransparentFX

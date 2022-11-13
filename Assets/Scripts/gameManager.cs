@@ -18,6 +18,7 @@ public class gameManager : MonoBehaviour
     public GameObject playerDeadMenu; //UI element for the death screen
     public GameObject playerWinMenu; //UI element for the win screen
     public TextMeshProUGUI enemyCounter; //UI element to count the enemies remaining in the level
+    public Image healthBar; 
 
     public int enemiesToKill; //The required enemy kills to win the level
 

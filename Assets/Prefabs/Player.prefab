@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 408548945}
   - component: {fileID: 408548947}
   - component: {fileID: 408548946}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Wall Jump Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,10 @@ MonoBehaviour:
   controller: {fileID: 4348394794709640343}
   arrow: {fileID: 8778150636216473605, guid: a22d5b02b8a55c042a32dd6af19ede31, type: 3}
   shootPos: {fileID: 4348394793739231654}
-  playerHealth: 20
+  mine: {fileID: 6960615568239687176, guid: fd4a1e47a77eeb342aba54aeb8e19477, type: 3}
+  gunModel: {fileID: 7495492988607187611}
+  hitEffect: {fileID: 0}
+  playerHealth: 10
   playerBaseSpeed: 5.5
   playerSprintMod: 1.75
   jumpHeight: 12
@@ -264,8 +267,9 @@ MonoBehaviour:
   shootRange: 0
   shootDamage: 0
   gunStatList: []
-  hitEffect: {fileID: 0}
-  gunModel: {fileID: 7495492988607187611}
+  minePlaceDistance: 3
+  mineCount: 2
+  placeMineTimer: 4
   jumpTimes: 0
   origJumpsMax: 0
 --- !u!23 &4348394794709640341

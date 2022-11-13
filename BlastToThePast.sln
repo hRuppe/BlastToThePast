@@ -3,6 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{F6C4CDE2-5726-46F3-24FD-66BC8558FD2C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CFXRRuntime", "CFXRRuntime.csproj", "{4D175F0B-C278-A480-B95C-75666221516D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CFXRDemo", "CFXRDemo.csproj", "{604C48ED-21D9-03CE-0BCB-D62F39866F9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinoBloom.Runtime", "KinoBloom.Runtime.csproj", "{3E31DF01-30B6-91BF-8E22-4665C0B731EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CFXREditor", "CFXREditor.csproj", "{C4636DBE-1C8E-75E2-8C0D-553DF013AAC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToonyColorsPro.Demo.Editor", "ToonyColorsPro.Demo.Editor.csproj", "{9AAB202D-F440-CF27-B688-4AEA01731C8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +23,26 @@ Global
 		{F6C4CDE2-5726-46F3-24FD-66BC8558FD2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6C4CDE2-5726-46F3-24FD-66BC8558FD2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6C4CDE2-5726-46F3-24FD-66BC8558FD2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D175F0B-C278-A480-B95C-75666221516D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D175F0B-C278-A480-B95C-75666221516D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D175F0B-C278-A480-B95C-75666221516D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D175F0B-C278-A480-B95C-75666221516D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{604C48ED-21D9-03CE-0BCB-D62F39866F9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{604C48ED-21D9-03CE-0BCB-D62F39866F9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{604C48ED-21D9-03CE-0BCB-D62F39866F9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{604C48ED-21D9-03CE-0BCB-D62F39866F9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E31DF01-30B6-91BF-8E22-4665C0B731EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E31DF01-30B6-91BF-8E22-4665C0B731EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E31DF01-30B6-91BF-8E22-4665C0B731EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E31DF01-30B6-91BF-8E22-4665C0B731EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4636DBE-1C8E-75E2-8C0D-553DF013AAC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4636DBE-1C8E-75E2-8C0D-553DF013AAC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4636DBE-1C8E-75E2-8C0D-553DF013AAC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4636DBE-1C8E-75E2-8C0D-553DF013AAC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AAB202D-F440-CF27-B688-4AEA01731C8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AAB202D-F440-CF27-B688-4AEA01731C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AAB202D-F440-CF27-B688-4AEA01731C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AAB202D-F440-CF27-B688-4AEA01731C8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
