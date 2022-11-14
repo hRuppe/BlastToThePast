@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
@@ -15,6 +15,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] Transform bulletSpawnPos;
     [SerializeField] Animator anim;
     [SerializeField] GameObject headPos;
+    [SerializeField] Image healthBar;
     
     [Header("---- Enemy Stats ----")]
     [Range(1, 100)][SerializeField] int HP;
@@ -26,12 +27,16 @@ public class enemyAI : MonoBehaviour, IDamage
     [Header("---- Gun Stats ----")]
     [Range(1, 5)][SerializeField] int shootDelay;
 
-    bool isShooting;
-    float origStoppingDist;
-    Vector3 startingPos;
-    bool playerInRange;
+    
     Vector3 playerDir;
+    Vector3 startingPos;
+
+    bool playerInRange;
+    bool isShooting;
+
+    float origStoppingDist;
     float origSpeed;
+    float origHealth;
     float angleToPlayer;
 
     void Start()
@@ -40,9 +45,8 @@ public class enemyAI : MonoBehaviour, IDamage
         origStoppingDist = agent.stoppingDistance;
         origSpeed = agent.speed;
         startingPos = transform.position;
-
-        gameManager.instance.enemiesToKill++; //Increment the enemy count on spawn
-        gameManager.instance.updateUI(); //Update the UI
+        origHealth = HP;
+        UpdateHpBar();
     }
 
     void Update()
@@ -116,6 +120,7 @@ public class enemyAI : MonoBehaviour, IDamage
     public void TakeDamage(int dmg)
     {
         HP -= dmg;
+        UpdateHpBar();
         StartCoroutine(FlashDamage());
         // Turn stopping distance to 0 so enemy goes exactly where he was shot from
         agent.stoppingDistance = 0;
@@ -128,7 +133,10 @@ public class enemyAI : MonoBehaviour, IDamage
         }
     }
 
-
+    public void UpdateHpBar()
+    {
+        healthBar.fillAmount = HP / origHealth;
+    }
 
     IEnumerator FlashDamage()
     {

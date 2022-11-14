@@ -78,14 +78,14 @@ public class gameManager : MonoBehaviour
 
     public void updateEnemyNumber()
     {
-        enemiesToKill--; //Update the counter
-        updateUI(); //Update the UI
+        updateUI(-1); //Update the UI
         if (enemiesToKill <= 0)
             youWin();
     }
 
-    public void updateUI()
+    public void updateUI(int amount)
     {
+        enemiesToKill += amount;
         enemyCounter.text = enemiesToKill.ToString("F0"); //Update the display
     }
 }

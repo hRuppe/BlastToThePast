@@ -205,5 +205,4 @@ public class playerController : MonoBehaviour
     {
         gameManager.instance.healthBar.fillAmount = (float)playerHealth / (float)OrigHP; 
     }
-
 }
