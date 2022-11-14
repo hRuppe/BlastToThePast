@@ -19,4 +19,4 @@ MonoBehaviour:
   gunModel: {fileID: 2436435537921354890, guid: a412a37657d509a4d85c105bbb2c005a, type: 3}
   hitEffect: {fileID: 0}
   muzzleFlash: {fileID: 0}
-  gunSound: {fileID: 0}
+  gunSound: {fileID: 8300000, guid: 73e59134d0571ab469c141de6922f601, type: 3}

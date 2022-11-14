@@ -11,6 +11,7 @@ public class playerController : MonoBehaviour
     [SerializeField] GameObject mine;
     [SerializeField] GameObject gunModel;
     [SerializeField] GameObject hitEffect;
+    [SerializeField] AudioSource audioSource;
 
     [Header("----- Player Stats -----")]
     [Range(0, 50)] [SerializeField] int playerHealth;
@@ -28,6 +29,14 @@ public class playerController : MonoBehaviour
     [Range(1, 10)][SerializeField] int minePlaceDistance;
     [Range(0, 10)][SerializeField] int mineCount;
     [Range(1, 10)][SerializeField] float placeMineTimer;
+
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audioJump;
+    [SerializeField] AudioClip[] audioHurt;
+    [SerializeField] AudioClip audioGunSwap;
+    [Range(0, 1)] [SerializeField] float audioJumpVolume;
+    [Range(0, 1)] [SerializeField] float audioHurtVolume;
+    [Range(0, 1)] [SerializeField] float audioGunshotVolume;
 
     private Vector3 move;
     private Vector3 playerVelocity;
@@ -74,6 +83,7 @@ public class playerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && jumpTimes < jumpMax)
         {
+            audioSource.PlayOneShot(audioJump[Random.Range(0, audioJump.Length)], audioJumpVolume);
             playerVelocity.y = jumpHeight;
             jumpTimes++;
         }
@@ -100,6 +110,7 @@ public class playerController : MonoBehaviour
         if (gunStatList.Count > 0 && !isShooting && Input.GetButton("Shoot"))
         {
             isShooting = true;
+            audioSource.PlayOneShot(gunStatList[selectedGun].gunSound, audioGunshotVolume);
 
             // GameObject newArrow = Instantiate(arrow, shootPos.position, transform.rotation);
 
@@ -137,6 +148,7 @@ public class playerController : MonoBehaviour
     {
         playerHealth -= damageValue;
         StartCoroutine(gameManager.instance.playerDamageFlash());
+        audioSource.PlayOneShot(audioHurt[Random.Range(0, audioJump.Length)], audioJumpVolume);
         UpdatePlayerHPBar();
 
         if (playerHealth <= 0)
@@ -149,6 +161,7 @@ public class playerController : MonoBehaviour
     public void GunPickup(gunStats gunStat)
     {
         gunStatList.Add(gunStat);
+        audioSource.PlayOneShot(audioGunSwap, audioGunshotVolume);
 
         // Clone gun stats onto player
         shootRate = gunStat.shooteRate;
@@ -168,10 +181,13 @@ public class playerController : MonoBehaviour
             if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunStatList.Count - 1)
             {
                 selectedGun++;
+                audioSource.PlayOneShot(audioGunSwap, audioGunshotVolume);
+
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
             {
                 selectedGun--;
+                audioSource.PlayOneShot(audioGunSwap, audioGunshotVolume);
             }
 
             ChangeGuns();
