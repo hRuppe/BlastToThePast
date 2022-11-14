@@ -553,6 +553,7 @@ MonoBehaviour:
   anim: {fileID: 371036039657421895}
   headPos: {fileID: 371036039650096479}
   healthBar: {fileID: 31037956}
+  UI: {fileID: 1794595484}
   HP: 4
   playerFaceSpeed: 2
   animLerpSpeed: 3

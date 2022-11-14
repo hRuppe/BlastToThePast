@@ -9,13 +9,14 @@ using UnityEngine.AI;
 public class enemyAI : MonoBehaviour, IDamage
 {
     [Header("---- Components ----")]
-    [SerializeField] SkinnedMeshRenderer model;
+    [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] GameObject bullet;
     [SerializeField] Transform bulletSpawnPos;
     [SerializeField] Animator anim;
     [SerializeField] GameObject headPos;
     [SerializeField] Image healthBar;
+    [SerializeField] GameObject UI;
     
     [Header("---- Enemy Stats ----")]
     [Range(1, 100)][SerializeField] int HP;
@@ -129,7 +130,10 @@ public class enemyAI : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             gameManager.instance.updateEnemyNumber(); //Decrement enemy number on kill
-            Destroy(gameObject); 
+            anim.SetBool("Dead", true);
+            agent.enabled = false;
+            UI.SetActive(false);
+            GetComponent<Collider>().enabled = false;
         }
     }
 
