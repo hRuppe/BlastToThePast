@@ -854,7 +854,7 @@ GameObject:
   - component: {fileID: 1012627375212975640}
   m_Layer: 6
   m_Name: Enemy - Sniper
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -893,8 +893,15 @@ MonoBehaviour:
   agent: {fileID: 1012627375212975642}
   bullet: {fileID: 5441798788371574306, guid: 21646ccc963a3e14da6143d809ddfb46, type: 3}
   bulletSpawnPos: {fileID: 8735007096972447113}
+  anim: {fileID: 0}
+  headPos: {fileID: 0}
+  healthBar: {fileID: 0}
+  UI: {fileID: 0}
   HP: 2
   playerFaceSpeed: 3
+  animLerpSpeed: 0
+  sightAngle: 0
+  roamDist: 0
   shootDelay: 2
 --- !u!195 &1012627375212975642
 NavMeshAgent:

@@ -121,6 +121,7 @@ public class playerController : MonoBehaviour
                 {
                     hit.collider.gameObject.GetComponent<IDamage>().TakeDamage(shootDamage);
                 }
+                Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
             }
 
             yield return new WaitForSeconds(1.0f / shootRate);

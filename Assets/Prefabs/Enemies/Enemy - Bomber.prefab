@@ -822,7 +822,7 @@ GameObject:
   - component: {fileID: 2594949670347957010}
   m_Layer: 6
   m_Name: Enemy - Bomber
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -861,8 +861,15 @@ MonoBehaviour:
   agent: {fileID: 2594949670347957008}
   bullet: {fileID: 4549919629550166347, guid: 5a31791dac6d69d4b928f40be17d9134, type: 3}
   bulletSpawnPos: {fileID: 5996109072551884931}
+  anim: {fileID: 0}
+  headPos: {fileID: 0}
+  healthBar: {fileID: 0}
+  UI: {fileID: 0}
   HP: 7
   playerFaceSpeed: 3
+  animLerpSpeed: 0
+  sightAngle: 0
+  roamDist: 0
   shootDelay: 2
 --- !u!195 &2594949670347957008
 NavMeshAgent:

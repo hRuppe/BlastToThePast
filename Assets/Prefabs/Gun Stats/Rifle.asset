@@ -17,6 +17,6 @@ MonoBehaviour:
   shootDamage: 5
   ammoCount: 7
   gunModel: {fileID: 2522459990078887040, guid: 380b07b369b83554983463a01cc5295b, type: 3}
-  hitEffect: {fileID: 0}
+  hitEffect: {fileID: 1845240806346120, guid: b395d5d6eb4b4b846acc021ee036b744, type: 3}
   muzzleFlash: {fileID: 0}
   gunSound: {fileID: 8300000, guid: 0956fac36a86f6e4daab4eca6246aa37, type: 3}
