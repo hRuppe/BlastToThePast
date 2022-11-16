@@ -105,10 +105,12 @@ public class enemyAI : MonoBehaviour, IDamage
 
         NavMeshHit hit;
 
-        NavMesh.SamplePosition(new Vector3(randomPos.x, 0, randomPos.z), out hit, 1, 1);
-        NavMeshPath path = new NavMeshPath();
-        agent.CalculatePath(hit.position, path);
-        agent.SetPath(path);
+        if (NavMesh.SamplePosition(new Vector3(randomPos.x, 0, randomPos.z), out hit, 1, 1))
+        {
+            NavMeshPath path = new NavMeshPath();
+            agent.CalculatePath(hit.position, path);
+            agent.SetPath(path);
+        }
     }
 
     void FacePlayer()
@@ -116,6 +118,15 @@ public class enemyAI : MonoBehaviour, IDamage
         playerDir.y = 0;
         Quaternion rotation = Quaternion.LookRotation(playerDir); 
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, playerFaceSpeed * Time.deltaTime); 
+    }
+
+    public void GotoPlayer()
+    {
+        if (HP > 0)
+        {
+            agent.stoppingDistance = 0;
+            agent.SetDestination(gameManager.instance.player.transform.position);
+        }
     }
 
     public void TakeDamage(int dmg)

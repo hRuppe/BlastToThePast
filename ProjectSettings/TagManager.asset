@@ -7,6 +7,10 @@ TagManager:
   - Spawn Pos
   - Wall
   - Enemy
+  - FxTemporaire
+  - ThinWall
+  - MediumWall
+  - ThickWall
   layers:
   - Default
   - TransparentFX

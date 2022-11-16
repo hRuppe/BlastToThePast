@@ -38,15 +38,24 @@ public class playerController : MonoBehaviour
     [Range(0, 1)] [SerializeField] float audioHurtVolume;
     [Range(0, 1)] [SerializeField] float audioGunshotVolume;
 
+    public float playerSoundLevel;
+
     private Vector3 move;
     private Vector3 playerVelocity;
+
     [HideInInspector] public int jumpTimes;
     [HideInInspector] public int origJumpsMax;
+
     private int OrigHP;
     private int selectedGun;
+
     private float playerCurrentSpeed;
+
     private bool isShooting;
-    bool isPlacingMine;
+    private bool isSprinting;
+    private bool isSneaking;
+    private bool trackShootSound;
+    private bool isPlacingMine;
 
 
     private void Start()
@@ -63,9 +72,11 @@ public class playerController : MonoBehaviour
     {
         PlayerMove();
         PlayerSprint();
+        PlayerSneak();
         StartCoroutine(Shoot());
         StartCoroutine(PlaceMine()); 
         GunSelect();
+        CalculateSound();
     }
 
     void PlayerMove()
@@ -97,11 +108,28 @@ public class playerController : MonoBehaviour
         if (Input.GetButtonDown("Sprint"))
         {
             playerCurrentSpeed = playerBaseSpeed * playerSprintMod;
+            isSprinting = true;
 
         }
         else if (Input.GetButtonUp("Sprint"))
         {
             playerCurrentSpeed = playerBaseSpeed;
+            isSprinting = false;
+        }
+    }
+
+    void PlayerSneak()
+    {
+        if (Input.GetButtonDown("Sneak"))
+        {
+            playerCurrentSpeed = playerBaseSpeed / 2;
+            isSneaking = true;
+
+        }
+        else if (Input.GetButtonUp("Sneak"))
+        {
+            playerCurrentSpeed = playerBaseSpeed;
+            isSneaking = false;
         }
     }
 
@@ -111,6 +139,7 @@ public class playerController : MonoBehaviour
         {
             isShooting = true;
             audioSource.PlayOneShot(gunStatList[selectedGun].gunSound, audioGunshotVolume);
+            trackShootSound = true;
 
             // GameObject newArrow = Instantiate(arrow, shootPos.position, transform.rotation);
 
@@ -142,6 +171,28 @@ public class playerController : MonoBehaviour
             }
             yield return new WaitForSeconds(placeMineTimer);
             isPlacingMine = false;
+        }
+    }
+
+    void CalculateSound()
+    {
+        playerSoundLevel = 0;
+
+        // Sound is on a scale from 0 - 1
+        if (isSprinting)
+            playerSoundLevel += 0.3f;
+
+        if ((move.x > 0 || move.x < 0) || (move.y > 0 || move.y < 0))
+            playerSoundLevel += 0.2f;
+
+        if (isSneaking)
+            playerSoundLevel /= 2f;
+
+        // Shooting is tracked last since sneaking shouldn't influence the sound level
+        if (trackShootSound)
+        {
+            playerSoundLevel += 0.5f;
+            trackShootSound = false;
         }
     }
 
