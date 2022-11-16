@@ -18,7 +18,8 @@ public class gameManager : MonoBehaviour
     public GameObject playerDeadMenu; //UI element for the death screen
     public GameObject playerWinMenu; //UI element for the win screen
     public TextMeshProUGUI enemyCounter; //UI element to count the enemies remaining in the level
-    public Image healthBar; 
+    public Image healthBar;
+    public Image soundBar; 
 
     public int enemiesToKill; //The required enemy kills to win the level
 
@@ -26,7 +27,8 @@ public class gameManager : MonoBehaviour
 
     public bool isPaused; //Tracker to see if the game is currently paused
 
-    // Start is called before the first frame update
+    public bool hasItem;
+
     void Awake()
     {
         instance = this; // Binds the singleton on startup
@@ -35,7 +37,6 @@ public class gameManager : MonoBehaviour
         spawnPos = GameObject.FindGameObjectWithTag("Spawn Pos"); // Find the spawn location of the level & bind
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Cancel") && !playerDeadMenu.activeSelf && !playerWinMenu.activeSelf)
@@ -79,8 +80,8 @@ public class gameManager : MonoBehaviour
     public void updateEnemyNumber()
     {
         updateUI(-1); //Update the UI
-        if (enemiesToKill <= 0)
-            youWin();
+        //if (enemiesToKill <= 0) // Commented out so win will be based on escaping with item
+            //youWin();
     }
 
     public void updateUI(int amount)

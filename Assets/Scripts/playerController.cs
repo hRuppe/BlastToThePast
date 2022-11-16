@@ -194,6 +194,7 @@ public class playerController : MonoBehaviour
             playerSoundLevel += 0.5f;
             trackShootSound = false;
         }
+        gameManager.instance.soundBar.fillAmount = playerSoundLevel;
     }
 
     public void damage(int damageValue)
