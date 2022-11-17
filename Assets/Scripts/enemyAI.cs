@@ -48,6 +48,8 @@ public class enemyAI : MonoBehaviour, IDamage
         startingPos = transform.position;
         origHealth = HP;
         UpdateHpBar();
+
+        UI.gameObject.SetActive(false);
     }
 
     void Update()
@@ -132,6 +134,7 @@ public class enemyAI : MonoBehaviour, IDamage
     public void TakeDamage(int dmg)
     {
         HP -= dmg;
+        UI.gameObject.SetActive(true);
         UpdateHpBar();
         StartCoroutine(FlashDamage());
         // Turn stopping distance to 0 so enemy goes exactly where he was shot from

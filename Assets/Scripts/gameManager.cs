@@ -19,7 +19,8 @@ public class gameManager : MonoBehaviour
     public GameObject playerWinMenu; //UI element for the win screen
     public TextMeshProUGUI enemyCounter; //UI element to count the enemies remaining in the level
     public Image healthBar;
-    public Image soundBar; 
+    public Image soundBar;
+    public Image itemIcon; 
 
     public int enemiesToKill; //The required enemy kills to win the level
 
@@ -28,6 +29,8 @@ public class gameManager : MonoBehaviour
     public bool isPaused; //Tracker to see if the game is currently paused
 
     public bool hasItem;
+
+    public GameObject[] exitSpawners; 
 
     void Awake()
     {
@@ -47,6 +50,15 @@ public class gameManager : MonoBehaviour
                 pause();
             else
                 unpause();
+        }
+
+        if (hasItem && !itemIcon.IsActive())
+        {
+            itemIcon.gameObject.SetActive(true); 
+            for (int i = 0; i < exitSpawners.Length; i++)
+            {
+                exitSpawners[i].SetActive(true); 
+            }
         }
     }
 

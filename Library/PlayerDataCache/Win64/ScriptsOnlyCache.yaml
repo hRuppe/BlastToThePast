@@ -1,15 +1,30 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - CFX_AutoDestructShuriken
     - arrow
+    - blowUp
     - bomb
     - bullet
     - buttonFunctions
     - cameraController
     - enemyAI
+    - faceCamera
     - fire
     - gameManager
+    - gunPickup
+    - gunStats
+    - kamikazeAI
+    - mine
     - playerController
+    - retrieveItem
+    - soundDetection
+    - spawnerController
+    - wallJump
+    - wallStats
+    - winTrigger
+    CFXRRuntime.dll:
+    - CartoonFX.CFXR_Effect
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
@@ -19,6 +34,12 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshProUGUI
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -31,6 +52,9 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
   serializedClasses:
+    CFXRRuntime:
+    - CartoonFX.CFXR_Effect/AnimatedLight
+    - CartoonFX.CFXR_Effect/CameraShake
     Unity.TextMeshPro:
     - TMPro.FaceInfo_Legacy
     - TMPro.FontAssetCreationSettings
@@ -85,7 +109,7 @@ ScriptsOnlyBuild:
     fullTypeName: buttonFunctions
     methodName: resume
   sceneClasses:
-    Assets/Scenes/Build.unity:
+    Assets/Scenes/Build2.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -112,11 +136,19 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 90
+      Script: {instanceID: 0}
+    - Class: 91
       Script: {instanceID: 0}
     - Class: 95
       Script: {instanceID: 0}
@@ -127,47 +159,75 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1546}
+      Script: {instanceID: 1560}
     - Class: 114
-      Script: {instanceID: 2226}
+      Script: {instanceID: 1730}
     - Class: 114
-      Script: {instanceID: 2392}
+      Script: {instanceID: 2238}
     - Class: 114
-      Script: {instanceID: 2664}
+      Script: {instanceID: 2408}
     - Class: 114
-      Script: {instanceID: 2774}
+      Script: {instanceID: 2410}
     - Class: 114
-      Script: {instanceID: 2894}
+      Script: {instanceID: 2554}
     - Class: 114
-      Script: {instanceID: 3198}
+      Script: {instanceID: 2688}
     - Class: 114
-      Script: {instanceID: 3722}
+      Script: {instanceID: 2690}
     - Class: 114
-      Script: {instanceID: 4166}
+      Script: {instanceID: 2800}
     - Class: 114
-      Script: {instanceID: 4278}
+      Script: {instanceID: 2922}
     - Class: 114
-      Script: {instanceID: 4552}
+      Script: {instanceID: 3228}
     - Class: 114
-      Script: {instanceID: 5334}
+      Script: {instanceID: 3754}
     - Class: 114
-      Script: {instanceID: 5382}
+      Script: {instanceID: 4198}
     - Class: 114
-      Script: {instanceID: 5834}
+      Script: {instanceID: 4310}
     - Class: 114
-      Script: {instanceID: 5942}
+      Script: {instanceID: 4584}
     - Class: 114
-      Script: {instanceID: 5958}
+      Script: {instanceID: 4610}
     - Class: 114
-      Script: {instanceID: 6112}
+      Script: {instanceID: 4960}
     - Class: 114
-      Script: {instanceID: 6164}
+      Script: {instanceID: 5372}
     - Class: 114
-      Script: {instanceID: 6460}
+      Script: {instanceID: 5420}
     - Class: 114
-      Script: {instanceID: 8218}
+      Script: {instanceID: 5654}
     - Class: 114
-      Script: {instanceID: 8368}
+      Script: {instanceID: 5880}
+    - Class: 114
+      Script: {instanceID: 5988}
+    - Class: 114
+      Script: {instanceID: 6004}
+    - Class: 114
+      Script: {instanceID: 6158}
+    - Class: 114
+      Script: {instanceID: 6210}
+    - Class: 114
+      Script: {instanceID: 6434}
+    - Class: 114
+      Script: {instanceID: 6508}
+    - Class: 114
+      Script: {instanceID: 6900}
+    - Class: 114
+      Script: {instanceID: 7146}
+    - Class: 114
+      Script: {instanceID: 7256}
+    - Class: 114
+      Script: {instanceID: 7568}
+    - Class: 114
+      Script: {instanceID: 7654}
+    - Class: 114
+      Script: {instanceID: 7854}
+    - Class: 114
+      Script: {instanceID: 8296}
+    - Class: 114
+      Script: {instanceID: 8446}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -185,6 +245,10 @@ ScriptsOnlyBuild:
     - Class: 195
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 198
+      Script: {instanceID: 0}
+    - Class: 199
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -223,6 +287,12 @@ ScriptsOnlyBuild:
     className: SignalAsset
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: faceCamera
+  - hash:
+      serializedVersion: 2
       Hash: 0dbc3be398b4869a5c8d0d8481ee402c
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -247,10 +317,22 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
+      Hash: f98b07cf919b54e1cbdc75109809c5b5
+    assemblyName: CFXRDemo.dll
+    namespaceName: CartoonFX
+    className: CFXR_Demo
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnCollisionStayMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 660deb0ce569359218f0ba85b7ce0e3a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CFX_LightIntensityFade
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -301,6 +383,12 @@ ScriptsOnlyBuild:
     className: UnityOnJointBreakMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 9cf4a50e1f425d06b81c01050a0b2950
+    assemblyName: CFXRDemo.dll
+    namespaceName: CartoonFX
+    className: CFXR_Demo_Translate
+  - hash:
+      serializedVersion: 2
       Hash: c1d728126ff1918728036c59106d32b2
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -313,10 +401,34 @@ ScriptsOnlyBuild:
     className: bullet
   - hash:
       serializedVersion: 2
+      Hash: f741c50b5d6b51f76d92881736be672a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: kamikazeAI
+  - hash:
+      serializedVersion: 2
+      Hash: dad3a1f1e1ecb4691721bab721edd60a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CFX_AutoRotate
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: winTrigger
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnBecameVisibleMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 79e9b233ff431fec1263e2ac250337ee
+    assemblyName: CFXRRuntime.dll
+    namespaceName: CartoonFX
+    className: CFXR_ParticleText
   - hash:
       serializedVersion: 2
       Hash: 27e5341178f188b89bdc6495710b590c
@@ -329,6 +441,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
     className: EventSystem
+  - hash:
+      serializedVersion: 2
+      Hash: d761a51bff00b4a5be989ff0290b4258
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: retrieveItem
   - hash:
       serializedVersion: 2
       Hash: fe64a45214940b510a0ec79c96d43498
@@ -367,7 +485,7 @@ ScriptsOnlyBuild:
     className: TMP_TextSelector_A
   - hash:
       serializedVersion: 2
-      Hash: 629f8986b9121b7e7c0a55fd17c2df5c
+      Hash: 549617e314455a655581d261cafdb634
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: playerController
@@ -407,6 +525,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SpriteAnimator
+  - hash:
+      serializedVersion: 2
+      Hash: 1d0beb1a2d4edee4c06b6835632e83a3
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CFX_AutoStopLoopedEffect
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -521,6 +645,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
     className: BaseInput
+  - hash:
+      serializedVersion: 2
+      Hash: 4aac268d7e435f7a65add91aaba819a4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CFX_Demo_RandomDir
   - hash:
       serializedVersion: 2
       Hash: 7536c3aaa3b668b80f1580147a12d30d
@@ -691,6 +821,12 @@ ScriptsOnlyBuild:
     className: TMPro_InstructionOverlay
   - hash:
       serializedVersion: 2
+      Hash: 5d27c6e85ec89cfab8577e9e26695e88
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CFX_AutoDestructShuriken
+  - hash:
+      serializedVersion: 2
       Hash: e244702e0dc05782229aa524e4d757f5
     assemblyName: Assembly-CSharp.dll
     namespaceName: TMPro.Examples
@@ -725,6 +861,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: ActivationPlayableAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 87b426a6e7f067b75c185acd7b500203
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: gunStats
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -805,6 +947,12 @@ ScriptsOnlyBuild:
     className: HorizontalLayoutGroup
   - hash:
       serializedVersion: 2
+      Hash: 3f5031037e63abe5dcf87c278e01a4de
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CFX_Demo_RotateCamera
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
@@ -853,16 +1001,34 @@ ScriptsOnlyBuild:
     className: GroupTrack
   - hash:
       serializedVersion: 2
+      Hash: b10f0f008d787b95a5928eed8ceaa36e
+    assemblyName: KinoBloom.Runtime.dll
+    namespaceName: Kino
+    className: Bloom
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnDeselectMessageListener
   - hash:
       serializedVersion: 2
+      Hash: ec7412effa7fc587d415ef61413272c4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: gunPickup
+  - hash:
+      serializedVersion: 2
       Hash: 699619b86d9359741a4f58540298c80b
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Text
+  - hash:
+      serializedVersion: 2
+      Hash: 4e875e1432fadf1f077549b388792f99
+    assemblyName: CFXRDemo.dll
+    namespaceName: CartoonFX
+    className: CFXR_Demo_Rotate
   - hash:
       serializedVersion: 2
       Hash: 2574ac7d50617d23cdefe4ad22f5e1ad
@@ -919,7 +1085,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: a37c2cf139292f466d4b8d100d857ab9
+      Hash: 937a915c372e5e8c15d4a720b26206aa
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: enemyAI
@@ -935,6 +1101,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: TMPro.Examples
     className: Benchmark03
+  - hash:
+      serializedVersion: 2
+      Hash: d7b05ab989973c202c94265b157c61e9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: mine
   - hash:
       serializedVersion: 2
       Hash: e09e8bebc0fcd32bb8af1287a6b44816
@@ -967,6 +1139,12 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
+      Hash: e70e7b311a1620c2e899545b2e1fdfae
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CFX_Demo_RandomDirectionTranslate
+  - hash:
+      serializedVersion: 2
       Hash: 4fd8bf02e3089425d3502e26c44ba31a
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -989,6 +1167,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Outline
+  - hash:
+      serializedVersion: 2
+      Hash: 053af5cf08eb21aace7d1d5622658246
+    assemblyName: CFXRRuntime.dll
+    namespaceName: CartoonFX
+    className: CFXR_Effect
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1039,6 +1223,12 @@ ScriptsOnlyBuild:
     className: PositionAsUV1
   - hash:
       serializedVersion: 2
+      Hash: 524dc38b013e60c5ca22c3ea61685508
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: soundDetection
+  - hash:
+      serializedVersion: 2
       Hash: 87ff43d2baf3385cba327d8f803a4ebb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -1063,6 +1253,12 @@ ScriptsOnlyBuild:
     className: UnityOnScrollRectValueChangedMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 13cd7b986dc6d99ed5a365b9d075b3ff
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: spawnerController
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner.Callbacks
@@ -1079,6 +1275,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnSubmitMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 671420ad2c33f1ddaf6d076461adf15a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CFX_Demo_Translate
   - hash:
       serializedVersion: 2
       Hash: a81d4c2c1cf3ad164d277d927a193679
@@ -1099,10 +1301,22 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
+      Hash: 32ad028668126aa886e22e0e6ea7927b
+    assemblyName: CFXRRuntime.dll
+    namespaceName: CartoonFX
+    className: CFXR_EmissionBySurface
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnMoveMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 892d4f7b5467d45a8798a252acd22636
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: wallStats
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -1111,10 +1325,34 @@ ScriptsOnlyBuild:
     className: ControlTrack
   - hash:
       serializedVersion: 2
+      Hash: 1669918a79c1f462d8b67cb9b45b3e81
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: blowUp
+  - hash:
+      serializedVersion: 2
       Hash: 040dd48e3a027d5424519a5fa2009df4
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: ScrollRect
+  - hash:
+      serializedVersion: 2
+      Hash: 5065f436a319f7d4eabef552e95362b4
+    assemblyName: CFXRRuntime.dll
+    namespaceName: CartoonFX
+    className: CFXR_ParticleTextFontAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: wallJump
+  - hash:
+      serializedVersion: 2
+      Hash: 421b20ccd7815ebee5e2b14a986d2efc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CFX_Demo_New
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1153,6 +1391,12 @@ ScriptsOnlyBuild:
     className: TMP_PhoneNumberValidator
   - hash:
       serializedVersion: 2
+      Hash: e4db0ddf42150a3b60bd39cf2bc3def2
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CFX_LightFlicker
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: TMPro.Examples
@@ -1183,7 +1427,7 @@ ScriptsOnlyBuild:
     className: VertexZoom
   - hash:
       serializedVersion: 2
-      Hash: 377aa4e1380ea505e504b50be4756600
+      Hash: d7b19733118eb7b465c3d166ac9e27e8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: gameManager
@@ -1231,5 +1475,5 @@ ScriptsOnlyBuild:
     className: UnityOnSliderValueChangedMessageListener
   platform: 19
   scenePathNames:
-  - Assets/Scenes/Build.unity
-  playerPath: C:/Users/mrtlc/Desktop/BlastToThePast - Builds/BlastToThePast.exe
+  - Assets/Scenes/Build2.unity
+  playerPath: C:/Users/ruppe/Downloads/BlastToThePast.exe
