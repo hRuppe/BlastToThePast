@@ -7,6 +7,7 @@ public class playerController : MonoBehaviour
 {
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
+    [SerializeField] cameraController cameraController;
     [SerializeField] GameObject arrow; // This will eventually be determined by the weapon the player is holding
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject mine;
@@ -15,12 +16,16 @@ public class playerController : MonoBehaviour
     [SerializeField] AudioSource audioSource;
 
     [Header("----- Player Stats -----")]
-    [Range(0, 50)] [SerializeField] int playerHealth;
+    [Range(0, 50)] [SerializeField] float playerHealth;
     [Range(1, 10)] [SerializeField] float playerBaseSpeed; 
     [Range(1.5f, 5)] [SerializeField] float playerSprintMod;
     [Range(8, 20)] [SerializeField] float jumpHeight;
     [Range(0, 35)] [SerializeField] float gravityValue;
     [Range(1, 3)] [SerializeField] public int jumpMax;
+    [SerializeField] float adsSpeed;
+    [SerializeField] float adsFov;
+    [SerializeField] int adsHorizontalSens;
+    [SerializeField] int adsVerticalSens;
 
     [Header("----- Weapon Stats -----")]
     [SerializeField] float shootRate; // Value represents bullets per second
@@ -47,11 +52,15 @@ public class playerController : MonoBehaviour
     [HideInInspector] public int jumpTimes;
     [HideInInspector] public int origJumpsMax;
 
-    private int OrigHP;
     private int selectedGun;
 
+    private float originalFov;
+    private float OrigHP;
     private float playerCurrentSpeed;
+    private float timeSinceAdsStart;
 
+    private bool isAds;
+    private bool isBlocking;
     private bool isShooting;
     private bool isSprinting;
     private bool isSneaking;
@@ -62,6 +71,7 @@ public class playerController : MonoBehaviour
     private void Start()
     {
         // Store original values
+        originalFov = Camera.main.fieldOfView;
         OrigHP = playerHealth;
         origJumpsMax = jumpMax;
 
@@ -74,6 +84,7 @@ public class playerController : MonoBehaviour
         PlayerMove();
         PlayerSprint();
         PlayerSneak();
+        AltFire();
         StartCoroutine(Shoot());
         StartCoroutine(PlaceMine()); 
         GunSelect();
@@ -134,6 +145,64 @@ public class playerController : MonoBehaviour
         }
     }
 
+    void AltFire()
+    {
+        if (gunStatList.Count <= 0) return;
+
+        if (Input.GetButtonDown("Alt Fire"))
+        {
+            Debug.Log("Alt Fire");
+            switch (gunStatList[selectedGun].weaponType)
+            {
+                case enums.WeaponType.Melee:
+                    isBlocking = true;
+                    break;
+                case enums.WeaponType.Hitscan:
+                    isAds = true;
+                    timeSinceAdsStart = 0;
+                    cameraController.horizontalSens = adsHorizontalSens;
+                    cameraController.verticalSens = adsVerticalSens;
+                    break;
+                case enums.WeaponType.Projectile:
+
+                    break;
+            }
+        } 
+        
+        else if (Input.GetButtonUp("Alt Fire"))
+        {
+            switch (gunStatList[selectedGun].weaponType)
+            {
+                case enums.WeaponType.Melee:
+                    isBlocking = false;
+                    break;
+                case enums.WeaponType.Hitscan:
+                    isAds = false;
+                    cameraController.horizontalSens = cameraController.originalHorizontalSense;
+                    cameraController.verticalSens = cameraController.originalVerticalSens;
+                    break;
+                case enums.WeaponType.Projectile:
+
+                    break;
+            }
+        }
+
+        if (isAds)
+        {
+            timeSinceAdsStart += Time.deltaTime;
+
+            Camera.main.fieldOfView = Mathf.Lerp(originalFov, adsFov, Mathf.Clamp(timeSinceAdsStart / adsSpeed, 0, 1));
+        } else if (!isAds)
+        {
+            timeSinceAdsStart -= Time.deltaTime;
+
+            Camera.main.fieldOfView = Mathf.Lerp(originalFov, adsFov, Mathf.Clamp(timeSinceAdsStart / adsSpeed, 0, 1));
+        }
+
+        timeSinceAdsStart = Mathf.Clamp(timeSinceAdsStart, 0, adsSpeed);
+
+    }
+
     IEnumerator Shoot()
     {
         if (gunStatList.Count > 0 && !isShooting && Input.GetButton("Shoot"))
@@ -141,18 +210,40 @@ public class playerController : MonoBehaviour
             isShooting = true;
             audioSource.PlayOneShot(gunStatList[selectedGun].gunSound, audioGunshotVolume);
             trackShootSound = true;
-
-            // GameObject newArrow = Instantiate(arrow, shootPos.position, transform.rotation);
-
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootRange))
+
+            if (gunStatList[selectedGun].weaponType == enums.WeaponType.Melee)
             {
-                if (hit.collider.gameObject.GetComponent<IDamage>() != null)
+                RaycastHit[] hits;
+                hits = Physics.SphereCastAll(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), shootRange, shootRange);
+
+                if (hits.Length > 0)
                 {
-                    hit.collider.gameObject.GetComponent<IDamage>().TakeDamage(shootDamage);
+                    foreach (RaycastHit other in hits)
+                    {
+                        if (other.collider.gameObject.GetComponent<IDamage>() != null)
+                        {
+                            other.collider.gameObject.GetComponent<IDamage>().TakeDamage(shootDamage);
+                            Instantiate(hitEffect, other.point, hitEffect.transform.rotation);
+                        }   
+                    }
                 }
-                Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+            } else
+            {
+                // GameObject newArrow = Instantiate(arrow, shootPos.position, transform.rotation);
+
+
+                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootRange))
+                {
+                    if (hit.collider.gameObject.GetComponent<IDamage>() != null)
+                    {
+                        hit.collider.gameObject.GetComponent<IDamage>().TakeDamage(shootDamage);
+                        Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+                    }
+                }
             }
+
+            
 
             yield return new WaitForSeconds(1.0f / shootRate);
             isShooting = false;
@@ -198,9 +289,13 @@ public class playerController : MonoBehaviour
         gameManager.instance.soundBar.fillAmount = playerSoundLevel;
     }
 
-    public void damage(int damageValue)
+    public void damage(float damageValue)
     {
-        playerHealth -= damageValue;
+        if (isBlocking)
+            playerHealth -= damageValue / 2;
+        else
+            playerHealth -= damageValue;
+
         StartCoroutine(gameManager.instance.playerDamageFlash());
         audioSource.PlayOneShot(audioHurt[Random.Range(0, audioJump.Length)], audioJumpVolume);
         UpdatePlayerHPBar();
@@ -226,6 +321,7 @@ public class playerController : MonoBehaviour
         // Transfer model to player weapon model
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunStat.gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunStat.gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+        gunModel.transform.rotation = gunStat.gunModel.transform.rotation;
     }
 
     void GunSelect()

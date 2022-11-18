@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class cameraController : MonoBehaviour
 {
-    [SerializeField] int horizontalSens;
-    [SerializeField] int verticalSens;
+    [SerializeField] public int horizontalSens;
+    [SerializeField] public int verticalSens;
 
     [SerializeField] int verticalConstraintMin;
     [SerializeField] int verticalConstraintMax;
 
     [SerializeField] bool invertY;
+
+    public int originalHorizontalSense;
+    public int originalVerticalSens;
 
     float xRotation;
 
@@ -20,6 +23,8 @@ public class cameraController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        originalHorizontalSense = horizontalSens;
+        originalVerticalSens = verticalSens;
     }
 
     // Update is called once per frame

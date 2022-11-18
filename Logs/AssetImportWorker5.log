@@ -1,0 +1,529 @@
+Using pre-set license
+Built from '2021.3/release' branch; Version is '2021.3.12f1 (8af3c3e441b1) revision 9106371'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19044) 64bit Professional' Language: 'en' Physical Memory: 16085 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.12f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker5
+-projectPath
+C:/Users/mrtlc/Desktop/Portfolio2 - FSO/BlastToThePast
+-logFile
+Logs/AssetImportWorker5.log
+-srvPort
+54365
+Successfully changed project path to: C:/Users/mrtlc/Desktop/Portfolio2 - FSO/BlastToThePast
+C:/Users/mrtlc/Desktop/Portfolio2 - FSO/BlastToThePast
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Refreshing native plugins compatible for Editor in 96.12 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.12f1 (8af3c3e441b1)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.12f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/mrtlc/Desktop/Portfolio2 - FSO/BlastToThePast/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3080 Laptop GPU (ID=0x249c)
+    Vendor:   NVIDIA
+    VRAM:     16201 MB
+    Driver:   30.0.14.7288
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.12f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.12f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.12f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56868
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.12f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.006950 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 74.02 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.528 seconds
+Domain Reload Profiling:
+	ReloadAssembly (529ms)
+		BeginReloadAssembly (64ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (369ms)
+			LoadAssemblies (62ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (82ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (21ms)
+			SetupLoadedEditorAssemblies (226ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (6ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (74ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (108ms)
+				ProcessInitializeOnLoadMethodAttributes (36ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.005392 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\mrtlc\Desktop\Portfolio2 - FSO\BlastToThePast\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\mrtlc\Desktop\Portfolio2 - FSO\BlastToThePast\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.61 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.817 seconds
+Domain Reload Profiling:
+	ReloadAssembly (817ms)
+		BeginReloadAssembly (88ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (16ms)
+		EndReloadAssembly (636ms)
+			LoadAssemblies (70ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (197ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (40ms)
+			SetupLoadedEditorAssemblies (300ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (76ms)
+				ProcessInitializeOnLoadAttributes (187ms)
+				ProcessInitializeOnLoadMethodAttributes (23ms)
+				AfterProcessingInitializeOnLoad (8ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 0.61 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3484 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 27 unused Assets / (113.7 KB). Loaded Objects now: 3947.
+Memory consumption went from 125.9 MB to 125.7 MB.
+Total: 3.288100 ms (FindLiveObjects: 0.254700 ms CreateObjectMapping: 0.092100 ms MarkObjects: 2.853700 ms  DeleteObjects: 0.086600 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 1401379.865743 seconds.
+  path: Assets/Models/Space Kit/FBX format/terrain_roadSplit.fbx
+  artifactKey: Guid(7c46d2f11fbbd1142bb5627478b3d678) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/terrain_roadSplit.fbx using Guid(7c46d2f11fbbd1142bb5627478b3d678) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9402eea5acc5a82f8eb6742ea5f27155') in 0.160000 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Models/Space Kit/FBX format/terrain_roadStraight.fbx
+  artifactKey: Guid(e831e3b08d0d7444b9d16125f9bc0c20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/terrain_roadStraight.fbx using Guid(e831e3b08d0d7444b9d16125f9bc0c20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '14b899788f7383d8c8147f479bcfd53b') in 0.027693 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000049 seconds.
+  path: Assets/Models/Space Kit/FBX format/terrain_sideCorner.fbx
+  artifactKey: Guid(f17d6d86e9b3fc646af0f7a6d86afc2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/terrain_sideCorner.fbx using Guid(f17d6d86e9b3fc646af0f7a6d86afc2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9c1c998a1ab9893c9352c0c5e7e899be') in 0.027590 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Models/Space Kit/FBX format/weapon_gun.fbx
+  artifactKey: Guid(85f7d6f4066c29a4d9f52596b2c91a03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/weapon_gun.fbx using Guid(85f7d6f4066c29a4d9f52596b2c91a03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '72dc13ae933a53b4e53d052459e59e1f') in 0.036408 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.630561 seconds.
+  path: Assets/Models/Space Kit/FBX format/structure_detailed.fbx
+  artifactKey: Guid(040477f94ce71e043ba42ae14a9fc51f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/structure_detailed.fbx using Guid(040477f94ce71e043ba42ae14a9fc51f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5cd096c980dcf8367f4a9ea400ccdbd6') in 0.028902 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000058 seconds.
+  path: Assets/Models/Space Kit/FBX format/terrain_rampLarge_detailed.fbx
+  artifactKey: Guid(2f20e41390608b74eb9bb46f2d19396d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/terrain_rampLarge_detailed.fbx using Guid(2f20e41390608b74eb9bb46f2d19396d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f18e8476b7aeb41165484d2f4333047') in 0.027252 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Models/Space Kit/FBX format/terrain.fbx
+  artifactKey: Guid(a71bfd72f25d337489b598a8a80906cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/terrain.fbx using Guid(a71bfd72f25d337489b598a8a80906cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '12cbd45c8ff577231fd9dbe18e66e936') in 0.022860 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Models/Space Kit/FBX format/terrain_ramp.fbx
+  artifactKey: Guid(1d7bb7ff79bfbd94e8b4ea484b54e8e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/terrain_ramp.fbx using Guid(1d7bb7ff79bfbd94e8b4ea484b54e8e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '919b67253f975f56064a114f8567d748') in 0.029492 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Models/Space Kit/FBX format/rover.fbx
+  artifactKey: Guid(ae9776dfb2c353945891530cc2f9d7a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/rover.fbx using Guid(ae9776dfb2c353945891530cc2f9d7a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0814914faeda86b1d84076e2fbb10db5') in 0.039132 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Models/Commercial City Kit/FBX format/skyscraperC.fbx
+  artifactKey: Guid(0885315df1d6ec942a73de54670df39d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Commercial City Kit/FBX format/skyscraperC.fbx using Guid(0885315df1d6ec942a73de54670df39d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3be8ec11cc4513263c492d6eaf9823fd') in 0.055496 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Models/Commercial City Kit/FBX format/small_buildingC.fbx
+  artifactKey: Guid(6db0ef3758378a14e9a4b74e4d8c20d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Commercial City Kit/FBX format/small_buildingC.fbx using Guid(6db0ef3758378a14e9a4b74e4d8c20d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '61b1c32e621a911dbd223401defc55cb') in 0.044560 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.356249 seconds.
+  path: Assets/Models/Space Kit/FBX format/rocket_sidesB.fbx
+  artifactKey: Guid(2c3bcbc296616e6419c2f9379329d391) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/rocket_sidesB.fbx using Guid(2c3bcbc296616e6419c2f9379329d391) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2115279072c1d6d96c769d90ad948307') in 0.028494 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Models/Space Kit/FBX format/rock_crystalsLargeB.fbx
+  artifactKey: Guid(7995797d340b99f49b9e061e4cf2abde) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/rock_crystalsLargeB.fbx using Guid(7995797d340b99f49b9e061e4cf2abde) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd770570d357af8620ec8397e64def036') in 0.032017 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Models/Space Kit/FBX format/rocks_smallA.fbx
+  artifactKey: Guid(fab24da7ae24c64469bce01217fb698e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/rocks_smallA.fbx using Guid(fab24da7ae24c64469bce01217fb698e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '98daaf5b388b8a689e74498406afa9da') in 0.027679 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Models/Space Kit/FBX format/platform_large.fbx
+  artifactKey: Guid(9c2019d43bacfe046a492ecc94a28d9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/platform_large.fbx using Guid(9c2019d43bacfe046a492ecc94a28d9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8c586ee715e259f17b83d2520704eeb1') in 0.030163 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Models/Space Kit/FBX format/platform_low.fbx
+  artifactKey: Guid(f6222f8846b80b84fadf17711772a5c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/platform_low.fbx using Guid(f6222f8846b80b84fadf17711772a5c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8a77f429b86f0d50fab690f5b8eb68e4') in 0.027595 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Models/Space Kit/FBX format/rock_largeA.fbx
+  artifactKey: Guid(6e879daf380532b46a1855f5df6849e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/rock_largeA.fbx using Guid(6e879daf380532b46a1855f5df6849e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7dae52ee54f49f4059ccfc3a4d016b07') in 0.027014 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Models/Space Kit/FBX format/rock_largeB.fbx
+  artifactKey: Guid(be674b993950c9240b96281e7c8f043f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/rock_largeB.fbx using Guid(be674b993950c9240b96281e7c8f043f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c5f6ea689de51f69ea947a9a29306fa4') in 0.027035 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Models/Space Kit/FBX format/rocket_topA.fbx
+  artifactKey: Guid(5e9a66c2291ec1048b9c6531d3326776) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/rocket_topA.fbx using Guid(5e9a66c2291ec1048b9c6531d3326776) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fbff63b50f6121ef9b08dd3886c9fc8d') in 0.036443 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Models/Space Kit/FBX format/rocket_topB.fbx
+  artifactKey: Guid(74ca0d6e7d95b5049aec303241d2e443) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/rocket_topB.fbx using Guid(74ca0d6e7d95b5049aec303241d2e443) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9608fbcabddac51a18dd9b51785ccb1b') in 0.029131 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Models/Space Kit/FBX format/rail_corner.fbx
+  artifactKey: Guid(4831335750707b548b4e59ce56f80d3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/rail_corner.fbx using Guid(4831335750707b548b4e59ce56f80d3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '95c072393e61416a5bc681feda6bd1a6') in 0.027864 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Models/Space Kit/FBX format/rail_middle.fbx
+  artifactKey: Guid(1f077e64cec256a43a00fe6f75cedeaa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Space Kit/FBX format/rail_middle.fbx using Guid(1f077e64cec256a43a00fe6f75cedeaa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ab72e5431e10b64d6eec9389c99c327a') in 0.026438 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 10.710501 seconds.
+  path: Assets/JMO Assets/Cartoon FX (legacy)/Mesh/CFX_Mesh_Circular.FBX
+  artifactKey: Guid(33e6621d2756c044d88f4f9de1a55e7e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/JMO Assets/Cartoon FX (legacy)/Mesh/CFX_Mesh_Circular.FBX using Guid(33e6621d2756c044d88f4f9de1a55e7e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e1e2cc089aea56820ef9488a2ec64f40') in 0.025309 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/JMO Assets/Cartoon FX Remaster/CFXR Assets/Graphics/cfxr electric small anim2 7x2 mesh.asset
+  artifactKey: Guid(0df52a77851b6214792776cda02da918) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/JMO Assets/Cartoon FX Remaster/CFXR Assets/Graphics/cfxr electric small anim2 7x2 mesh.asset using Guid(0df52a77851b6214792776cda02da918) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3d4b4486d556d69470d6c40bd25a4b45') in 0.030068 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/JMO Assets/Cartoon FX Remaster/CFXR Assets/Meshes/cfxr mesh donut.fbx
+  artifactKey: Guid(5d48695472dfda94b92ac5316397da95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/JMO Assets/Cartoon FX Remaster/CFXR Assets/Meshes/cfxr mesh donut.fbx using Guid(5d48695472dfda94b92ac5316397da95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3075af126b42d0b66b6588017761db79') in 0.051418 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/JMO Assets/Cartoon FX (legacy)/Mesh/CFX_Mesh_CircularAngle.FBX
+  artifactKey: Guid(cd0e4347930affd4f81cb4698d17c2ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/JMO Assets/Cartoon FX (legacy)/Mesh/CFX_Mesh_CircularAngle.FBX using Guid(cd0e4347930affd4f81cb4698d17c2ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ef21686c13eba95514cb5f26ef095dc7') in 0.018936 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/JMO Assets/Cartoon FX Remaster/CFXR Assets/Meshes/cfxr mesh disk.fbx
+  artifactKey: Guid(7874f2765cea0a547827d03a8933235d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/JMO Assets/Cartoon FX Remaster/CFXR Assets/Meshes/cfxr mesh disk.fbx using Guid(7874f2765cea0a547827d03a8933235d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ebd8b429d0b4d999e05e739324d920c4') in 0.023862 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/JMO Assets/Cartoon FX Remaster/CFXR Assets/Meshes/cfxr electric_arc_circle.fbx
+  artifactKey: Guid(b10f0a773262b9c478542ff2d1a04863) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/JMO Assets/Cartoon FX Remaster/CFXR Assets/Meshes/cfxr electric_arc_circle.fbx using Guid(b10f0a773262b9c478542ff2d1a04863) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fa37a3cb6758d0393244f76738ca9ea2') in 0.027115 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004311 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\mrtlc\Desktop\Portfolio2 - FSO\BlastToThePast\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\mrtlc\Desktop\Portfolio2 - FSO\BlastToThePast\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.72 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.889 seconds
+Domain Reload Profiling:
+	ReloadAssembly (889ms)
+		BeginReloadAssembly (124ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (3ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (36ms)
+		EndReloadAssembly (677ms)
+			LoadAssemblies (78ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (235ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (37ms)
+			SetupLoadedEditorAssemblies (289ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (11ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (65ms)
+				ProcessInitializeOnLoadAttributes (180ms)
+				ProcessInitializeOnLoadMethodAttributes (25ms)
+				AfterProcessingInitializeOnLoad (8ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.73 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3459 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 20 unused Assets / (80.3 KB). Loaded Objects now: 3995.
+Memory consumption went from 128.5 MB to 128.4 MB.
+Total: 2.522500 ms (FindLiveObjects: 0.234200 ms CreateObjectMapping: 0.095000 ms MarkObjects: 2.106100 ms  DeleteObjects: 0.086200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005285 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\mrtlc\Desktop\Portfolio2 - FSO\BlastToThePast\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\mrtlc\Desktop\Portfolio2 - FSO\BlastToThePast\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.66 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.831 seconds
+Domain Reload Profiling:
+	ReloadAssembly (832ms)
+		BeginReloadAssembly (111ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (29ms)
+		EndReloadAssembly (641ms)
+			LoadAssemblies (69ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (202ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (35ms)
+			SetupLoadedEditorAssemblies (296ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (11ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (66ms)
+				ProcessInitializeOnLoadAttributes (184ms)
+				ProcessInitializeOnLoadMethodAttributes (26ms)
+				AfterProcessingInitializeOnLoad (8ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (6ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.66 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3459 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 20 unused Assets / (80.4 KB). Loaded Objects now: 3998.
+Memory consumption went from 128.5 MB to 128.5 MB.
+Total: 2.483300 ms (FindLiveObjects: 0.266600 ms CreateObjectMapping: 0.115500 ms MarkObjects: 2.023500 ms  DeleteObjects: 0.077100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 142.461451 seconds.
+  path: Assets/Prefabs/UI.prefab
+  artifactKey: Guid(983ec5a227622434b99faa433f833c7d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/UI.prefab using Guid(983ec5a227622434b99faa433f833c7d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c68461c16c712afb7f68ed29ec02b726') in 0.101985 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.193932 seconds.
+  path: Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Sword Trails/Ice/CFXR4 Sword Hit ICE (Cross).prefab
+  artifactKey: Guid(0c2509361b13505428ce788b7f846686) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Sword Trails/Ice/CFXR4 Sword Hit ICE (Cross).prefab using Guid(0c2509361b13505428ce788b7f846686) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '55fc4cbecd4cff2d7a49ab2c88bc2f9f') in 0.075195 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Sword Trails/Plain/CFXR4 Sword Hit PLAIN (Cross).prefab
+  artifactKey: Guid(b85d21f3b8fed714bacf0c4fd50fa512) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Sword Trails/Plain/CFXR4 Sword Hit PLAIN (Cross).prefab using Guid(b85d21f3b8fed714bacf0c4fd50fa512) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '608f8fd37715ea22e86eea0bca314e27') in 0.028726 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Sword Trails/Plain/CFXR4 Sword Trail PLAIN (360 Spiral).prefab
+  artifactKey: Guid(95b8d3d65b5d7f1409c4ed1723887826) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Sword Trails/Plain/CFXR4 Sword Trail PLAIN (360 Spiral).prefab using Guid(95b8d3d65b5d7f1409c4ed1723887826) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '27d01b07790e97b826dfc89405a3d764') in 0.023082 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Sword Trails/Plain/CFXR4 Sword Trail PLAIN (360 Thin Spiral).prefab
+  artifactKey: Guid(2b987d41506d172419fa18578f6ac380) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Sword Trails/Plain/CFXR4 Sword Trail PLAIN (360 Thin Spiral).prefab using Guid(2b987d41506d172419fa18578f6ac380) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '889c874c4c1f31c011891d6e94eeaadd') in 0.016553 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005167 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\mrtlc\Desktop\Portfolio2 - FSO\BlastToThePast\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\mrtlc\Desktop\Portfolio2 - FSO\BlastToThePast\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.73 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.902 seconds
+Domain Reload Profiling:
+	ReloadAssembly (902ms)
+		BeginReloadAssembly (123ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (36ms)
+		EndReloadAssembly (698ms)
+			LoadAssemblies (76ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (226ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (42ms)
+			SetupLoadedEditorAssemblies (317ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (13ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (71ms)
+				ProcessInitializeOnLoadAttributes (194ms)
+				ProcessInitializeOnLoadMethodAttributes (29ms)
+				AfterProcessingInitializeOnLoad (8ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (6ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.31 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3459 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 23 unused Assets / (82.7 KB). Loaded Objects now: 4001.
+Memory consumption went from 128.6 MB to 128.6 MB.
+Total: 2.381200 ms (FindLiveObjects: 0.224400 ms CreateObjectMapping: 0.082500 ms MarkObjects: 1.983700 ms  DeleteObjects: 0.089700 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

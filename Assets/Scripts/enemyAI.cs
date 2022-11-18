@@ -19,7 +19,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject UI;
     
     [Header("---- Enemy Stats ----")]
-    [Range(1, 100)][SerializeField] int HP;
+    [Range(1, 100)] [SerializeField] int HP;
     [Range(0, 5)][SerializeField] float playerFaceSpeed; // Speed of the enemy turning to face player in range
     [Range(1, 10)][SerializeField] int animLerpSpeed; // How fast the animation transitions happen
     [Range(25, 75)][SerializeField] int sightAngle; // The angle that the player has to be under to be seen

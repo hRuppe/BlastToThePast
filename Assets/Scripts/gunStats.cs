@@ -10,6 +10,7 @@ public class gunStats : ScriptableObject
     public int shootDistance;
     public int shootDamage;
     public int ammoCount;
+    public enums.WeaponType weaponType;
     public GameObject gunModel;
     public GameObject hitEffect;
     public GameObject muzzleFlash;
