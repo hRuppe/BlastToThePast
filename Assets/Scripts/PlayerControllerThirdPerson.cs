@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class PlayerControllerThirdPerson : MonoBehaviour
 {
-    [SerializeField] int playerBaseSpeed; 
-    [SerializeField] CharacterController controller;
+    [SerializeField] int playerBaseSpeed;
     [SerializeField] int maxJumps;
     [SerializeField] int jumpHeight;
-    [SerializeField] float gravityValue;
-    [SerializeField] Camera cam;
-    [SerializeField] int playerRotateSpeed;
-    [SerializeField] Animator anim;
     [SerializeField] int animLerpSpeed;
+    [SerializeField] int playerRotateSpeed;
+    [SerializeField] float gravityValue;
     [SerializeField] float playerSprintMod;
+    [SerializeField] CharacterController controller;
+    [SerializeField] Camera cam;
+    [SerializeField] Animator anim;
     
     Vector3 move; 
     Vector3 playerVelocity;
@@ -30,9 +30,14 @@ public class PlayerControllerThirdPerson : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {        
-        // Animation speed is not set up correctly 
-        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), controller.velocity.normalized.magnitude, Time.deltaTime * animLerpSpeed));
+    {
+        // I used the absolute value of the horizontal and vertical axis clamped to the values of 0 - 1 for the animation speed.
+        // This is more consistent and achieves the same outcome
+        float horizontalAxis = Mathf.Abs(Input.GetAxis("Horizontal"));
+        float verticalAxis = Mathf.Abs(Input.GetAxis("Vertical"));
+        float axisTotal = Mathf.Clamp(horizontalAxis + verticalAxis, 0, 1);
+
+        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), axisTotal, Time.deltaTime * animLerpSpeed));
 
         PlayerMove();
         PlayerSprint(); 
@@ -50,7 +55,11 @@ public class PlayerControllerThirdPerson : MonoBehaviour
                transform.forward * Input.GetAxis("Vertical");
 
         // Makes the player rotate with the camera. Has a bug where the player rotates on all axis
-        transform.rotation = Quaternion.Lerp(transform.rotation, cam.transform.rotation, Time.deltaTime * playerRotateSpeed);
+        // Ignoring the x-axis because that is the axis that rotates the player towards the ground
+        transform.eulerAngles = new Vector3(0, cam.transform.eulerAngles.y, cam.transform.eulerAngles.z);
+
+        // Moves head with camera
+        playerHead.transform.rotation = Quaternion.Lerp(playerHead.transform.rotation, cam.transform.rotation, Time.deltaTime * playerRotateSpeed);
 
         controller.Move(move * Time.deltaTime * playerCurrentSpeed);
 
