@@ -16,7 +16,9 @@ MonoBehaviour:
   shootDistance: 15
   shootDamage: 1
   ammoCount: 10
+  weaponType: 0
   gunModel: {fileID: 2436435537921354890, guid: a412a37657d509a4d85c105bbb2c005a, type: 3}
   hitEffect: {fileID: 100000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}
   muzzleFlash: {fileID: 0}
   gunSound: {fileID: 8300000, guid: 73e59134d0571ab469c141de6922f601, type: 3}
+  handScale: {x: 1, y: 1, z: 1}

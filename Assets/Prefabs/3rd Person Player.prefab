@@ -2298,6 +2298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8242640330379777385}
   - component: {fileID: 8242640330379777391}
+  - component: {fileID: 3953593881110671335}
   - component: {fileID: 8242640330379777390}
   - component: {fileID: 8242640330379777388}
   m_Layer: 0
@@ -2347,6 +2348,56 @@ MonoBehaviour:
   controller: {fileID: 8242640330379777390}
   cam: {fileID: 0}
   anim: {fileID: 8242640330379777388}
+--- !u!114 &3953593881110671335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8730347832288481235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1227362ff06902344bd3e9b17a4094d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  cam: {fileID: 0}
+  freeLook: {fileID: 0}
+  anim: {fileID: 0}
+  arrow: {fileID: 0}
+  shootPos: {fileID: 0}
+  mine: {fileID: 0}
+  gunModel: {fileID: 0}
+  hitEffect: {fileID: 0}
+  audioSource: {fileID: 0}
+  playerHealth: 0
+  playerBaseSpeed: 0
+  playerSprintMod: 0
+  jumpHeight: 0
+  gravityValue: 0
+  jumpMax: 0
+  animLerpSpeed: 0
+  playerRotateSpeed: 0
+  adsSpeed: 0
+  adsFov: 0
+  adsHorizontalSens: 0
+  adsVerticalSens: 0
+  shootRate: 0
+  shootRange: 0
+  shootDamage: 0
+  gunStatList: []
+  minePlaceDistance: 0
+  mineCount: 0
+  placeMineTimer: 0
+  audioJump: []
+  audioHurt: []
+  audioGunSwap: {fileID: 0}
+  audioJumpVolume: 0
+  audioHurtVolume: 0
+  audioGunshotVolume: 0
+  playerSoundLevel: 0
+  jumpTimes: 0
+  origJumpsMax: 0
 --- !u!143 &8242640330379777390
 CharacterController:
   m_ObjectHideFlags: 0

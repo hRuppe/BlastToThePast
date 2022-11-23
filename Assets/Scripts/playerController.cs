@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,7 +8,9 @@ public class playerController : MonoBehaviour
 {
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
-    [SerializeField] cameraController cameraController;
+    [SerializeField] Camera cam;
+    [SerializeField] CinemachineFreeLook freeLook;
+    [SerializeField] Animator anim;
     [SerializeField] GameObject arrow; // This will eventually be determined by the weapon the player is holding
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject mine;
@@ -22,10 +25,10 @@ public class playerController : MonoBehaviour
     [Range(8, 20)] [SerializeField] float jumpHeight;
     [Range(0, 35)] [SerializeField] float gravityValue;
     [Range(1, 3)] [SerializeField] public int jumpMax;
+    [SerializeField] int animLerpSpeed;
+    [SerializeField] int playerRotateSpeed;
     [SerializeField] float adsSpeed;
     [SerializeField] float adsFov;
-    [SerializeField] int adsHorizontalSens;
-    [SerializeField] int adsVerticalSens;
 
     [Header("----- Weapon Stats -----")]
     [SerializeField] float shootRate; // Value represents bullets per second
@@ -58,6 +61,8 @@ public class playerController : MonoBehaviour
     private float OrigHP;
     private float playerCurrentSpeed;
     private float timeSinceAdsStart;
+    private float originalHorizontalSens;
+    private float originalVerticalSens;
 
     private bool isAds;
     private bool isBlocking;
@@ -71,9 +76,11 @@ public class playerController : MonoBehaviour
     private void Start()
     {
         // Store original values
-        originalFov = Camera.main.fieldOfView;
+        originalFov = freeLook.m_Lens.FieldOfView;
         OrigHP = playerHealth;
         origJumpsMax = jumpMax;
+        originalHorizontalSens = freeLook.m_XAxis.m_MaxSpeed;
+        originalVerticalSens = freeLook.m_YAxis.m_MaxSpeed;
 
         playerCurrentSpeed = playerBaseSpeed;
         Respawn();
@@ -81,6 +88,20 @@ public class playerController : MonoBehaviour
 
     void Update()
     {
+        // I used the absolute value of the horizontal and vertical axis clamped to the values of 0 - 1 for the animation speed.
+        // This is more consistent and achieves the same outcome
+        float horizontalAxis = Mathf.Abs(Input.GetAxis("Horizontal"));
+        float verticalAxis = Mathf.Abs(Input.GetAxis("Vertical"));
+        float axisTotal = Mathf.Clamp(horizontalAxis + verticalAxis, 0, 1);
+
+        // Divides the axis total by two if we aren't sprinting, causing the blend tree to use the walking animation.
+        if (!isSprinting)
+            axisTotal /= 2;
+
+        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), axisTotal, Time.deltaTime * animLerpSpeed));
+
+        shootPos.transform.rotation = cam.transform.rotation;
+
         PlayerMove();
         PlayerSprint();
         PlayerSneak();
@@ -102,11 +123,18 @@ public class playerController : MonoBehaviour
         move = transform.right * Input.GetAxis("Horizontal") +
                transform.forward * Input.GetAxis("Vertical");
 
+        // Makes the player rotate with the camera. Has a bug where the player rotates on all axis
+        // Ignoring the x-axis because that is the axis that rotates the player towards the ground
+        transform.eulerAngles = new Vector3(0, cam.transform.eulerAngles.y, cam.transform.eulerAngles.z);
+
         controller.Move(move * Time.deltaTime * playerCurrentSpeed);
 
         if (Input.GetButtonDown("Jump") && jumpTimes < jumpMax)
         {
-            audioSource.PlayOneShot(audioJump[Random.Range(0, audioJump.Length)], audioJumpVolume);
+            if (audioJump.Length > 0)
+                audioSource.PlayOneShot(audioJump[Random.Range(0, audioJump.Length)], audioJumpVolume);
+            
+            anim.SetTrigger("Jump");
             playerVelocity.y = jumpHeight;
             jumpTimes++;
         }
@@ -151,7 +179,7 @@ public class playerController : MonoBehaviour
 
         if (Input.GetButtonDown("Alt Fire"))
         {
-            Debug.Log("Alt Fire");
+
             switch (gunStatList[selectedGun].weaponType)
             {
                 case enums.WeaponType.Melee:
@@ -160,8 +188,8 @@ public class playerController : MonoBehaviour
                 case enums.WeaponType.Hitscan:
                     isAds = true;
                     timeSinceAdsStart = 0;
-                    cameraController.horizontalSens = adsHorizontalSens;
-                    cameraController.verticalSens = adsVerticalSens;
+                    freeLook.m_XAxis.m_MaxSpeed = originalHorizontalSens / 2;
+                    freeLook.m_YAxis.m_MaxSpeed = originalVerticalSens / 2;
                     break;
                 case enums.WeaponType.Projectile:
 
@@ -178,8 +206,8 @@ public class playerController : MonoBehaviour
                     break;
                 case enums.WeaponType.Hitscan:
                     isAds = false;
-                    cameraController.horizontalSens = cameraController.originalHorizontalSense;
-                    cameraController.verticalSens = cameraController.originalVerticalSens;
+                    freeLook.m_XAxis.m_MaxSpeed = originalHorizontalSens;
+                    freeLook.m_YAxis.m_MaxSpeed = originalVerticalSens;
                     break;
                 case enums.WeaponType.Projectile:
 
@@ -191,12 +219,12 @@ public class playerController : MonoBehaviour
         {
             timeSinceAdsStart += Time.deltaTime;
 
-            Camera.main.fieldOfView = Mathf.Lerp(originalFov, adsFov, Mathf.Clamp(timeSinceAdsStart / adsSpeed, 0, 1));
+            freeLook.m_Lens.FieldOfView = Mathf.Lerp(originalFov, adsFov, Mathf.Clamp(timeSinceAdsStart / adsSpeed, 0, 1));
         } else if (!isAds)
         {
             timeSinceAdsStart -= Time.deltaTime;
 
-            Camera.main.fieldOfView = Mathf.Lerp(originalFov, adsFov, Mathf.Clamp(timeSinceAdsStart / adsSpeed, 0, 1));
+            freeLook.m_Lens.FieldOfView = Mathf.Lerp(originalFov, adsFov, Mathf.Clamp(timeSinceAdsStart / adsSpeed, 0, 1));
         }
 
         timeSinceAdsStart = Mathf.Clamp(timeSinceAdsStart, 0, adsSpeed);
@@ -208,14 +236,16 @@ public class playerController : MonoBehaviour
         if (gunStatList.Count > 0 && !isShooting && Input.GetButton("Shoot"))
         {
             isShooting = true;
-            audioSource.PlayOneShot(gunStatList[selectedGun].gunSound, audioGunshotVolume);
+
+            if (gunStatList.Count > 0)
+                audioSource.PlayOneShot(gunStatList[selectedGun].gunSound, audioGunshotVolume);
             trackShootSound = true;
             RaycastHit hit;
 
             if (gunStatList[selectedGun].weaponType == enums.WeaponType.Melee)
             {
                 RaycastHit[] hits;
-                hits = Physics.SphereCastAll(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), shootRange, shootRange);
+                hits = Physics.SphereCastAll(cam.ViewportPointToRay(new Vector2(0.5f, 0.5f)), shootRange, shootRange);
 
                 if (hits.Length > 0)
                 {
@@ -233,7 +263,7 @@ public class playerController : MonoBehaviour
                 // GameObject newArrow = Instantiate(arrow, shootPos.position, transform.rotation);
 
 
-                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootRange))
+                if (Physics.Raycast(cam.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootRange, 3))
                 {
                     if (hit.collider.gameObject.GetComponent<IDamage>() != null)
                     {
@@ -256,7 +286,7 @@ public class playerController : MonoBehaviour
         {
             isPlacingMine = true;
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(.5f, .5f)), out hit, minePlaceDistance))
+            if (Physics.Raycast(cam.ViewportPointToRay(new Vector2(.5f, .5f)), out hit, minePlaceDistance))
             {
                 Instantiate(mine, hit.point, mine.transform.rotation);
                 mineCount--;
@@ -297,7 +327,10 @@ public class playerController : MonoBehaviour
             playerHealth -= damageValue;
 
         StartCoroutine(gameManager.instance.playerDamageFlash());
-        audioSource.PlayOneShot(audioHurt[Random.Range(0, audioJump.Length)], audioJumpVolume);
+
+        if (audioHurt.Length > 0)
+            audioSource.PlayOneShot(audioHurt[Random.Range(0, audioJump.Length)], audioJumpVolume);
+
         UpdatePlayerHPBar();
 
         if (playerHealth <= 0)
@@ -310,7 +343,9 @@ public class playerController : MonoBehaviour
     public void GunPickup(gunStats gunStat)
     {
         gunStatList.Add(gunStat);
-        audioSource.PlayOneShot(audioGunSwap, audioGunshotVolume);
+        
+        if (audioGunSwap.length > 0)
+            audioSource.PlayOneShot(audioGunSwap, audioGunshotVolume);
 
         // Clone gun stats onto player
         shootRate = gunStat.shooteRate;
@@ -321,7 +356,7 @@ public class playerController : MonoBehaviour
         // Transfer model to player weapon model
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunStat.gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunStat.gunModel.GetComponent<MeshRenderer>().sharedMaterial;
-        gunModel.transform.rotation = gunStat.gunModel.transform.rotation;
+        gunModel.transform.localScale = gunStat.handScale;
     }
 
     void GunSelect()
@@ -331,12 +366,14 @@ public class playerController : MonoBehaviour
             if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunStatList.Count - 1)
             {
                 selectedGun++;
+                
                 audioSource.PlayOneShot(audioGunSwap, audioGunshotVolume);
 
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
             {
                 selectedGun--;
+
                 audioSource.PlayOneShot(audioGunSwap, audioGunshotVolume);
             }
 
@@ -355,6 +392,7 @@ public class playerController : MonoBehaviour
         // Transfer model to player weapon model
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunStatList[selectedGun].gunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunStatList[selectedGun].gunModel.GetComponent<MeshRenderer>().sharedMaterial;
+        gunModel.transform.localScale = gunStatList[selectedGun].handScale;
     }
 
     public void Respawn()

@@ -15,4 +15,5 @@ public class gunStats : ScriptableObject
     public GameObject hitEffect;
     public GameObject muzzleFlash;
     public AudioClip gunSound;
+    public Vector3 handScale;
 }
