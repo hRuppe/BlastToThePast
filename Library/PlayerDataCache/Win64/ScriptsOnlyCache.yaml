@@ -158,6 +158,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 108
       Script: {instanceID: 0}
+    - Class: 111
+      Script: {instanceID: 0}
     - Class: 114
       Script: {instanceID: 1560}
     - Class: 114
@@ -179,55 +181,55 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2922}
     - Class: 114
-      Script: {instanceID: 3228}
+      Script: {instanceID: 3230}
     - Class: 114
-      Script: {instanceID: 3754}
+      Script: {instanceID: 3756}
     - Class: 114
-      Script: {instanceID: 4198}
+      Script: {instanceID: 4200}
     - Class: 114
-      Script: {instanceID: 4310}
+      Script: {instanceID: 4312}
     - Class: 114
-      Script: {instanceID: 4584}
+      Script: {instanceID: 4586}
     - Class: 114
-      Script: {instanceID: 4610}
+      Script: {instanceID: 4612}
     - Class: 114
-      Script: {instanceID: 4960}
+      Script: {instanceID: 4962}
     - Class: 114
-      Script: {instanceID: 5372}
+      Script: {instanceID: 5374}
     - Class: 114
-      Script: {instanceID: 5420}
+      Script: {instanceID: 5422}
     - Class: 114
-      Script: {instanceID: 5654}
+      Script: {instanceID: 5656}
     - Class: 114
-      Script: {instanceID: 5880}
+      Script: {instanceID: 5882}
     - Class: 114
-      Script: {instanceID: 5988}
+      Script: {instanceID: 5990}
     - Class: 114
-      Script: {instanceID: 6004}
+      Script: {instanceID: 6006}
     - Class: 114
-      Script: {instanceID: 6158}
+      Script: {instanceID: 6160}
     - Class: 114
-      Script: {instanceID: 6210}
+      Script: {instanceID: 6212}
     - Class: 114
-      Script: {instanceID: 6434}
+      Script: {instanceID: 6436}
     - Class: 114
-      Script: {instanceID: 6508}
+      Script: {instanceID: 6510}
     - Class: 114
-      Script: {instanceID: 6900}
+      Script: {instanceID: 6902}
     - Class: 114
-      Script: {instanceID: 7146}
+      Script: {instanceID: 7148}
     - Class: 114
-      Script: {instanceID: 7256}
+      Script: {instanceID: 7258}
     - Class: 114
-      Script: {instanceID: 7568}
+      Script: {instanceID: 7570}
     - Class: 114
-      Script: {instanceID: 7654}
+      Script: {instanceID: 7656}
     - Class: 114
-      Script: {instanceID: 7854}
+      Script: {instanceID: 7856}
     - Class: 114
-      Script: {instanceID: 8296}
+      Script: {instanceID: 8300}
     - Class: 114
-      Script: {instanceID: 8446}
+      Script: {instanceID: 8450}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -485,7 +487,7 @@ ScriptsOnlyBuild:
     className: TMP_TextSelector_A
   - hash:
       serializedVersion: 2
-      Hash: 549617e314455a655581d261cafdb634
+      Hash: 9b8121db13544f3029df2ab5b6a18117
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: playerController
@@ -555,6 +557,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnDropdownValueChangedMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 641257573e7a3e4ae8c0298a71d158a2
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: dummy
   - hash:
       serializedVersion: 2
       Hash: 0784d4fd5b93bd75440d01eb2fac4233
@@ -683,7 +691,7 @@ ScriptsOnlyBuild:
     className: UnityOnCollisionExit2DMessageListener
   - hash:
       serializedVersion: 2
-      Hash: ab9c7aebfcb9966d0b0ff02b66f4704a
+      Hash: d6f00d2b007471e0733f460d50232c85
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: cameraController
@@ -863,7 +871,7 @@ ScriptsOnlyBuild:
     className: ActivationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 87b426a6e7f067b75c185acd7b500203
+      Hash: 0ff01394fce679ad8036851a6f379b1e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: gunStats
@@ -1476,4 +1484,5 @@ ScriptsOnlyBuild:
   platform: 19
   scenePathNames:
   - Assets/Scenes/Build2.unity
-  playerPath: C:/Users/ruppe/Downloads/BlastToThePast.exe
+  playerPath: C:/Users/ruppe/OneDrive - Full Sail University/Documents/College Stuff/Full
+    Sail/Project & Portfolio 3/Week 1/First Playable Milestone/BlastToThePast.exe

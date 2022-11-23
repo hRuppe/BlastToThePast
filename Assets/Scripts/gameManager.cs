@@ -34,6 +34,10 @@ public class gameManager : MonoBehaviour
 
     void Awake()
     {
+        // Lock & hide the cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         instance = this; // Binds the singleton on startup
         player = GameObject.FindGameObjectWithTag("Player"); // Find the Player & bind
         playerScript = player.GetComponent<playerController>(); // Find the playerController & bind
