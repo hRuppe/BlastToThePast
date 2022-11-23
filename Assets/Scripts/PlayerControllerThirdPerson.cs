@@ -25,7 +25,7 @@ public class PlayerControllerThirdPerson : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerCurrentSpeed = 0; 
+        playerCurrentSpeed = playerBaseSpeed; 
     }
 
     // Update is called once per frame
@@ -36,6 +36,10 @@ public class PlayerControllerThirdPerson : MonoBehaviour
         float horizontalAxis = Mathf.Abs(Input.GetAxis("Horizontal"));
         float verticalAxis = Mathf.Abs(Input.GetAxis("Vertical"));
         float axisTotal = Mathf.Clamp(horizontalAxis + verticalAxis, 0, 1);
+
+        // Divides the axis total by two if we aren't sprinting, causing the blend tree to use the walking animation.
+        if (!isSprinting)
+            axisTotal /= 2;
 
         anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), axisTotal, Time.deltaTime * animLerpSpeed));
 
@@ -63,6 +67,7 @@ public class PlayerControllerThirdPerson : MonoBehaviour
         if (Input.GetButtonDown("Jump") && jumpTimes < maxJumps)
         {
             //audioSource.PlayOneShot(audioJump[Random.Range(0, audioJump.Length)], audioJumpVolume);
+            anim.SetTrigger("Jump");
             playerVelocity.y = jumpHeight;
             jumpTimes++;
         }
