@@ -58,9 +58,6 @@ public class PlayerControllerThirdPerson : MonoBehaviour
         // Ignoring the x-axis because that is the axis that rotates the player towards the ground
         transform.eulerAngles = new Vector3(0, cam.transform.eulerAngles.y, cam.transform.eulerAngles.z);
 
-        // Moves head with camera
-        playerHead.transform.rotation = Quaternion.Lerp(playerHead.transform.rotation, cam.transform.rotation, Time.deltaTime * playerRotateSpeed);
-
         controller.Move(move * Time.deltaTime * playerCurrentSpeed);
 
         if (Input.GetButtonDown("Jump") && jumpTimes < maxJumps)
