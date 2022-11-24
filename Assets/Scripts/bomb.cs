@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class bomb : MonoBehaviour
 {
-    [Header("----- Bopmb Components -----")]
+    [Header("----- Bomb Components -----")]
     [SerializeField] Rigidbody rb;
     [SerializeField] GameObject fire;
 

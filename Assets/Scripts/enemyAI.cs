@@ -71,7 +71,8 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void CanSeePlayer()
     {
-        playerDir = gameManager.instance.player.transform.position - headPos.transform.position;
+        //playerDir = gameManager.instance.player.transform.position - headPos.transform.position;
+        playerDir = gameManager.instance.playerScript.torsoPos.transform.position - headPos.transform.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
         RaycastHit hit;

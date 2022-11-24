@@ -13,6 +13,7 @@ public class playerController : MonoBehaviour
     [SerializeField] Animator anim;
     [SerializeField] GameObject arrow; // This will eventually be determined by the weapon the player is holding
     [SerializeField] Transform shootPos;
+    [SerializeField] public Transform torsoPos; 
     [SerializeField] GameObject mine;
     [SerializeField] GameObject gunModel;
     [SerializeField] GameObject hitEffect;
@@ -120,10 +121,11 @@ public class playerController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
+        // Removing the horizontal axis makes the camera movement feel better but takes awa
         move = transform.right * Input.GetAxis("Horizontal") +
                transform.forward * Input.GetAxis("Vertical");
 
-        // Makes the player rotate with the camera. Has a bug where the player rotates on all axis
+        // Makes the player rotate with the camera. 
         // Ignoring the x-axis because that is the axis that rotates the player towards the ground
         transform.eulerAngles = new Vector3(0, cam.transform.eulerAngles.y, cam.transform.eulerAngles.z);
 
