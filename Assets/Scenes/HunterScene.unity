@@ -134,6 +134,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy - Ranged Swordman
       objectReference: {fileID: 0}
+    - target: {fileID: 1340167450959418826, guid: 30c744c072439b844a7eae814a32c34a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1340167450959418827, guid: 30c744c072439b844a7eae814a32c34a, type: 3}
+      propertyPath: m_AutoBraking
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1860808662835679088, guid: 30c744c072439b844a7eae814a32c34a, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -177,10 +185,6 @@ PrefabInstance:
     - target: {fileID: 1860808662835679088, guid: 30c744c072439b844a7eae814a32c34a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3259561642861908001, guid: 30c744c072439b844a7eae814a32c34a, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 2.02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30c744c072439b844a7eae814a32c34a, type: 3}
@@ -1639,7 +1643,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &438255540763173533
 Animator:
   serializedVersion: 4
@@ -2414,19 +2418,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 984747127908765407, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 2.580848
+      value: 3.191136
       objectReference: {fileID: 0}
     - target: {fileID: 984747127908765407, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -2.998216
+      value: -2.882256
       objectReference: {fileID: 0}
     - target: {fileID: 984747127994343240, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 2.580848
+      value: 3.191136
       objectReference: {fileID: 0}
     - target: {fileID: 984747127994343240, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -2.998216
+      value: -2.882256
       objectReference: {fileID: 0}
     - target: {fileID: 984747128068492821, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2454,11 +2458,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 984747128230939782, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000009620829
+      value: 0.000009612258
       objectReference: {fileID: 0}
     - target: {fileID: 984747128230939782, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000008270251
+      value: -0.00000082628816
       objectReference: {fileID: 0}
     - target: {fileID: 984747128952455914, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_RootOrder
@@ -2518,11 +2522,11 @@ PrefabInstance:
       objectReference: {fileID: 8333067241203088438}
     - target: {fileID: 984747129071981177, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 2.580848
+      value: 3.191136
       objectReference: {fileID: 0}
     - target: {fileID: 984747129071981177, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -2.998216
+      value: -2.882256
       objectReference: {fileID: 0}
     - target: {fileID: 984747129443903852, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2880,7 +2884,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!137 &3522190114190991259
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -3421,11 +3425,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 340010660, guid: 35056355b633b8f42947711786108de3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000009625115
+      value: 0.000009607971
       objectReference: {fileID: 0}
     - target: {fileID: 340010660, guid: 35056355b633b8f42947711786108de3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00000082739354
+      value: -0.00000082591987
       objectReference: {fileID: 0}
     - target: {fileID: 3953593881110671335, guid: 35056355b633b8f42947711786108de3, type: 3}
       propertyPath: freeLook

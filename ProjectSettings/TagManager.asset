@@ -12,6 +12,7 @@ TagManager:
   - MediumWall
   - ThickWall
   - Retrieve Item
+  - Enemy Melee Weapon
   layers:
   - Default
   - TransparentFX

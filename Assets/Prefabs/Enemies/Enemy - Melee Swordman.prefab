@@ -1774,7 +1774,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6536905483026362924}
-  - component: {fileID: 5907614727737354377}
+  - component: {fileID: 325625657689861944}
   - component: {fileID: 6718659922508695414}
   - component: {fileID: 5907614727737354378}
   - component: {fileID: 5907614727737354379}
@@ -1782,7 +1782,7 @@ GameObject:
   - component: {fileID: 5907614727737354389}
   m_Layer: 0
   m_Name: Enemy - Melee Swordman
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1808,7 +1808,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &5907614727737354377
+--- !u!114 &325625657689861944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1817,13 +1817,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5907614727737354390}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcde40e8dcf37f1498c7359a531e0e2d, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ffbfdb852dd2244a856a7241f95908a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 3715065511999981307}
   agent: {fileID: 5907614727737354378}
-  bullet: {fileID: 5441798788371574306, guid: 21646ccc963a3e14da6143d809ddfb46, type: 3}
-  bulletSpawnPos: {fileID: 4811862829549634662}
   anim: {fileID: 6718659922508695414}
   headPos: {fileID: 7782626764529117822}
   healthBar: {fileID: 5993987991921478343}
@@ -1833,7 +1831,8 @@ MonoBehaviour:
   animLerpSpeed: 2
   sightAngle: 65
   roamDist: 25
-  shootDelay: 1
+  swingDelay: 1
+  canSeePlayer: 0
 --- !u!95 &6718659922508695414
 Animator:
   serializedVersion: 4
@@ -1870,7 +1869,7 @@ NavMeshAgent:
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 1.55
   m_BaseOffset: 0
@@ -2365,9 +2364,11 @@ GameObject:
   - component: {fileID: 7889846109696264271}
   - component: {fileID: 6544159795211831274}
   - component: {fileID: 9022242638093251360}
+  - component: {fileID: 1200733928}
+  - component: {fileID: 1200733929}
   m_Layer: 0
   m_Name: OHS06
-  m_TagString: Untagged
+  m_TagString: Enemy Melee Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2437,6 +2438,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1200733928
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7364948417770017525}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5426684885162492598, guid: 8e583e9185af1be4e9dd6f501e6fe7d4, type: 3}
+--- !u!114 &1200733929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7364948417770017525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ccfb885e989334d99015f18d49f9f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponDmg: 3
 --- !u!1 &7782626764529117822
 GameObject:
   m_ObjectHideFlags: 0

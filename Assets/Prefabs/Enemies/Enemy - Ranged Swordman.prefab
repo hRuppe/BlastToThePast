@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 1340167450959418821}
   m_Layer: 6
   m_Name: Enemy - Ranged Swordman
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3074,7 +3074,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3153969514194588659, guid: 5f8136ca16a293a42bb21be407bad1e4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.2
+      value: 2.02
       objectReference: {fileID: 0}
     - target: {fileID: 3153969514194588659, guid: 5f8136ca16a293a42bb21be407bad1e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
