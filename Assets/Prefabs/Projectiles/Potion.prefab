@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 5441798788371574311}
   - component: {fileID: 5441798788371574308}
-  - component: {fileID: 5441798788371574310}
+  - component: {fileID: 8410677552203618737}
   - component: {fileID: 5441798788371574305}
   - component: {fileID: 5441798788371574304}
   - component: {fileID: 5441798788371574307}
   - component: {fileID: 4656018572296807594}
   m_Layer: 7
-  m_Name: Bullet
+  m_Name: Potion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,14 +29,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5441798788371574306}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.38, y: 1.5, z: -14.29}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -1.942, y: 1.5, z: -12.102}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &5441798788371574308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,14 +53,14 @@ MonoBehaviour:
   bulletSpeed: 4
   bulletDmg: 1
   bulletTimer: 5
---- !u!33 &5441798788371574310
+--- !u!33 &8410677552203618737
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5441798788371574306}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 73c33de544278cc40862c8e46858e7fd, type: 3}
 --- !u!23 &5441798788371574305
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -188,7 +188,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.7921569, g: 0.5473955, b: 0.14509802, a: 1}
+      key0: {r: 0.26799223, g: 0.8301887, b: 0.23887502, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}

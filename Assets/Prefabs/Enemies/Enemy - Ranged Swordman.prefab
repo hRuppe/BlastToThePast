@@ -379,7 +379,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1860808662835679088}
-  - component: {fileID: 1340167450959418820}
+  - component: {fileID: 7983843464562700257}
   - component: {fileID: 2186588756391524906}
   - component: {fileID: 1340167450959418827}
   - component: {fileID: 6776098292073654056}
@@ -413,7 +413,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &1340167450959418820
+--- !u!114 &7983843464562700257
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -422,7 +422,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1340167450959418826}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcde40e8dcf37f1498c7359a531e0e2d, type: 3}
+  m_Script: {fileID: 11500000, guid: f53b0ec8eb72c41499078327dcd5c267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 7139810158405335113}
@@ -438,7 +438,9 @@ MonoBehaviour:
   animLerpSpeed: 2
   sightAngle: 65
   roamDist: 25
+  playerPursuitStoppingDistance: 6
   shootDelay: 1
+  canSeePlayer: 0
 --- !u!95 &2186588756391524906
 Animator:
   serializedVersion: 4
@@ -475,7 +477,7 @@ NavMeshAgent:
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 1.55
   m_BaseOffset: 0

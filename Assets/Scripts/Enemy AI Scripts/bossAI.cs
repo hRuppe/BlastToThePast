@@ -7,15 +7,20 @@ using UnityEngine.UI;
 using UnityEngine.AI;
 using System.Globalization;
 
-public class meleeSwordsmanAI : MonoBehaviour, IDamage
+public class bossAI : MonoBehaviour, IDamage
 {
     [Header("---- Components ----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] GameObject magicEffect;
+    [SerializeField] GameObject summonEffect; 
     [SerializeField] Animator anim;
     [SerializeField] GameObject headPos;
     [SerializeField] Image healthBar;
     [SerializeField] GameObject UI;
+    [SerializeField] GameObject enemyToSummon; 
+    [SerializeField] Transform enemySummonPos1; 
+    [SerializeField] Transform enemySummonPos2;
 
     [Header("---- Enemy Stats ----")]
     [Range(1, 100)][SerializeField] int HP;
@@ -23,19 +28,22 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     [Range(1, 10)][SerializeField] int animLerpSpeed; // How fast the animation transitions happen
     [Range(25, 75)][SerializeField] int sightAngle; // The angle that the player has to be under to be seen
     [Range(0, 50)][SerializeField] int roamDist; // How far the enemy can roam from orig position
-    [Range(1, 15)][SerializeField] int playerPursuitStoppingDistance;
+    [Range(1, 15)][SerializeField] int playerPursuitStoppingDistance; 
 
-    [Header("---- Sword Stats ----")]
-    [Range(1, 5)][SerializeField] int swingDelay; 
+
+    [Header("---- Attack Stats ----")]
+    [Range(1, 20)][SerializeField] int magicAttackDelay;
+    [Range(1, 15)][SerializeField] int enemySummonTimer;
 
     Vector3 playerDir;
     Vector3 startingPos;
 
     bool playerInRange;
-    public bool canSeePlayer;
-    bool isSwinging;
+    [HideInInspector] public bool canSeePlayer;
+    bool usingMagic;
+    bool isSummoning; 
     bool inPursuit;
-    bool isRoaming; 
+    bool isRoaming;
 
     float origStoppingDist;
     float origSpeed;
@@ -72,7 +80,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
                 }
                 if (inPursuit)
                 {
-                    FacePlayer(); 
+                    FacePlayer();
                 }
             }
             else if (!isRoaming && agent.destination != gameManager.instance.player.transform.position)
@@ -102,12 +110,12 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
                 isRoaming = false;
                 agent.stoppingDistance = playerPursuitStoppingDistance;
                 agent.SetDestination(gameManager.instance.player.transform.position);
-                 
+
 
                 if (!inPursuit)
                 {
                     StartCoroutine(Pursuit());
-                }     
+                }
 
                 // Prevents enemy from freezing up when you go the side of him in a fight - still happens if you go all the way behind him quickly
                 if (agent.remainingDistance < agent.stoppingDistance)
@@ -115,13 +123,18 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
                     FacePlayer();
                 }
 
-                if (!isSwinging && agent.remainingDistance <= agent.stoppingDistance)
+                if (!usingMagic)
                 {
-                    StartCoroutine(SwingSword()); 
+                    StartCoroutine(MagicAttack());
+                }
+
+                if (!isSummoning)
+                {
+                    StartCoroutine(SummonEnemies()); 
                 }
             }
             else
-            { 
+            {
                 canSeePlayer = false;
             }
         }
@@ -129,13 +142,13 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
 
     IEnumerator Pursuit()
     {
-        inPursuit = true; 
+        inPursuit = true;
         yield return new WaitForSeconds(5f);
         inPursuit = false;
     }
 
     void Roam()
-    { 
+    {
         agent.stoppingDistance = 0;
 
         Vector3 randomPos = Random.insideUnitSphere * roamDist;
@@ -188,13 +201,39 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
         }
     }
 
-    IEnumerator SwingSword()
+    IEnumerator MagicAttack()
     {
-        isSwinging = true;
-        anim.SetTrigger("Swing");
+        usingMagic = true;
+        anim.SetTrigger("SummonMagic");
 
-        yield return new WaitForSeconds(swingDelay);
-        isSwinging = false;
+        Instantiate(magicEffect, gameManager.instance.player.transform.position, magicEffect.transform.rotation);
+
+        yield return new WaitForSeconds(magicAttackDelay);
+        usingMagic = false;
+    }
+
+    IEnumerator SummonEnemies()
+    {
+        // Set true & wait for timer
+        isSummoning = true;
+        yield return new WaitForSeconds(enemySummonTimer); 
+        // Set false so it has to wait for timer before going back into it
+        isSummoning = false;
+        
+
+        agent.isStopped = true;
+        anim.SetTrigger("SummonEnemies"); 
+        Vector3 summonSpot1 = enemySummonPos1.position; 
+        Vector3 summonSpot2 = enemySummonPos2.position;
+        GameObject effect1 = Instantiate(summonEffect, summonSpot1, summonEffect.transform.rotation);
+        GameObject effect2 = Instantiate(summonEffect, summonSpot2, summonEffect.transform.rotation);
+        yield return new WaitForSeconds(.5f); 
+        Instantiate(enemyToSummon, summonSpot1, gameObject.transform.rotation);
+        Instantiate(enemyToSummon, summonSpot2, gameObject.transform.rotation);
+        Destroy(effect1);
+        Destroy(effect2); 
+        yield return new WaitForSeconds(1);
+        agent.isStopped = false;
     }
 
     public void UpdateHpBar()

@@ -1780,7 +1780,7 @@ GameObject:
   - component: {fileID: 5907614727737354379}
   - component: {fileID: 5907614727737354388}
   - component: {fileID: 5907614727737354389}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy - Melee Swordman
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1831,6 +1831,7 @@ MonoBehaviour:
   animLerpSpeed: 2
   sightAngle: 65
   roamDist: 25
+  playerPursuitStoppingDistance: 2
   swingDelay: 1
   canSeePlayer: 0
 --- !u!95 &6718659922508695414

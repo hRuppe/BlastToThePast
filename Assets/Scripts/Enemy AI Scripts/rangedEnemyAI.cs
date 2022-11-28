@@ -7,11 +7,13 @@ using UnityEngine.UI;
 using UnityEngine.AI;
 using System.Globalization;
 
-public class meleeSwordsmanAI : MonoBehaviour, IDamage
+public class rangedEnemyAI : MonoBehaviour, IDamage
 {
     [Header("---- Components ----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] GameObject bullet;
+    [SerializeField] Transform bulletSpawnPos;
     [SerializeField] Animator anim;
     [SerializeField] GameObject headPos;
     [SerializeField] Image healthBar;
@@ -23,19 +25,20 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     [Range(1, 10)][SerializeField] int animLerpSpeed; // How fast the animation transitions happen
     [Range(25, 75)][SerializeField] int sightAngle; // The angle that the player has to be under to be seen
     [Range(0, 50)][SerializeField] int roamDist; // How far the enemy can roam from orig position
-    [Range(1, 15)][SerializeField] int playerPursuitStoppingDistance;
+    [Range(1, 15)][SerializeField] int playerPursuitStoppingDistance; 
 
-    [Header("---- Sword Stats ----")]
-    [Range(1, 5)][SerializeField] int swingDelay; 
+
+    [Header("---- Gun Stats ----")]
+    [Range(1, 5)][SerializeField] int shootDelay;
 
     Vector3 playerDir;
     Vector3 startingPos;
 
     bool playerInRange;
     public bool canSeePlayer;
-    bool isSwinging;
+    bool isShooting;
     bool inPursuit;
-    bool isRoaming; 
+    bool isRoaming;
 
     float origStoppingDist;
     float origSpeed;
@@ -72,7 +75,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
                 }
                 if (inPursuit)
                 {
-                    FacePlayer(); 
+                    FacePlayer();
                 }
             }
             else if (!isRoaming && agent.destination != gameManager.instance.player.transform.position)
@@ -102,12 +105,12 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
                 isRoaming = false;
                 agent.stoppingDistance = playerPursuitStoppingDistance;
                 agent.SetDestination(gameManager.instance.player.transform.position);
-                 
+
 
                 if (!inPursuit)
                 {
                     StartCoroutine(Pursuit());
-                }     
+                }
 
                 // Prevents enemy from freezing up when you go the side of him in a fight - still happens if you go all the way behind him quickly
                 if (agent.remainingDistance < agent.stoppingDistance)
@@ -115,13 +118,13 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
                     FacePlayer();
                 }
 
-                if (!isSwinging && agent.remainingDistance <= agent.stoppingDistance)
+                if (!isShooting)
                 {
-                    StartCoroutine(SwingSword()); 
+                    StartCoroutine(Shoot());
                 }
             }
             else
-            { 
+            {
                 canSeePlayer = false;
             }
         }
@@ -129,13 +132,13 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
 
     IEnumerator Pursuit()
     {
-        inPursuit = true; 
+        inPursuit = true;
         yield return new WaitForSeconds(5f);
         inPursuit = false;
     }
 
     void Roam()
-    { 
+    {
         agent.stoppingDistance = 0;
 
         Vector3 randomPos = Random.insideUnitSphere * roamDist;
@@ -188,13 +191,15 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
         }
     }
 
-    IEnumerator SwingSword()
+    IEnumerator Shoot()
     {
-        isSwinging = true;
-        anim.SetTrigger("Swing");
+        isShooting = true;
+        anim.SetTrigger("Shoot");
 
-        yield return new WaitForSeconds(swingDelay);
-        isSwinging = false;
+        Instantiate(bullet, bulletSpawnPos.position, transform.rotation);
+
+        yield return new WaitForSeconds(shootDelay);
+        isShooting = false;
     }
 
     public void UpdateHpBar()
