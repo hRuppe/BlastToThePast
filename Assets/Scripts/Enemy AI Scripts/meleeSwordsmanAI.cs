@@ -16,6 +16,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     [SerializeField] GameObject headPos;
     [SerializeField] Image healthBar;
     [SerializeField] GameObject UI;
+    [SerializeField] enemyMelee meleeScript; 
 
     [Header("---- Enemy Stats ----")]
     [Range(1, 100)][SerializeField] int HP;
@@ -24,6 +25,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     [Range(25, 75)][SerializeField] int sightAngle; // The angle that the player has to be under to be seen
     [Range(0, 50)][SerializeField] int roamDist; // How far the enemy can roam from orig position
     [Range(1, 15)][SerializeField] int playerPursuitStoppingDistance;
+    [Range(1, 8)][SerializeField] float stunnedTime;
 
     [Header("---- Sword Stats ----")]
     [Range(1, 5)][SerializeField] int swingDelay; 
@@ -31,11 +33,13 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     Vector3 playerDir;
     Vector3 startingPos;
 
+    public bool isSwinging;
+
     bool playerInRange;
     public bool canSeePlayer;
-    bool isSwinging;
     bool inPursuit;
-    bool isRoaming; 
+    bool isRoaming;
+    bool isStunned; 
 
     float origStoppingDist;
     float origSpeed;
@@ -188,13 +192,31 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
         }
     }
 
+    IEnumerator CheckForStun()
+    {
+        if (gameManager.instance.playerScript.blockTime < .5f && meleeScript.playerHit)
+        {
+            meleeScript.audSource.Play(); 
+            isStunned = true;
+            anim.SetBool("Stun", true);
+            agent.isStopped = true; 
+            yield return new WaitForSeconds(stunnedTime);
+            anim.SetBool("Stun", false);
+            agent.isStopped = false; 
+            isStunned = false; 
+        }
+    }
+
     IEnumerator SwingSword()
     {
-        isSwinging = true;
-        anim.SetTrigger("Swing");
-
-        yield return new WaitForSeconds(swingDelay);
-        isSwinging = false;
+        if (!isStunned)
+        {
+            isSwinging = true;
+            anim.SetTrigger("Swing");
+            StartCoroutine(CheckForStun());
+            yield return new WaitForSeconds(swingDelay);
+            isSwinging = false;
+        }  
     }
 
     public void UpdateHpBar()

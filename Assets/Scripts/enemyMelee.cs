@@ -4,13 +4,29 @@ using UnityEngine;
 
 public class enemyMelee : MonoBehaviour
 {
-    [SerializeField] int weaponDmg; 
+    [SerializeField] int weaponDmg;
+    [SerializeField] meleeSwordsmanAI meleeSwordsmanAIScript;
+    
+    public AudioSource audSource; 
+    public bool playerHit; 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        StartCoroutine(PlayerHit(other)); 
+    }
+
+    IEnumerator PlayerHit(Collider collider)
+    {
+        if (collider.tag == "Player")
         {
-            gameManager.instance.playerScript.damage(weaponDmg); 
+            playerHit = true;
+            
+            if (gameManager.instance.playerScript.blockTime > .5f || !gameManager.instance.playerScript.isBlocking && meleeSwordsmanAIScript.isSwinging)
+            {
+                gameManager.instance.playerScript.damage(weaponDmg);
+            }
+            yield return new WaitForSeconds(1); 
+            playerHit = false;
         }
     }
 }

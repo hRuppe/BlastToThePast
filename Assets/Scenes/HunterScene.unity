@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1340167450959418826, guid: 30c744c072439b844a7eae814a32c34a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1860808662835679088, guid: 30c744c072439b844a7eae814a32c34a, type: 3}
       propertyPath: m_RootOrder
@@ -1142,6 +1142,10 @@ PrefabInstance:
     - target: {fileID: 8792942106868008158, guid: f11543240535296418d4ada9b8fbae28, type: 3}
       propertyPath: m_Name
       value: Enemy - Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792942106868008158, guid: f11543240535296418d4ada9b8fbae28, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f11543240535296418d4ada9b8fbae28, type: 3}
@@ -2391,19 +2395,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 984747127908765407, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 2.927136
+      value: 2.495446
       objectReference: {fileID: 0}
     - target: {fileID: 984747127908765407, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -2.953247
+      value: -2.999994
       objectReference: {fileID: 0}
     - target: {fileID: 984747127994343240, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 2.927136
+      value: 2.495446
       objectReference: {fileID: 0}
     - target: {fileID: 984747127994343240, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -2.953247
+      value: -2.999994
       objectReference: {fileID: 0}
     - target: {fileID: 984747128068492821, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2431,11 +2435,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 984747128230939782, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000009612258
+      value: 0.000009620829
       objectReference: {fileID: 0}
     - target: {fileID: 984747128230939782, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00000082628816
+      value: -0.0000008270251
       objectReference: {fileID: 0}
     - target: {fileID: 984747128952455914, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_RootOrder
@@ -2495,11 +2499,11 @@ PrefabInstance:
       objectReference: {fileID: 8333067241203088438}
     - target: {fileID: 984747129071981177, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 2.927136
+      value: 2.495446
       objectReference: {fileID: 0}
     - target: {fileID: 984747129071981177, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_FollowOffset.z
-      value: -2.953247
+      value: -2.999994
       objectReference: {fileID: 0}
     - target: {fileID: 984747129443903852, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2537,10 +2541,6 @@ PrefabInstance:
     - target: {fileID: 5907614727737354390, guid: e2da5b4435a00f94c8aeb17dae4fee72, type: 3}
       propertyPath: m_Name
       value: Enemy - Melee Swordman
-      objectReference: {fileID: 0}
-    - target: {fileID: 5907614727737354390, guid: e2da5b4435a00f94c8aeb17dae4fee72, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6536905483026362924, guid: e2da5b4435a00f94c8aeb17dae4fee72, type: 3}
       propertyPath: m_RootOrder
@@ -2601,16 +2601,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 340010660, guid: 35056355b633b8f42947711786108de3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.08564607
-      objectReference: {fileID: 0}
-    - target: {fileID: 340010660, guid: 35056355b633b8f42947711786108de3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000009607971
+      value: 0.000009625115
       objectReference: {fileID: 0}
     - target: {fileID: 340010660, guid: 35056355b633b8f42947711786108de3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00000082591987
+      value: -0.00000082739354
       objectReference: {fileID: 0}
     - target: {fileID: 3953593881110671335, guid: 35056355b633b8f42947711786108de3, type: 3}
       propertyPath: freeLook

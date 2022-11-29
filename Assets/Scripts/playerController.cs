@@ -24,6 +24,9 @@ public class playerController : MonoBehaviour
     [Range(1, 10)] [SerializeField] float playerBaseSpeed; 
     [Range(1.5f, 5)] [SerializeField] float playerSprintMod;
     [Range(8, 20)] [SerializeField] float jumpHeight;
+    [Range(1, 10)][SerializeField] float dashDelay; // 
+    [Range(0, 3)][SerializeField] float dashTime; // 
+    [Range(1, 40)][SerializeField] int dashSpeed;
     [Range(0, 35)] [SerializeField] float gravityValue;
     [Range(1, 3)] [SerializeField] public int jumpMax;
     [SerializeField] int animLerpSpeed;
@@ -49,6 +52,7 @@ public class playerController : MonoBehaviour
     [Range(0, 1)] [SerializeField] float audioGunshotVolume;
 
     public float playerSoundLevel;
+    public float blockTime;
 
     private Vector3 move;
     private Vector3 playerVelocity;
@@ -65,13 +69,16 @@ public class playerController : MonoBehaviour
     private float originalHorizontalSens;
     private float originalVerticalSens;
 
+    public bool isBlocking;
+
     private bool isAds;
-    private bool isBlocking;
     private bool isShooting;
     private bool isSprinting;
+    private bool isDashing; 
     private bool isSneaking;
-    private bool trackShootSound;
     private bool isPlacingMine;
+    private bool trackShootSound;
+
 
 
     private void Start()
@@ -111,6 +118,7 @@ public class playerController : MonoBehaviour
         StartCoroutine(PlaceMine()); 
         GunSelect();
         CalculateSound();
+        StartBlockTimer(); 
     }
 
     void PlayerMove()
@@ -160,6 +168,23 @@ public class playerController : MonoBehaviour
         }
     }
 
+    //IEnumerator PlayerDash()
+    //{
+    //    if (Input.GetButtonDown("Dash") && !isDashing)
+    //    {
+    //        isDashing = true;
+
+    //        float startTime = Time.time; 
+    //        while (Time.time < startTime + dashTime)
+    //        {
+    //            playerCurrentSpeed = playerBaseSpeed * dashSpeed; 
+    //        }
+    //        playerCurrentSpeed = playerBaseSpeed; 
+    //    }
+    //    yield return new WaitForSeconds(dashDelay);
+    //    isDashing = false; 
+    //}
+
     void PlayerSneak()
     {
         if (Input.GetButtonDown("Sneak"))
@@ -186,13 +211,16 @@ public class playerController : MonoBehaviour
             {
                 case enums.WeaponType.Melee:
                     isBlocking = true;
+                    anim.SetBool("Block", true); 
                     break;
+                
                 case enums.WeaponType.Hitscan:
                     isAds = true;
                     timeSinceAdsStart = 0;
                     freeLook.m_XAxis.m_MaxSpeed = originalHorizontalSens / 2;
                     freeLook.m_YAxis.m_MaxSpeed = originalVerticalSens / 2;
                     break;
+                
                 case enums.WeaponType.Projectile:
 
                     break;
@@ -204,7 +232,9 @@ public class playerController : MonoBehaviour
             switch (gunStatList[selectedGun].weaponType)
             {
                 case enums.WeaponType.Melee:
+                    blockTime = 0; 
                     isBlocking = false;
+                    anim.SetBool("Block", false);
                     break;
                 case enums.WeaponType.Hitscan:
                     isAds = false;
@@ -212,7 +242,6 @@ public class playerController : MonoBehaviour
                     freeLook.m_YAxis.m_MaxSpeed = originalVerticalSens;
                     break;
                 case enums.WeaponType.Projectile:
-
                     break;
             }
         }
@@ -231,6 +260,15 @@ public class playerController : MonoBehaviour
 
         timeSinceAdsStart = Mathf.Clamp(timeSinceAdsStart, 0, adsSpeed);
 
+    }
+
+    // Starts a timer to see how long the player has been blocking
+    void StartBlockTimer()
+    {
+        if (isBlocking)
+        {
+            blockTime += Time.deltaTime; 
+        }
     }
 
     IEnumerator Shoot()
