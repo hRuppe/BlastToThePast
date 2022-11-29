@@ -60,7 +60,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.008620693
+      - time: 0
         functionName: ResetCombo
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -74,7 +74,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.97402877
+      - time: 1
         functionName: ResetCombo
         data: 
         objectReferenceParameter: {instanceID: 0}

@@ -67,14 +67,14 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.5776339
+      - time: 0.74717414
         functionName: DamageMelee
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.87643677
+      - time: 1
         functionName: ResetCombo
         data: 
         objectReferenceParameter: {instanceID: 0}
