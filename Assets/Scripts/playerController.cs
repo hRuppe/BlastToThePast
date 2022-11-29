@@ -18,6 +18,7 @@ public class playerController : MonoBehaviour
     [SerializeField] GameObject gunModel;
     [SerializeField] GameObject hitEffect;
     [SerializeField] AudioSource audioSource;
+    [SerializeField] BoxCollider meleeCollider;
 
     [Header("----- Player Stats -----")]
     [Range(0, 50)] [SerializeField] float playerHealth;
@@ -34,7 +35,7 @@ public class playerController : MonoBehaviour
     [Header("----- Weapon Stats -----")]
     [SerializeField] float shootRate; // Value represents bullets per second
     [SerializeField] float shootRange;
-    [SerializeField] int shootDamage;
+    [SerializeField] public int shootDamage;
     [SerializeField] List<gunStats> gunStatList;
     [Range(1, 10)][SerializeField] int minePlaceDistance;
     [Range(0, 10)][SerializeField] int mineCount;
@@ -72,6 +73,7 @@ public class playerController : MonoBehaviour
     private bool isSneaking;
     private bool trackShootSound;
     private bool isPlacingMine;
+    private bool canCombo;
 
 
     private void Start()
@@ -233,6 +235,27 @@ public class playerController : MonoBehaviour
 
     }
 
+    // Resets canCombo, which determines if the player can combo sword swings. Called by an animation event.
+    void ResetCombo()
+    {
+        anim.SetBool("CanCombo", false);
+    }
+
+    // Checks a collider in front of the player and damages enemy. This function is called by an animation event.
+    void DamageMelee()
+    {
+        anim.SetBool("CanCombo", true);
+
+        Collider[] hits = Physics.OverlapBox(meleeCollider.transform.position, meleeCollider.size / 2);
+        foreach (Collider hit in hits)
+        {
+            if (hit.GetComponent<IDamage>() != null)
+            {
+                hit.GetComponent<IDamage>().TakeDamage(shootDamage);
+            }
+        }
+    }
+
     IEnumerator Shoot()
     {
         if (gunStatList.Count > 0 && !isShooting && Input.GetButton("Shoot"))
@@ -246,20 +269,9 @@ public class playerController : MonoBehaviour
 
             if (gunStatList[selectedGun].weaponType == enums.WeaponType.Melee)
             {
-                RaycastHit[] hits;
-                hits = Physics.SphereCastAll(cam.ViewportPointToRay(new Vector2(0.5f, 0.5f)), shootRange, shootRange);
 
-                if (hits.Length > 0)
-                {
-                    foreach (RaycastHit other in hits)
-                    {
-                        if (other.collider.gameObject.GetComponent<IDamage>() != null)
-                        {
-                            other.collider.gameObject.GetComponent<IDamage>().TakeDamage(shootDamage);
-                            Instantiate(hitEffect, other.point, hitEffect.transform.rotation);
-                        }   
-                    }
-                }
+                anim.SetTrigger("SwordCombo");
+
             } else
             {
                 // GameObject newArrow = Instantiate(arrow, shootPos.position, transform.rotation);
@@ -278,6 +290,8 @@ public class playerController : MonoBehaviour
             
 
             yield return new WaitForSeconds(1.0f / shootRate);
+
+            gunModel.GetComponent<BoxCollider>().enabled = false;
             isShooting = false;
         }
     }

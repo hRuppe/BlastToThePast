@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Cinemachine;
 
 public class gameManager : MonoBehaviour
 {
     public static gameManager instance; // Singleton for reference in other methods
+
+    [Header("----- Camera -----")]
+    public CinemachineFreeLook camera;
 
     [Header("----- Player Information -----")]
     public GameObject player; // Player entity tracker

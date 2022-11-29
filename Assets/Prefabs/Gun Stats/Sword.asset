@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f709094af346ef047a2b0eb65d01f735, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  shooteRate: 0.75
-  shootDistance: 1
+  shooteRate: 2
+  shootDistance: 3
   shootDamage: 3
   ammoCount: 1
   weaponType: 2
