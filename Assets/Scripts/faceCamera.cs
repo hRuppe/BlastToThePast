@@ -6,6 +6,6 @@ public class faceCamera : MonoBehaviour
 {
     void Update()
     {
-        transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
+        transform.rotation = Quaternion.LookRotation(transform.position - gameManager.instance.camera.transform.position);
     }
 }

@@ -188,9 +188,6 @@ public class bossAI : MonoBehaviour, IDamage
         UI.gameObject.SetActive(true);
         UpdateHpBar();
         StartCoroutine(FlashDamage());
-        // Turn stopping distance to 0 so enemy goes exactly where he was shot from
-        agent.stoppingDistance = 0;
-        agent.SetDestination(gameManager.instance.player.transform.position);
 
         if (HP <= 0)
         {
@@ -199,6 +196,11 @@ public class bossAI : MonoBehaviour, IDamage
             agent.enabled = false;
             UI.SetActive(false);
             GetComponent<Collider>().enabled = false;
+        } else
+        {
+            // Turn stopping distance to 0 so enemy goes exactly where he was shot from
+            agent.stoppingDistance = 0;
+            agent.SetDestination(gameManager.instance.player.transform.position);
         }
     }
 
@@ -220,21 +222,24 @@ public class bossAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(enemySummonTimer); 
         // Set false so it has to wait for timer before going back into it
         isSummoning = false;
-        
 
-        agent.isStopped = true;
-        anim.SetTrigger("SummonEnemies"); 
-        Vector3 summonSpot1 = enemySummonPos1.position; 
-        Vector3 summonSpot2 = enemySummonPos2.position;
-        GameObject effect1 = Instantiate(summonEffect, summonSpot1, summonEffect.transform.rotation);
-        GameObject effect2 = Instantiate(summonEffect, summonSpot2, summonEffect.transform.rotation);
-        yield return new WaitForSeconds(.5f); 
-        Instantiate(enemyToSummon, summonSpot1, gameObject.transform.rotation);
-        Instantiate(enemyToSummon, summonSpot2, gameObject.transform.rotation);
-        Destroy(effect1);
-        Destroy(effect2); 
-        yield return new WaitForSeconds(1);
-        agent.isStopped = false;
+        // Makes sure the boss doesn't try to summon enemies if he is dead.
+        if (HP > 0)
+        {
+            agent.isStopped = true;
+            anim.SetTrigger("SummonEnemies");
+            Vector3 summonSpot1 = enemySummonPos1.position;
+            Vector3 summonSpot2 = enemySummonPos2.position;
+            GameObject effect1 = Instantiate(summonEffect, summonSpot1, summonEffect.transform.rotation);
+            GameObject effect2 = Instantiate(summonEffect, summonSpot2, summonEffect.transform.rotation);
+            yield return new WaitForSeconds(.5f);
+            Instantiate(enemyToSummon, summonSpot1, gameObject.transform.rotation);
+            Instantiate(enemyToSummon, summonSpot2, gameObject.transform.rotation);
+            Destroy(effect1);
+            Destroy(effect2);
+            yield return new WaitForSeconds(1);
+            agent.isStopped = false;
+        } 
     }
 
     public void UpdateHpBar()
