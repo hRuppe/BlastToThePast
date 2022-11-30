@@ -194,22 +194,32 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
 
     IEnumerator CheckForStun()
     {
-        if (gameManager.instance.playerScript.blockTime < .5f && meleeScript.playerHit)
+        // Check that the player is blocking but not over 1/2 a second & that the player was hit
+        if (gameManager.instance.playerScript.isBlocking && gameManager.instance.playerScript.blockTime < .5f 
+            && meleeScript.playerHit && agent.enabled)
         {
+            // Play sword clashing audio on perfect block
             meleeScript.audSource.Play(); 
+            
+            // Stop movement & stun animation to true
             isStunned = true;
             anim.SetBool("Stun", true);
             agent.isStopped = true; 
+
+            // Wait before stopping stun animation & make sure agent is still alive before resuming movement
             yield return new WaitForSeconds(stunnedTime);
             anim.SetBool("Stun", false);
-            agent.isStopped = false; 
+            if (agent.enabled)
+            {
+                agent.isStopped = false;
+            } 
             isStunned = false; 
         }
     }
 
     IEnumerator SwingSword()
     {
-        if (!isStunned)
+        if (!isStunned && agent.enabled)
         {
             isSwinging = true;
             anim.SetTrigger("Swing");
