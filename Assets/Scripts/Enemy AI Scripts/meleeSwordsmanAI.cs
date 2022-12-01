@@ -39,7 +39,8 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     public bool canSeePlayer;
     bool inPursuit;
     bool isRoaming;
-    bool isStunned; 
+    bool isStunned;
+    bool isTakingDmg; 
 
     float origStoppingDist;
     float origSpeed;
@@ -174,6 +175,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
 
     public void TakeDamage(int dmg)
     {
+        anim.SetTrigger("GetHit"); 
         HP -= dmg;
         UI.gameObject.SetActive(true);
         UpdateHpBar();
@@ -219,7 +221,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
 
     IEnumerator SwingSword()
     {
-        if (!isStunned && agent.enabled)
+        if (!isStunned && agent.enabled && !isTakingDmg)
         {
             isSwinging = true;
             anim.SetTrigger("Swing");
