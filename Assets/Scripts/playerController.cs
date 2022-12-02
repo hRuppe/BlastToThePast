@@ -1,8 +1,6 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class playerController : MonoBehaviour
@@ -32,7 +30,8 @@ public class playerController : MonoBehaviour
     [SerializeField] int playerRotateSpeed;
     [SerializeField] float adsSpeed;
     [SerializeField] float adsFov;
-    [SerializeField] public float dodgeMoveDistance; 
+    [SerializeField] public float dodgeMoveDistance;
+    [SerializeField] float deathDuration;
 
     [Header("----- Weapon Stats -----")]
     [SerializeField] float shootRate; // Value represents bullets per second
@@ -92,6 +91,9 @@ public class playerController : MonoBehaviour
         originalVerticalSens = freeLook.m_YAxis.m_MaxSpeed;
 
         playerCurrentSpeed = playerBaseSpeed;
+
+        freeLook.transform.rotation = new Quaternion(0, 0, 0, 0);
+
         Respawn();
     }
 
@@ -99,32 +101,43 @@ public class playerController : MonoBehaviour
     {
         // I used the absolute value of the horizontal and vertical axis clamped to the values of 0 - 1 for the animation speed.
         // This is more consistent and achieves the same outcome
-        float horizontalAxis = Mathf.Abs(Input.GetAxis("Horizontal"));
-        float verticalAxis = Mathf.Abs(Input.GetAxis("Vertical"));
-        float axisTotal = Mathf.Clamp(horizontalAxis + verticalAxis, 0, 1);
+        float horizontalAxis = Input.GetAxis("Horizontal");
+        float verticalAxis = Input.GetAxis("Vertical");
+        //float axisTotal = Mathf.Clamp(horizontalAxis + verticalAxis, 0, 1);
 
         // Divides the axis total by two if we aren't sprinting, causing the blend tree to use the walking animation.
-        if (!isSprinting)
-            axisTotal /= 2;
+        if (!isSprinting && !isSneaking)
+        {
+            horizontalAxis /= 2;
+            verticalAxis /= 2;
+        }
+            
+        //anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), axisTotal, Time.deltaTime * animLerpSpeed));
 
-        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), axisTotal, Time.deltaTime * animLerpSpeed));
+        anim.SetFloat("Horizontal", Mathf.Lerp(anim.GetFloat("Horizontal"), horizontalAxis, Time.deltaTime * animLerpSpeed));
+        anim.SetFloat("Vertical", Mathf.Lerp(anim.GetFloat("Vertical"), verticalAxis, Time.deltaTime * animLerpSpeed));
 
         shootPos.transform.rotation = cam.transform.rotation;
 
-        PlayerMove();
-        PlayerSprint();
-        PlayerDodge(); 
-        PlayerSneak();
-        AltFire();
-        StartCoroutine(Shoot());
-        StartCoroutine(PlaceMine()); 
-        GunSelect();
-        CalculateSound();
-        StartBlockTimer(); 
+        if (!anim.GetBool("Dead"))
+        {
+            PlayerMove();
+            PlayerSprint();
+            PlayerDodge();
+            PlayerSneak();
+            AltFire();
+            StartCoroutine(Shoot());
+            StartCoroutine(PlaceMine());
+            GunSelect();
+            CalculateSound();
+            StartBlockTimer();
+        }
     }
 
     void PlayerMove()
     {
+        anim.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
+
         if (controller.isGrounded && playerVelocity.y < 0)
         {
             jumpTimes = 0;
@@ -156,11 +169,13 @@ public class playerController : MonoBehaviour
 
     void PlayerSprint()
     {
+        // Don't sprint while sneaking
+        if (isSneaking) return;
+
         if (Input.GetButtonDown("Sprint"))
         {
             playerCurrentSpeed = playerBaseSpeed * playerSprintMod;
             isSprinting = true;
-
         }
         else if (Input.GetButtonUp("Sprint"))
         {
@@ -198,6 +213,16 @@ public class playerController : MonoBehaviour
         }
     }
 
+    public IEnumerator PlayerDead()
+    {
+        anim.SetBool("Dead", true);
+
+        yield return new WaitForSeconds(deathDuration);
+
+        gameManager.instance.playerDeadMenu.SetActive(true);
+        gameManager.instance.pause();
+    }
+
     public void DodgeForwardComplete()
     {
         controller.Move(transform.forward * dodgeMoveDistance); 
@@ -214,12 +239,14 @@ public class playerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Sneak"))
         {
+            anim.SetBool("Is Crouching", true);
             playerCurrentSpeed = playerBaseSpeed / 2;
             isSneaking = true;
 
         }
         else if (Input.GetButtonUp("Sneak"))
         {
+            anim.SetBool("Is Crouching", false);
             playerCurrentSpeed = playerBaseSpeed;
             isSneaking = false;
         }
@@ -410,8 +437,7 @@ public class playerController : MonoBehaviour
 
         if (playerHealth <= 0)
         {
-            gameManager.instance.playerDeadMenu.SetActive(true);
-            gameManager.instance.pause();
+            StartCoroutine(PlayerDead());
         }    
     }
 
@@ -472,6 +498,7 @@ public class playerController : MonoBehaviour
 
     public void Respawn()
     {
+        anim.SetBool("Dead", false);
         controller.enabled = false;
         playerHealth = OrigHP;
         UpdatePlayerHPBar();
