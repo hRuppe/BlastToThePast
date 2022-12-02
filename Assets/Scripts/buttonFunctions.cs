@@ -28,4 +28,15 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.unpause();
         gameManager.instance.playerScript.Respawn();
     }
+
+    public void nextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); 
+    }
+
+    public void newGame()
+    {
+        Debug.Log("Pressed"); 
+        SceneManager.LoadScene("CutScene1"); 
+    }
 }

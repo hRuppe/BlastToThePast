@@ -16,7 +16,8 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     [SerializeField] GameObject headPos;
     [SerializeField] Image healthBar;
     [SerializeField] GameObject UI;
-    [SerializeField] enemyMelee meleeScript; 
+    [SerializeField] enemyMelee meleeScript;
+    [SerializeField] MeshCollider swordCollider; 
 
     [Header("---- Enemy Stats ----")]
     [Range(1, 100)][SerializeField] int HP;
@@ -223,11 +224,13 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     {
         if (!isStunned && agent.enabled && !isTakingDmg)
         {
+            swordCollider.enabled = true; 
             isSwinging = true;
             anim.SetTrigger("Swing");
             StartCoroutine(CheckForStun());
             yield return new WaitForSeconds(swingDelay);
             isSwinging = false;
+            swordCollider.enabled = false; 
         }  
     }
 

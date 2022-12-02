@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class playerController : MonoBehaviour
@@ -25,15 +26,13 @@ public class playerController : MonoBehaviour
     [Range(1, 10)] [SerializeField] float playerBaseSpeed; 
     [Range(1.5f, 5)] [SerializeField] float playerSprintMod;
     [Range(8, 20)] [SerializeField] float jumpHeight;
-    [Range(1, 10)][SerializeField] float dashDelay; // 
-    [Range(0, 3)][SerializeField] float dashTime; // 
-    [Range(1, 40)][SerializeField] int dashSpeed;
     [Range(0, 35)] [SerializeField] float gravityValue;
     [Range(1, 3)] [SerializeField] public int jumpMax;
     [SerializeField] int animLerpSpeed;
     [SerializeField] int playerRotateSpeed;
     [SerializeField] float adsSpeed;
     [SerializeField] float adsFov;
+    [SerializeField] public float dodgeMoveDistance; 
 
     [Header("----- Weapon Stats -----")]
     [SerializeField] float shootRate; // Value represents bullets per second
@@ -71,16 +70,16 @@ public class playerController : MonoBehaviour
     private float originalVerticalSens;
 
     public bool isBlocking;
+    public bool dodgeComplete;
 
+    private bool isDodging; 
     private bool isAds;
     private bool isShooting;
     private bool isSprinting;
-    private bool isDashing; 
     private bool isSneaking;
     private bool isPlacingMine;
     private bool trackShootSound;
     private bool canCombo;
-
 
 
     private void Start()
@@ -114,6 +113,7 @@ public class playerController : MonoBehaviour
 
         PlayerMove();
         PlayerSprint();
+        PlayerDodge(); 
         PlayerSneak();
         AltFire();
         StartCoroutine(Shoot());
@@ -131,7 +131,6 @@ public class playerController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-        // Removing the horizontal axis makes the camera movement feel better but takes awa
         move = transform.right * Input.GetAxis("Horizontal") +
                transform.forward * Input.GetAxis("Vertical");
 
@@ -170,22 +169,46 @@ public class playerController : MonoBehaviour
         }
     }
 
-    //IEnumerator PlayerDash()
-    //{
-    //    if (Input.GetButtonDown("Dash") && !isDashing)
-    //    {
-    //        isDashing = true;
+    void PlayerDodge()
+    {
+        if (Input.GetButtonDown("Dodge"))
+        {
+            isDodging = true;
+            if (Input.GetAxis("Vertical") > 0)
+            {
+                Debug.Log("Dodge Forward");
+                anim.SetTrigger("Dodge Forward");
+            }
+            else if (Input.GetAxis("Vertical") < 0)
+            {
+                Debug.Log("Dodge Backward");
+                anim.SetTrigger("Dodge Backward");
+            }
 
-    //        float startTime = Time.time; 
-    //        while (Time.time < startTime + dashTime)
-    //        {
-    //            playerCurrentSpeed = playerBaseSpeed * dashSpeed; 
-    //        }
-    //        playerCurrentSpeed = playerBaseSpeed; 
-    //    }
-    //    yield return new WaitForSeconds(dashDelay);
-    //    isDashing = false; 
-    //}
+            if (Input.GetAxis("Horizontal") > 0)
+            {
+                Debug.Log("Dodge Right");
+                anim.SetTrigger("Dodge Right");
+            }
+            else if (Input.GetAxis("Horizontal") < 0)
+            {
+                Debug.Log("Dodge Left");
+                anim.SetTrigger("Dodge Left");
+            }
+        }
+    }
+
+    public void DodgeForwardComplete()
+    {
+        controller.Move(transform.forward * dodgeMoveDistance); 
+        //controller.enabled = true;
+        isDodging = false;
+    }
+
+    public void TurnOffController()
+    {
+        controller.enabled = false;
+    }
 
     void PlayerSneak()
     {
@@ -208,7 +231,6 @@ public class playerController : MonoBehaviour
 
         if (Input.GetButtonDown("Alt Fire"))
         {
-
             switch (gunStatList[selectedGun].weaponType)
             {
                 case enums.WeaponType.Melee:
@@ -261,7 +283,6 @@ public class playerController : MonoBehaviour
         }
 
         timeSinceAdsStart = Mathf.Clamp(timeSinceAdsStart, 0, adsSpeed);
-
     }
 
     // Resets canCombo, which determines if the player can combo sword swings. Called by an animation event.
