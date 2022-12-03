@@ -256,23 +256,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 4348394794709640343}
-  cameraController: {fileID: 4348394792945088686}
+  cam: {fileID: 0}
+  freeLook: {fileID: 0}
+  anim: {fileID: 0}
   arrow: {fileID: 8778150636216473605, guid: a22d5b02b8a55c042a32dd6af19ede31, type: 3}
   shootPos: {fileID: 4348394793739231654}
+  torsoPos: {fileID: 0}
   mine: {fileID: 6960615568239687176, guid: fd4a1e47a77eeb342aba54aeb8e19477, type: 3}
   gunModel: {fileID: 7495492988607187611}
   hitEffect: {fileID: 3432958286849152088, guid: 87ee7299dd44ed747af24dbb91bcd33b, type: 3}
   audioSource: {fileID: 4348394793053282897}
+  meleeCollider: {fileID: 0}
   playerHealth: 10
   playerBaseSpeed: 5.5
   playerSprintMod: 1.75
   jumpHeight: 12
   gravityValue: 35
   jumpMax: 2
+  animLerpSpeed: 0
+  playerRotateSpeed: 0
   adsSpeed: 0.05
   adsFov: 15
-  adsHorizontalSens: 0
-  adsVerticalSens: 0
+  dodgeMoveDistance: 0
   shootRate: 0
   shootRange: 0
   shootDamage: 0
@@ -296,8 +301,11 @@ MonoBehaviour:
   audioHurtVolume: 0.35
   audioGunshotVolume: 0.12
   playerSoundLevel: 0
+  blockTime: 0
   jumpTimes: 0
   origJumpsMax: 0
+  isBlocking: 0
+  dodgeComplete: 0
 --- !u!23 &4348394794709640341
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -367,7 +375,7 @@ AudioSource:
   m_GameObject: {fileID: 4348394794709640344}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4330325330426602662, guid: c1fe9b13fa83e004f9b2ad48308217fd, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
