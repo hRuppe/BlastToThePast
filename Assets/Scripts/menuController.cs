@@ -16,6 +16,10 @@ public class menuController : MonoBehaviour
     [SerializeField] Slider musicSlider;
     [SerializeField] Slider sfxSlider;
 
+    [SerializeField] AudioSource sfxSource;
+
+    [SerializeField] Button[] interactiveButtons; 
+
     public void openSettings()
     {
         settingsMenu.SetActive(true);
@@ -51,4 +55,10 @@ public class menuController : MonoBehaviour
         else
             mixer.SetFloat("SFX Volume", Mathf.Log10(sfxSlider.value) * 20);
     }
+
+    public void SFXTestPlay()
+    {
+        sfxSource.Play(); 
+    }
+
 }

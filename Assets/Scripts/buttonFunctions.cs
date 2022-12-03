@@ -36,7 +36,6 @@ public class buttonFunctions : MonoBehaviour
 
     public void newGame()
     {
-        Debug.Log("Pressed"); 
         SceneManager.LoadScene("CutScene1"); 
     }
 }
