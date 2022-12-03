@@ -6,6 +6,7 @@ public class gunPickup : MonoBehaviour
 {
 
     [SerializeField] gunStats gunStat;
+    [SerializeField] GameObject weapon;
     [SerializeField] float moveIncrement;
     [SerializeField] float hoverMax;
     [SerializeField] float rotationSpeed;
@@ -32,7 +33,7 @@ public class gunPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            gameManager.instance.playerScript.GunPickup(gunStat);
+            gameManager.instance.playerScript.GunPickup(gunStat, weapon);
             Destroy(gameObject);
         }
     }

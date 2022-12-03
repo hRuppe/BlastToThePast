@@ -16,6 +16,7 @@ public class arrow : MonoBehaviour
 
     void Start()
     {
+        rb = gameObject.GetComponent<Rigidbody>();
         rb.velocity = (transform.forward * bulletSpeed) + new Vector3(0, bulletVertOffset, 0); // Use instead of trans.forward when game manager is set up with player (playerRef.transform.position - transform.position)
         Destroy(gameObject, bulletTimer);
     }
@@ -28,8 +29,13 @@ public class arrow : MonoBehaviour
             return;
         }
 
+        if (other.gameObject.GetComponent<IDamage>() != null)
+        {
+            other.gameObject.GetComponent<IDamage>().TakeDamage(bulletdamage);
+        }
+
         // Stick arrow into wall
-        transform.position += -transform.forward;
+        //transform.position += -transform.forward;
 
         // Parents the arrow to the other object so it moves with them
         transform.parent = other.gameObject.transform;

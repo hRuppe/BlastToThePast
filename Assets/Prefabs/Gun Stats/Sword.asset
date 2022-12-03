@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   shooteRate: 2
+  reloadSpeed: 0
   shootDistance: 3
   shootDamage: 1
   ammoCount: 1
+  isLeftHanded: 0
   weaponType: 2
-  gunModel: {fileID: 7023539351297555960, guid: 34e9229030ebefc40943a95365e3e25a, type: 3}
+  gunModel: {fileID: 829887073046348096, guid: bbbd6ca6ba1a14c4f956f942e40b6bfd, type: 3}
   hitEffect: {fileID: 8525990746615576120, guid: b85d21f3b8fed714bacf0c4fd50fa512, type: 3}
   muzzleFlash: {fileID: 0}
   gunSound: {fileID: 8300000, guid: 637ac878e3c306943973898b10cb12c9, type: 3}
