@@ -896,9 +896,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.18039216, g: 0.39607844, b: 0.56078434, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -914,7 +914,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 454255204}
+  m_TargetGraphic: {fileID: 1662834644}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -965,10 +965,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 454255201}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d6e3f40817b2554cbe7ec5ba1312daf, type: 3}
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 1, g: 0, b: 0, a: 1}
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1123617442}
+          m_TargetAssemblyTypeName: menuController, Assembly-CSharp
+          m_MethodName: PlayBtnHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &589950080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,6 +1297,7 @@ GameObject:
   - component: {fileID: 733242100}
   - component: {fileID: 733242099}
   - component: {fileID: 733242102}
+  - component: {fileID: 733242103}
   m_Layer: 5
   m_Name: New Game Btn
   m_TagString: Untagged
@@ -1331,7 +1348,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.18039216, g: 0.39607844, b: 0.56078434, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1349,7 +1366,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 733242100}
+  m_TargetGraphic: {fileID: 1286768793}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -1415,6 +1432,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da248f43a1a314e40902f336004ebb73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &733242103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733242097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1123617442}
+          m_TargetAssemblyTypeName: menuController, Assembly-CSharp
+          m_MethodName: PlayBtnHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &839844608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1693,6 +1739,7 @@ GameObject:
   m_Component:
   - component: {fileID: 867625490}
   - component: {fileID: 867625491}
+  - component: {fileID: 867625492}
   m_Layer: 5
   m_Name: SFX Slider
   m_TagString: Untagged
@@ -1786,6 +1833,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &867625492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867625489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1123617442}
+          m_TargetAssemblyTypeName: menuController, Assembly-CSharp
+          m_MethodName: PlayBtnHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &995423643
 GameObject:
   m_ObjectHideFlags: 0
@@ -2245,6 +2321,7 @@ GameObject:
   - component: {fileID: 1099382306}
   - component: {fileID: 1099382305}
   - component: {fileID: 1099382304}
+  - component: {fileID: 1099382307}
   m_Layer: 5
   m_Name: Settings Btn
   m_TagString: Untagged
@@ -2295,7 +2372,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.18039216, g: 0.39607844, b: 0.56078434, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -2313,7 +2390,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1099382305}
+  m_TargetGraphic: {fileID: 1260419079}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -2367,6 +2444,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099382302}
   m_CullTransparentMesh: 1
+--- !u!114 &1099382307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099382302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1123617442}
+          m_TargetAssemblyTypeName: menuController, Assembly-CSharp
+          m_MethodName: PlayBtnHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1108010985
 GameObject:
   m_ObjectHideFlags: 0
@@ -2554,6 +2660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 339925783}
   settingsMenu: {fileID: 1794940014}
+  btnHoverClip: {fileID: 8300000, guid: fdf68698ecc97ff43afa6ba235fd0e99, type: 3}
   mixer: {fileID: 24100000, guid: c1fe9b13fa83e004f9b2ad48308217fd, type: 2}
   masterSlider: {fileID: 1385208942}
   musicSlider: {fileID: 1727387522}
@@ -3260,6 +3367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1385208941}
   - component: {fileID: 1385208942}
+  - component: {fileID: 1385208943}
   m_Layer: 5
   m_Name: Master Slider
   m_TagString: Untagged
@@ -3312,9 +3420,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -3330,7 +3438,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 638416235}
+  m_TargetGraphic: {fileID: 1976358344}
   m_FillRect: {fileID: 1976358343}
   m_HandleRect: {fileID: 638416234}
   m_Direction: 0
@@ -3353,6 +3461,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1385208943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385208940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1123617442}
+          m_TargetAssemblyTypeName: menuController, Assembly-CSharp
+          m_MethodName: PlayBtnHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1463784217
 GameObject:
   m_ObjectHideFlags: 0
@@ -3403,6 +3540,7 @@ GameObject:
   - component: {fileID: 1475740389}
   - component: {fileID: 1475740388}
   - component: {fileID: 1475740391}
+  - component: {fileID: 1475740392}
   m_Layer: 5
   m_Name: Exit Btn
   m_TagString: Untagged
@@ -3453,7 +3591,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.18039216, g: 0.39607844, b: 0.56078434, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -3471,7 +3609,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1475740389}
+  m_TargetGraphic: {fileID: 1649278657}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -3537,6 +3675,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da248f43a1a314e40902f336004ebb73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1475740392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475740386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1123617442}
+          m_TargetAssemblyTypeName: menuController, Assembly-CSharp
+          m_MethodName: PlayBtnHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1571033584
 GameObject:
   m_ObjectHideFlags: 0
@@ -4110,6 +4277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1727387521}
   - component: {fileID: 1727387522}
+  - component: {fileID: 1727387523}
   m_Layer: 5
   m_Name: Music Slider
   m_TagString: Untagged
@@ -4203,6 +4371,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1727387523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727387520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1123617442}
+          m_TargetAssemblyTypeName: menuController, Assembly-CSharp
+          m_MethodName: PlayBtnHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1794940014
 GameObject:
   m_ObjectHideFlags: 0

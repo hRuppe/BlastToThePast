@@ -10,6 +10,8 @@ public class menuController : MonoBehaviour
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject settingsMenu;
 
+    [SerializeField] AudioClip btnHoverClip; 
+
     [SerializeField] AudioMixer mixer; 
     
     [SerializeField] Slider masterSlider;
@@ -59,6 +61,11 @@ public class menuController : MonoBehaviour
     public void SFXTestPlay()
     {
         sfxSource.Play(); 
+    }
+
+    public void PlayBtnHover()
+    {
+        sfxSource.PlayOneShot(btnHoverClip); 
     }
 
 }
