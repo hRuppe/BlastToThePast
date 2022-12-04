@@ -35,7 +35,7 @@ public class arrow : MonoBehaviour
         }
 
         // Stick arrow into wall
-        //transform.position += -transform.forward;
+        transform.position += -transform.forward * 1.25f;
 
         // Parents the arrow to the other object so it moves with them
         transform.parent = other.gameObject.transform;

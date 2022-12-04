@@ -120,10 +120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 635112718022439251}
-  bulletSpeed: 25
+  bulletSpeed: 50
   bulletdamage: 5
   bulletTimer: 5
-  bulletVertOffset: 5
+  bulletVertOffset: 3
 --- !u!54 &635112718022439251
 Rigidbody:
   m_ObjectHideFlags: 0

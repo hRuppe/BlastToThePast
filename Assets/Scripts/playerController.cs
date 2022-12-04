@@ -17,7 +17,7 @@ public class playerController : MonoBehaviour
     [SerializeField] GameObject rightHandWeaponContainer;
     [SerializeField] GameObject leftHandWeaponContainer;
     [SerializeField] GameObject hitEffect;
-    [SerializeField] AudioSource audioSource;
+    [SerializeField] public AudioSource audioSource;
     [SerializeField] BoxCollider meleeCollider;
 
     [Header("----- Player Stats -----")]
@@ -127,8 +127,8 @@ public class playerController : MonoBehaviour
             PlayerSprint();
             PlayerDodge();
             PlayerSneak();
-            AltFire();
-            StartCoroutine(Shoot());
+            //AltFire();
+            //StartCoroutine(Shoot());
             StartCoroutine(PlaceMine());
             GunSelect();
             CalculateSound();
@@ -258,7 +258,7 @@ public class playerController : MonoBehaviour
     }
 
     // Function handles genric right click actions based on the type of weapon equipped
-    void AltFire()
+   /* void AltFire()
     {
         if (gunStatList.Count <= 0) return;
 
@@ -320,6 +320,7 @@ public class playerController : MonoBehaviour
 
         timeSinceAdsStart = Mathf.Clamp(timeSinceAdsStart, 0, adsSpeed);
     }
+   */
 
     // Resets canCombo, which determines if the player can combo sword swings. Called by an animation event.
     void ResetCombo()
@@ -351,7 +352,7 @@ public class playerController : MonoBehaviour
         }
     }
 
-    IEnumerator Shoot()
+    /*IEnumerator Shoot()
     {
         // Makes sure the player has a weapon and is trying to shoot
         if (gunStatList.Count > 0 && !isShooting && Input.GetButton("Shoot"))
@@ -397,6 +398,7 @@ public class playerController : MonoBehaviour
             isShooting = false;
         }
     }
+    */
 
     IEnumerator PlaceMine()
     {

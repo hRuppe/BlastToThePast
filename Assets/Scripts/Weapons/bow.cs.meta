@@ -3,7 +3,11 @@ guid: c69ec662d5a928b4cb0cda1f212fb482
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - arrow: {fileID: 5829213762401587201, guid: ca3c1ad2992267644aec0f04d2f41338, type: 3}
+  - gunStats: {fileID: 11400000, guid: 1f197ab8dcd700f478355b62b557cc00, type: 2}
+  - bowDraw: {fileID: 8300000, guid: 28ecac922c44d264383925bb733197ce, type: 3}
+  - bowFire: {fileID: 8300000, guid: 1d8cc3c188ec572489b65bbcf098ddd1, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

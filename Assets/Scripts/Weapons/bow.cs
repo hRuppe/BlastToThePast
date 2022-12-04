@@ -10,9 +10,13 @@ public class bow : weapon
 
     [SerializeField] gunStats gunStats;
 
+    [SerializeField] AudioClip bowDraw;
+    [SerializeField] AudioClip bowFire;
+
     private float currentLoadTime;
 
     private bool isLoaded;
+    private bool playedDrawSound;
     private bool drawBow;
     private bool bowReset; // Used to track when the player manually unloaded bow with alt fire
 
@@ -45,10 +49,16 @@ public class bow : weapon
             // Charges the bow. If you release before fully charged, it starts to uncharge it
             currentLoadTime += Time.deltaTime;
 
+            if (!playedDrawSound)
+            {
+                gameManager.instance.playerScript.audioSource.PlayOneShot(bowDraw, 1);
+                playedDrawSound = true;
+            }
         }
         else
         {
             drawBow = false;
+            playedDrawSound = false;
 
             // If the bow is loaded, shoot, otherwise, uncharge the bow
             if (isLoaded)
@@ -56,6 +66,8 @@ public class bow : weapon
                 GameObject newArrow = Instantiate(arrow, gameManager.instance.playerScript.shootPos.position, gameManager.instance.playerScript.cam.transform.rotation);
                 isLoaded = false;
                 currentLoadTime = 0;
+                gameManager.instance.playerScript.audioSource.PlayOneShot(bowFire, 0.25f);
+                playedDrawSound = false;
             }
             else if (currentLoadTime > 0)
             {
