@@ -23,9 +23,9 @@ public class arrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" || other.isTrigger)
         {
-            // Ignore player
+            // Ignore player and other triggers
             return;
         }
 
