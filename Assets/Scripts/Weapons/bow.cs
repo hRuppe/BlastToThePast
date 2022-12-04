@@ -13,6 +13,8 @@ public class bow : weapon
     private float currentLoadTime;
 
     private bool isLoaded;
+    private bool drawBow;
+    private bool bowReset; // Used to track when the player manually unloaded bow with alt fire
 
     private Animator anim;
 
@@ -25,18 +27,29 @@ public class bow : weapon
     {
         PrimaryFire();
         AltFire();
+
+        anim.SetBool("DrawBow", drawBow);
     }
 
     public override void PrimaryFire()
     {
+        // Allows the player to draw the bow again after resetting with alt fire
+        if (Input.GetButtonUp("Shoot"))
+            bowReset = false;
+
         // Charge bow if held until fire
-        if (Input.GetButton("Shoot"))
+        if (Input.GetButton("Shoot") && !bowReset)
         {
+            drawBow = true;
+
             // Charges the bow. If you release before fully charged, it starts to uncharge it
             currentLoadTime += Time.deltaTime;
+
         }
         else
         {
+            drawBow = false;
+
             // If the bow is loaded, shoot, otherwise, uncharge the bow
             if (isLoaded)
             {
@@ -44,7 +57,7 @@ public class bow : weapon
                 isLoaded = false;
                 currentLoadTime = 0;
             }
-            else
+            else if (currentLoadTime > 0)
             {
                 currentLoadTime -= chargeDecaySpeed * Time.deltaTime;
             }
@@ -63,14 +76,16 @@ public class bow : weapon
         currentLoadTime = Mathf.Clamp(currentLoadTime, 0, gunStats.reloadSpeed);
     }
 
+    // Un-notches the arrow from bow if the player already charged the bow
     public override void AltFire()
     {
         if (Input.GetButton("Alt Fire"))
         {
-            if (isLoaded)
-            {
-                currentLoadTime = 0;
-            }
+            isLoaded = false;
+            currentLoadTime = 0;
+
+            bowReset = true;
+            drawBow = false;
         }
     }
 }
