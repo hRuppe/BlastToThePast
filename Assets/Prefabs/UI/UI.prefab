@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1331aa785ce29e94d8eb19550dfd39d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 0}
   player: {fileID: 0}
   playerScript: {fileID: 0}
   playerDmgFlash: {fileID: 1326893132004890492}
@@ -2733,7 +2734,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &1105539647315917719
 MonoBehaviour:
   m_ObjectHideFlags: 0
