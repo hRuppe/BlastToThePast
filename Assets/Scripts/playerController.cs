@@ -74,6 +74,7 @@ public class playerController : MonoBehaviour
     public bool isBlocking;
     public bool dodgeComplete;
 
+    private bool isJumping;
     private bool isDodging; 
     private bool isAds;
     private bool isShooting;
@@ -132,6 +133,7 @@ public class playerController : MonoBehaviour
             GunSelect();
             CalculateSound();
             StartBlockTimer();
+            anim.SetBool("Jump", isJumping);
         }
     }
 
@@ -140,6 +142,7 @@ public class playerController : MonoBehaviour
         // Jump reset
         if (controller.isGrounded && playerVelocity.y < 0)
         {
+            isJumping = false;
             jumpTimes = 0;
             playerVelocity.y = 0f;
         }
@@ -155,6 +158,7 @@ public class playerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && jumpTimes < jumpMax)
         {
+            isJumping = true;
             if (audioJump.Length > 0)
                 audioSource.PlayOneShot(audioJump[Random.Range(0, audioJump.Length)], audioJumpVolume);
             
