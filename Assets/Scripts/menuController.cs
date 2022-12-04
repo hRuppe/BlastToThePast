@@ -9,8 +9,10 @@ public class menuController : MonoBehaviour
 {
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject settingsMenu;
+    [SerializeField] GameObject creditsMenu;
 
-    [SerializeField] AudioClip btnHoverClip; 
+    [SerializeField] AudioClip btnHoverClip;
+    [SerializeField] AudioClip btnClickClip;
 
     [SerializeField] AudioMixer mixer; 
     
@@ -20,7 +22,28 @@ public class menuController : MonoBehaviour
 
     [SerializeField] AudioSource sfxSource;
 
-    [SerializeField] Button[] interactiveButtons; 
+    [SerializeField] Button[] interactiveButtons;
+
+    private void Awake()
+    {
+        if (PlayerPrefs.HasKey("MasterVolume"))
+        {
+            masterSlider.value = PlayerPrefs.GetFloat("MasterVolume");
+            MasterSliderChanged();
+        }
+
+        if (PlayerPrefs.HasKey("MusicVolume"))
+        {
+            musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+            MusicSliderChanged();
+        }
+
+        if (PlayerPrefs.HasKey("SFXVolume"))
+        {
+            sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");
+            SFXSliderChanged();
+        }
+    }
 
     public void openSettings()
     {
@@ -28,10 +51,17 @@ public class menuController : MonoBehaviour
         mainMenu.SetActive(false);  
     }
 
-    public void closeSettings()
+    public void closeOverlapMenu()
     {
         mainMenu.SetActive(true);
-        settingsMenu.SetActive(false);  
+        settingsMenu.SetActive(false);
+        creditsMenu.SetActive(false); 
+    }
+
+    public void openCredits()
+    {
+        creditsMenu.SetActive(true);
+        mainMenu.SetActive(false);
     }
 
     public void MasterSliderChanged()
@@ -39,7 +69,9 @@ public class menuController : MonoBehaviour
         if (masterSlider.value <= 0)
             mixer.SetFloat("Master Volume", -80.0f);
         else 
-            mixer.SetFloat("Master Volume", Mathf.Log10(masterSlider.value) * 20); 
+            mixer.SetFloat("Master Volume", Mathf.Log10(masterSlider.value) * 20);
+
+        PlayerPrefs.SetFloat("MasterVolume", masterSlider.value); 
     }
 
     public void MusicSliderChanged()
@@ -48,6 +80,8 @@ public class menuController : MonoBehaviour
             mixer.SetFloat("Music Volume", -80.0f);
         else
             mixer.SetFloat("Music Volume", Mathf.Log10(musicSlider.value) * 20);
+
+        PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
     }
 
     public void SFXSliderChanged()
@@ -56,6 +90,8 @@ public class menuController : MonoBehaviour
             mixer.SetFloat("SFX Volume", -80.0f);
         else
             mixer.SetFloat("SFX Volume", Mathf.Log10(sfxSlider.value) * 20);
+
+        PlayerPrefs.SetFloat("SFXVolume", sfxSlider.value);
     }
 
     public void SFXTestPlay()
@@ -66,6 +102,11 @@ public class menuController : MonoBehaviour
     public void PlayBtnHover()
     {
         sfxSource.PlayOneShot(btnHoverClip); 
+    }
+
+    public void PlayBtnClick()
+    {
+        sfxSource.PlayOneShot(btnClickClip);
     }
 
 }
