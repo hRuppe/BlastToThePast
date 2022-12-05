@@ -44,8 +44,9 @@ public class sword : weapon
 
     IEnumerator Swing()
     {
+        gameManager.instance.playerScript.audioSource.PlayOneShot(gunStats.gunSound);
         canSwing = false;
-
+        
         yield return new WaitForSeconds(1.0f / gunStats.shooteRate);
 
         canSwing = true;

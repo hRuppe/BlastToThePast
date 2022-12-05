@@ -17,7 +17,9 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     [SerializeField] Image healthBar;
     [SerializeField] GameObject UI;
     [SerializeField] enemyMelee meleeScript;
-    [SerializeField] MeshCollider swordCollider; 
+    [SerializeField] MeshCollider swordCollider;
+    [SerializeField] AudioSource source;
+    [SerializeField] AudioClip[] hurtSounds; 
 
     [Header("---- Enemy Stats ----")]
     [Range(1, 100)][SerializeField] int HP;
@@ -176,7 +178,9 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
 
     public void TakeDamage(int dmg)
     {
-        anim.SetTrigger("GetHit"); 
+        // Play animation & hit sound
+        anim.SetTrigger("GetHit");
+        source.PlayOneShot(hurtSounds[Random.Range(0, hurtSounds.Length)]);
         HP -= dmg;
         UI.gameObject.SetActive(true);
         UpdateHpBar();

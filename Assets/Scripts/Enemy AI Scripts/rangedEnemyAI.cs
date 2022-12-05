@@ -18,6 +18,8 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject headPos;
     [SerializeField] Image healthBar;
     [SerializeField] GameObject UI;
+    [SerializeField] AudioSource source;
+    [SerializeField] AudioClip[] hurtSounds; 
 
     [Header("---- Enemy Stats ----")]
     [Range(1, 100)][SerializeField] int HP;
@@ -173,6 +175,7 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
 
     public void TakeDamage(int dmg)
     {
+        source.PlayOneShot(hurtSounds[Random.Range(0, hurtSounds.Length)]);
         HP -= dmg;
         UI.gameObject.SetActive(true);
         UpdateHpBar();

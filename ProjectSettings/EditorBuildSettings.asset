@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/KeegenScene.unity
     guid: 15d8632235518fa419d12177d53bf66e
+  - enabled: 1
+    path: Assets/Scenes/CutScene2.unity
+    guid: eea37c7211f2ef447ac2bcf2b6b0d3c2
   m_configObjects: {}
