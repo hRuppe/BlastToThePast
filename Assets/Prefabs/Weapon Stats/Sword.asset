@@ -15,7 +15,7 @@ MonoBehaviour:
   shooteRate: 2
   reloadSpeed: 0
   shootDistance: 3
-  shootDamage: 1
+  shootDamage: 3
   ammoCount: 1
   isLeftHanded: 0
   weaponType: 2

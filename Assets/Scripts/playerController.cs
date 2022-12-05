@@ -31,7 +31,6 @@ public class playerController : MonoBehaviour
     [SerializeField] int playerRotateSpeed;
     [SerializeField] float adsSpeed;
     [SerializeField] float adsFov;
-    [SerializeField] public float dodgeMoveDistance;
     [SerializeField] float deathDuration;
 
     [Header("----- Weapon Stats -----")]
@@ -72,7 +71,6 @@ public class playerController : MonoBehaviour
     private float originalVerticalSens;
 
     public bool isBlocking;
-    public bool dodgeComplete;
 
     private bool isJumping;
     private bool isDodging; 
@@ -125,7 +123,6 @@ public class playerController : MonoBehaviour
         {
             PlayerMove();
             PlayerSprint();
-            PlayerDodge();
             PlayerSneak();
             //AltFire();
             //StartCoroutine(Shoot());
@@ -188,35 +185,6 @@ public class playerController : MonoBehaviour
         }
     }
 
-    void PlayerDodge()
-    {
-        if (Input.GetButtonDown("Dodge"))
-        {
-            isDodging = true;
-            if (Input.GetAxis("Vertical") > 0)
-            {
-                Debug.Log("Dodge Forward");
-                anim.SetTrigger("Dodge Forward");
-            }
-            else if (Input.GetAxis("Vertical") < 0)
-            {
-                Debug.Log("Dodge Backward");
-                anim.SetTrigger("Dodge Backward");
-            }
-
-            if (Input.GetAxis("Horizontal") > 0)
-            {
-                Debug.Log("Dodge Right");
-                anim.SetTrigger("Dodge Right");
-            }
-            else if (Input.GetAxis("Horizontal") < 0)
-            {
-                Debug.Log("Dodge Left");
-                anim.SetTrigger("Dodge Left");
-            }
-        }
-    }
-
     // This is a coroutine so the death animation plays before pausing the game and showing the death screen
     public IEnumerator PlayerDead()
     {
@@ -226,13 +194,6 @@ public class playerController : MonoBehaviour
 
         gameManager.instance.playerDeadMenu.SetActive(true);
         gameManager.instance.pause();
-    }
-
-    public void DodgeForwardComplete()
-    {
-        controller.Move(transform.forward * dodgeMoveDistance); 
-        //controller.enabled = true;
-        isDodging = false;
     }
 
     public void TurnOffController()

@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/CutScene1.unity
     guid: 438857fe8c5e52843a950ead9dafea24
   - enabled: 1
-    path: Assets/Scenes/HunterScene.unity
-    guid: 4a06f73fc164395439d1ada924ecd691
+    path: Assets/Scenes/KeegenScene.unity
+    guid: 15d8632235518fa419d12177d53bf66e
   m_configObjects: {}
