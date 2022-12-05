@@ -16,8 +16,11 @@ public class sword : weapon
     
     void Update()
     {
-        PrimaryFire();
-        AltFire();
+        if (!gameManager.instance.playerScript.anim.GetBool("Dead"))
+        {
+            PrimaryFire();
+            AltFire();
+        }
     }
 
     public override void PrimaryFire()
