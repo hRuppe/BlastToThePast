@@ -29,9 +29,12 @@ public class bow : weapon
 
     void Update()
     {
-        PrimaryFire();
-        AltFire();
-
+        if (!anim.GetBool("Dead"))
+        {
+            PrimaryFire();
+            AltFire();
+        }
+        
         anim.SetBool("DrawBow", drawBow);
     }
 
