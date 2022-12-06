@@ -743,13 +743,13 @@
       <Project>{9426C3A0-16A0-4731-168A-905DA919AE80}</Project>
       <Name>Unity.Services.Core.Internal</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{71DD6134-4182-5931-09CB-667AED8C7A62}</Project>
-      <Name>UnityEngine.UI</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{895466FD-9EF4-0754-065A-08C22BFC4E23}</Project>
       <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{71DD6134-4182-5931-09CB-667AED8C7A62}</Project>
+      <Name>UnityEngine.UI</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.TestRunner.csproj">
       <Project>{E4181F3B-253F-EE9C-5EDD-70B5F6D4B101}</Project>

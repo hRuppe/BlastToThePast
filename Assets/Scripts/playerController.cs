@@ -19,6 +19,7 @@ public class playerController : MonoBehaviour
     [SerializeField] GameObject hitEffect;
     [SerializeField] public AudioSource audioSource;
     [SerializeField] BoxCollider meleeCollider;
+    [SerializeField] GameObject soundTrigger;
 
     [Header("----- Player Stats -----")]
     [Range(0, 50)] [SerializeField] float playerHealth;
@@ -113,8 +114,15 @@ public class playerController : MonoBehaviour
         }
 
         // Lerp the values so the animations transition smoothly
-        anim.SetFloat("Horizontal", Mathf.Lerp(anim.GetFloat("Horizontal"), horizontalAxis, Time.deltaTime * animLerpSpeed));
-        anim.SetFloat("Vertical", Mathf.Lerp(anim.GetFloat("Vertical"), verticalAxis, Time.deltaTime * animLerpSpeed));
+        if (Input.GetAxis("Horizontal") != 0)
+            anim.SetFloat("Horizontal", Mathf.Lerp(anim.GetFloat("Horizontal"), horizontalAxis, Time.deltaTime * animLerpSpeed));
+        else
+            anim.SetFloat("Horizontal", 0);
+
+        if (Input.GetAxis("Vertical") != 0)
+            anim.SetFloat("Vertical", Mathf.Lerp(anim.GetFloat("Vertical"), verticalAxis, Time.deltaTime * animLerpSpeed));
+        else
+            anim.SetFloat("Vertical", 0);
 
         shootPos.transform.rotation = cam.transform.rotation;
 
@@ -124,11 +132,8 @@ public class playerController : MonoBehaviour
             PlayerMove();
             PlayerSprint();
             PlayerSneak();
-            //AltFire();
-            //StartCoroutine(Shoot());
             StartCoroutine(PlaceMine());
             GunSelect();
-            CalculateSound();
             StartBlockTimer();
             anim.SetBool("Jump", isJumping);
         }
@@ -377,29 +382,6 @@ public class playerController : MonoBehaviour
         }
     }
 
-    void CalculateSound()
-    {
-        playerSoundLevel = 0;
-
-        // Sound is on a scale from 0 - 1
-        if (isSprinting)
-            playerSoundLevel += 0.3f;
-
-        if ((move.x > 0 || move.x < 0) || (move.y > 0 || move.y < 0))
-            playerSoundLevel += 0.2f;
-
-        if (isSneaking)
-            playerSoundLevel /= 2f;
-
-        // Shooting is tracked last since sneaking shouldn't influence the sound level
-        if (trackShootSound)
-        {
-            playerSoundLevel += 0.5f;
-            trackShootSound = false;
-        }
-        gameManager.instance.soundBar.fillAmount = playerSoundLevel;
-    }
-
     public void damage(float damageValue)
     {
         if (isBlocking)
@@ -449,6 +431,15 @@ public class playerController : MonoBehaviour
         }
 
         ChangeGuns();
+    }
+
+    // This is called by animation events
+    void GenerateSoundTrigger(int size)
+    {
+        GameObject newTrigger = Instantiate(soundTrigger, transform.position, soundTrigger.transform.rotation);
+        SoundTrigger triggerScript = newTrigger.GetComponent<SoundTrigger>();
+
+        triggerScript.SetTriggerSize(size);
     }
 
     void GunSelect()

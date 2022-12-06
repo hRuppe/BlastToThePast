@@ -43,7 +43,8 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     bool inPursuit;
     bool isRoaming;
     bool isStunned;
-    bool isTakingDmg; 
+    bool isTakingDmg;
+    bool goingToLocation;
 
     float origStoppingDist;
     float origSpeed;
@@ -73,7 +74,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
                 CanSeePlayer();
                 if (!canSeePlayer)
                 {
-                    if (!isRoaming && agent.destination != gameManager.instance.player.transform.position)
+                    if (!inPursuit && !isRoaming && agent.destination != gameManager.instance.player.transform.position)
                     {
                         Roam();
                     }
@@ -83,7 +84,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
                     FacePlayer(); 
                 }
             }
-            else if (!isRoaming && agent.destination != gameManager.instance.player.transform.position)
+            else if (!inPursuit && !isRoaming && agent.destination != gameManager.instance.player.transform.position)
             {
                 Roam();
             }
@@ -167,12 +168,14 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, playerFaceSpeed * Time.deltaTime);
     }
 
-    public void GotoPlayer()
+    public void GotoLocation(Vector3 position)
     {
         if (HP > 0)
         {
+            StopCoroutine(Pursuit());
+            StartCoroutine(Pursuit());
             agent.stoppingDistance = playerPursuitStoppingDistance;
-            agent.SetDestination(gameManager.instance.player.transform.position);
+            agent.SetDestination(position);
         }
     }
 
