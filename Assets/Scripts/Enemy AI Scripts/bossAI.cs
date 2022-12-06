@@ -257,6 +257,20 @@ public class bossAI : MonoBehaviour, IDamage
         model.material.color = Color.white;
     }
 
+    public bool IsAlive()
+    {
+        bool result; 
+        if (anim.GetBool("Dead"))
+        {
+            result = false; 
+        }
+        else
+        {
+            result = true; 
+        }
+        return result; 
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player")

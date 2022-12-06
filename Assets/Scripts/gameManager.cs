@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class gameManager : MonoBehaviour
     public Image itemIcon; 
 
     public int enemiesToKill; //The required enemy kills to win the level
+    public bossAI bossToWin;
 
     public GameObject spawnPos; //The spawn location of the level
 
@@ -34,7 +36,7 @@ public class gameManager : MonoBehaviour
 
     public bool hasItem;
 
-    public GameObject[] exitSpawners; 
+    public GameObject[] exitSpawners;
 
     void Awake()
     {
@@ -68,6 +70,12 @@ public class gameManager : MonoBehaviour
                 exitSpawners[i].SetActive(true); 
             }
         }
+
+        if (SceneManager.GetActiveScene().name == "KeegenScene")
+        {
+            StartCoroutine(LoadWinScene());
+        }
+         
     }
 
     public void pause()
@@ -108,6 +116,15 @@ public class gameManager : MonoBehaviour
     {
         enemiesToKill += amount;
         enemyCounter.text = enemiesToKill.ToString("F0"); //Update the display
+    }
+
+    IEnumerator LoadWinScene()
+    {
+        if (!bossToWin.IsAlive())
+        {
+            yield return new WaitForSeconds(5); 
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 }
     

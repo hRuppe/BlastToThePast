@@ -1,17 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class winTrigger : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if (other.tag == "Player")
+        if (!gameObject.activeSelf)
         {
-            if (gameManager.instance.hasItem)
-            {
-                gameManager.instance.youWin(); 
-            }
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }

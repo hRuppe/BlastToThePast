@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class menuController : MonoBehaviour
@@ -43,6 +44,11 @@ public class menuController : MonoBehaviour
             sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");
             SFXSliderChanged();
         }
+    }
+
+    private void Update()
+    {
+        OpenShowCaseLevel(); 
     }
 
     public void openSettings()
@@ -109,4 +115,11 @@ public class menuController : MonoBehaviour
         sfxSource.PlayOneShot(btnClickClip);
     }
 
+    void OpenShowCaseLevel()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            SceneManager.LoadScene("Showcase Level"); 
+        }
+    }
 }

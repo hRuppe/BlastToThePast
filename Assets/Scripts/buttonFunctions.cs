@@ -38,4 +38,12 @@ public class buttonFunctions : MonoBehaviour
     {
         SceneManager.LoadScene("CutScene1"); 
     }
+
+    public void OpenMainMenu()
+    {
+        SceneManager.LoadScene(0);
+        resume();
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true; 
+    }
 }

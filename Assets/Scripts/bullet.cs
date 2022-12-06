@@ -24,7 +24,7 @@ public class bullet : MonoBehaviour
 
 
     private void OnTriggerEnter(Collider other)
-    { 
+    {
         if (other.tag == "Player")
         {
             gameManager.instance.playerScript.damage(bulletDmg); 

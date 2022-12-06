@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CutScene2.unity
     guid: eea37c7211f2ef447ac2bcf2b6b0d3c2
+  - enabled: 1
+    path: Assets/Scenes/Showcase Level.unity
+    guid: 43817e5cd2deb704f84246a7f25f7f9d
   m_configObjects: {}
