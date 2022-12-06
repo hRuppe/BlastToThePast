@@ -23,8 +23,6 @@ public class menuController : MonoBehaviour
 
     [SerializeField] AudioSource sfxSource;
 
-    [SerializeField] Button[] interactiveButtons;
-
     private void Awake()
     {
         if (PlayerPrefs.HasKey("MasterVolume"))

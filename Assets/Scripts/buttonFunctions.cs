@@ -41,9 +41,9 @@ public class buttonFunctions : MonoBehaviour
 
     public void OpenMainMenu()
     {
+        SceneManager.LoadScene(0);
+        resume();
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-        SceneManager.LoadScene(0);
-        resume(); 
     }
 }
