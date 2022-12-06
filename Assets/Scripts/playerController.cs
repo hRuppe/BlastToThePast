@@ -447,7 +447,8 @@ public class playerController : MonoBehaviour
                 Instantiate(newWeapon, rightHandWeaponContainer.transform.position, rightHandWeaponContainer.transform.rotation, rightHandWeaponContainer.transform);
             }
         }
-        
+
+        ChangeGuns();
     }
 
     void GunSelect()
