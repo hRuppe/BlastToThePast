@@ -21,7 +21,7 @@ public class enemyMelee : MonoBehaviour
         {
             playerHit = true;
             
-            if (gameManager.instance.playerScript.blockTime > .5f && meleeSwordsmanAIScript.isSwinging || 
+            if (gameManager.instance.playerScript.blockTime > .2f && meleeSwordsmanAIScript.isSwinging || 
                 !gameManager.instance.playerScript.isBlocking && meleeSwordsmanAIScript.isSwinging)
             {
                 gameManager.instance.playerScript.damage(weaponDmg);

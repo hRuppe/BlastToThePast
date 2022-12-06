@@ -13,7 +13,7 @@ public class playerController : MonoBehaviour
     [SerializeField] GameObject arrow; // This will eventually be determined by the weapon the player is holding
     [SerializeField] public Transform shootPos;
     [SerializeField] public Transform torsoPos; 
-    [SerializeField] GameObject mine;
+    //[SerializeField] GameObject mine;
     [SerializeField] GameObject rightHandWeaponContainer;
     [SerializeField] GameObject leftHandWeaponContainer;
     [SerializeField] GameObject hitEffect;
@@ -38,9 +38,9 @@ public class playerController : MonoBehaviour
     [SerializeField] float shootRange;
     [SerializeField] public int shootDamage;
     [SerializeField] List<gunStats> gunStatList;
-    [Range(1, 10)][SerializeField] int minePlaceDistance;
-    [Range(0, 10)][SerializeField] int mineCount;
-    [Range(1, 10)][SerializeField] float placeMineTimer;
+    //[Range(1, 10)][SerializeField] int minePlaceDistance;
+    //[Range(0, 10)][SerializeField] int mineCount;
+    //[Range(1, 10)][SerializeField] float placeMineTimer;
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audioJump;
@@ -126,7 +126,7 @@ public class playerController : MonoBehaviour
             PlayerSneak();
             //AltFire();
             //StartCoroutine(Shoot());
-            StartCoroutine(PlaceMine());
+            //StartCoroutine(PlaceMine());
             GunSelect();
             CalculateSound();
             StartBlockTimer();
@@ -311,6 +311,10 @@ public class playerController : MonoBehaviour
         {
             blockTime += Time.deltaTime; 
         }
+        else
+        {
+            blockTime = 0; 
+        }
     }
 
     /*IEnumerator Shoot()
@@ -361,21 +365,23 @@ public class playerController : MonoBehaviour
     }
     */
 
-    IEnumerator PlaceMine()
-    {
-        if (Input.GetButtonDown("Place Trap") && !isPlacingMine && mineCount > 0)
-        {
-            isPlacingMine = true;
-            RaycastHit hit;
-            if (Physics.Raycast(cam.ViewportPointToRay(new Vector2(.5f, .5f)), out hit, minePlaceDistance))
-            {
-                Instantiate(mine, hit.point, mine.transform.rotation);
-                mineCount--;
-            }
-            yield return new WaitForSeconds(placeMineTimer);
-            isPlacingMine = false;
-        }
-    }
+    // ---- DON'T NEED MINE PLACEMENT FOR NOW ----
+
+    //IEnumerator PlaceMine()
+    //{
+    //    if (Input.GetButtonDown("Place Trap") && !isPlacingMine && mineCount > 0)
+    //    {
+    //        isPlacingMine = true;
+    //        RaycastHit hit;
+    //        if (Physics.Raycast(cam.ViewportPointToRay(new Vector2(.5f, .5f)), out hit, minePlaceDistance))
+    //        {
+    //            Instantiate(mine, hit.point, mine.transform.rotation);
+    //            mineCount--;
+    //        }
+    //        yield return new WaitForSeconds(placeMineTimer);
+    //        isPlacingMine = false;
+    //    }
+    //}
 
     void CalculateSound()
     {

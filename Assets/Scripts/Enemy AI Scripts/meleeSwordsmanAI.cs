@@ -202,7 +202,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     IEnumerator CheckForStun()
     {
         // Check that the player is blocking but not over 1/2 a second & that the player was hit
-        if (gameManager.instance.playerScript.isBlocking && gameManager.instance.playerScript.blockTime < .5f 
+        if (gameManager.instance.playerScript.isBlocking && gameManager.instance.playerScript.blockTime < .2f 
             && meleeScript.playerHit && agent.enabled)
         {
             // Play sword clashing audio on perfect block

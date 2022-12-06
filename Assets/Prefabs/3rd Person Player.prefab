@@ -2861,7 +2861,6 @@ MonoBehaviour:
   playerRotateSpeed: 5
   adsSpeed: 2
   adsFov: 50
-  dodgeMoveDistance: 1
   deathDuration: 5
   shootRate: 0
   shootRange: 0
@@ -2881,7 +2880,6 @@ MonoBehaviour:
   jumpTimes: 0
   origJumpsMax: 0
   isBlocking: 0
-  dodgeComplete: 0
 --- !u!143 &8242640330379777390
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3166,15 +3164,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 984747128952455914, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 984747128952455914, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 984747128952455914, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 984747128952455914, guid: e440eaf919e736f4fb1bd555f7e99eb8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
