@@ -750,13 +750,13 @@
       <Project>{2F187474-E9D9-853B-D112-00A99937CB57}</Project>
       <Name>Unity.VisualScripting.Flow</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{71DD6134-4182-5931-09CB-667AED8C7A62}</Project>
-      <Name>UnityEngine.UI</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{895466FD-9EF4-0754-065A-08C22BFC4E23}</Project>
       <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{71DD6134-4182-5931-09CB-667AED8C7A62}</Project>
+      <Name>UnityEngine.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

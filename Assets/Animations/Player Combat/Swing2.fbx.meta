@@ -61,14 +61,21 @@ ModelImporter:
       curves: []
       events:
       - time: 0
-        functionName: ResetCombo
+        functionName: GenerateSoundTrigger
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 40
+        messageOptions: 0
+      - time: 0.5242616
+        functionName: DamageMelee
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.5242616
-        functionName: DamageMelee
+      - time: 0.5439094
+        functionName: ResetCombo
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
