@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class playerController : MonoBehaviour
 {
@@ -530,5 +531,32 @@ public class playerController : MonoBehaviour
     public void UpdatePlayerHPBar()
     {
         gameManager.instance.healthBar.fillAmount = (float)playerHealth / (float)OrigHP; 
+    }
+
+    public float GetCurrentHealth()
+    {
+        return playerHealth; 
+    }
+
+    public float GetOriginalHealth()
+    {
+        return OrigHP; 
+    }
+
+    public void GiveHealth(float healthToGive)
+    {
+        // Calculate what health would be with the health increase
+        float postHealth = playerHealth + healthToGive;
+
+        if (postHealth > OrigHP)
+        {
+            playerHealth = OrigHP;
+        }
+        else
+        {
+            playerHealth += healthToGive;
+        }
+        UpdatePlayerHPBar();
+
     }
 }
