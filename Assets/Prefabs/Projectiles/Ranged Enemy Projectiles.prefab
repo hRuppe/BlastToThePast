@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5441798788371574307}
   - component: {fileID: 4656018572296807594}
   m_Layer: 7
-  m_Name: Potion
+  m_Name: Ranged Enemy Projectiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

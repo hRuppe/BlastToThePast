@@ -199,10 +199,13 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
         isShooting = true;
         anim.SetTrigger("Shoot");
 
-        Instantiate(bullet, bulletSpawnPos.position, transform.rotation);
-
         yield return new WaitForSeconds(shootDelay);
         isShooting = false;
+    }
+
+    void SpawnBullet()
+    {
+        Instantiate(bullet, bulletSpawnPos.position, transform.rotation);
     }
 
     public void UpdateHpBar()
