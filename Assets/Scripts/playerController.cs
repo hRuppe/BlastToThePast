@@ -14,7 +14,6 @@ public class playerController : MonoBehaviour
     [SerializeField] GameObject arrow; // This will eventually be determined by the weapon the player is holding
     [SerializeField] public Transform shootPos;
     [SerializeField] public Transform torsoPos; 
-    //[SerializeField] GameObject mine;
     [SerializeField] GameObject rightHandWeaponContainer;
     [SerializeField] GameObject leftHandWeaponContainer;
     [SerializeField] GameObject hitEffect;
@@ -48,9 +47,6 @@ public class playerController : MonoBehaviour
     [SerializeField] AudioClip[] audioJump;
     [SerializeField] AudioClip[] audioHurt;
     [SerializeField] AudioClip audioGunSwap;
-    [Range(0, 1)] [SerializeField] float audioJumpVolume;
-    [Range(0, 1)] [SerializeField] float audioHurtVolume;
-    [Range(0, 1)] [SerializeField] float audioGunshotVolume;
 
     public float playerSoundLevel;
     public float blockTime;
@@ -163,7 +159,7 @@ public class playerController : MonoBehaviour
         {
             isJumping = true;
             if (audioJump.Length > 0)
-                audioSource.PlayOneShot(audioJump[Random.Range(0, audioJump.Length)], audioJumpVolume);
+                audioSource.PlayOneShot(audioJump[Random.Range(0, audioJump.Length)], 1);
             
             anim.SetTrigger("Jump");
             playerVelocity.y = jumpHeight;
@@ -371,23 +367,6 @@ public class playerController : MonoBehaviour
     }
     */
 
-    
-// ---- DON'T NEED MINE PLACEMENT FOR NOW ----    //IEnumerator PlaceMine()
-    //{
-    //    if (Input.GetButtonDown("Place Trap") && !isPlacingMine && mineCount > 0)
-    //    {
-    //        isPlacingMine = true;
-    //        RaycastHit hit;
-    //        if (Physics.Raycast(cam.ViewportPointToRay(new Vector2(.5f, .5f)), out hit, minePlaceDistance))
-    //        {
-    //            Instantiate(mine, hit.point, mine.transform.rotation);
-    //            mineCount--;
-    //        }
-    //        yield return new WaitForSeconds(placeMineTimer);
-    //        isPlacingMine = false;
-    //    }
-    //}
-
     void CalculateSound()
     {
         playerSoundLevel = 0;
@@ -421,7 +400,7 @@ public class playerController : MonoBehaviour
         StartCoroutine(gameManager.instance.playerDamageFlash());
 
         if (audioHurt.Length > 0)
-            audioSource.PlayOneShot(audioHurt[Random.Range(0, audioJump.Length)], audioJumpVolume);
+            audioSource.PlayOneShot(audioHurt[Random.Range(0, audioHurt.Length)], 1);
 
         UpdatePlayerHPBar();
 
@@ -434,9 +413,6 @@ public class playerController : MonoBehaviour
     public void GunPickup(gunStats gunStat, GameObject newWeapon)
     {
         gunStatList.Add(gunStat);
-        
-        if (audioGunSwap.length > 0)
-            audioSource.PlayOneShot(audioGunSwap, audioGunshotVolume);
 
         // Clone gun stats onto player
         shootRate = gunStat.shooteRate;
@@ -479,14 +455,14 @@ public class playerController : MonoBehaviour
             {
                 selectedGun++;
                 
-                audioSource.PlayOneShot(audioGunSwap, audioGunshotVolume);
+                audioSource.PlayOneShot(audioGunSwap, 1);
                 ChangeGuns();
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
             {
                 selectedGun--;
 
-                audioSource.PlayOneShot(audioGunSwap, audioGunshotVolume);
+                audioSource.PlayOneShot(audioGunSwap, 1);
                 ChangeGuns();
             }
         }
