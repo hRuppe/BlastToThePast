@@ -118,7 +118,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
                     StartCoroutine(Pursuit());
                 }     
 
-                // Prevents enemy from freezing up when you go the side of him in a fight - still happens if you go all the way behind him quickly
+               
                 if (agent.remainingDistance < agent.stoppingDistance)
                 {
                     FacePlayer();
@@ -231,14 +231,22 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     {
         if (!isStunned && agent.enabled && !isTakingDmg)
         {
-            swordCollider.enabled = true; 
-            isSwinging = true;
             anim.SetTrigger("Swing");
             StartCoroutine(CheckForStun());
             yield return new WaitForSeconds(swingDelay);
-            isSwinging = false;
-            swordCollider.enabled = false; 
         }  
+    }
+
+    void EnableSwordCollider()
+    {
+        swordCollider.enabled = true;
+        isSwinging = true; 
+    }
+
+    void DisableSwordCollider()
+    {
+        swordCollider.enabled = false;
+        isSwinging = false; 
     }
 
     public void UpdateHpBar()
