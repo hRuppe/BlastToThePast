@@ -114,7 +114,7 @@ MonoBehaviour:
   dmgCollider: {fileID: 5132061347943579282}
   damage: 2
   dmgDelay: 1
-  reactTime: 1.25
+  reactTime: 2
   lifeTime: 6
 --- !u!1001 &4669958291675235361
 PrefabInstance:

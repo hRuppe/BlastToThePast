@@ -1,33 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class enemyMelee : MonoBehaviour
 {
-    [SerializeField] int weaponDmg;
+    [Header("---- Components ----")]
     [SerializeField] meleeSwordsmanAI meleeSwordsmanAIScript;
-    
     public AudioSource audSource; 
-    public bool playerHit; 
+    
+    [HideInInspector]public bool perfectBlock; 
 
     private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(PlayerHit(other)); 
+        PlayerHitCheck(other);  
     }
 
-    IEnumerator PlayerHit(Collider collider)
+    void PlayerHitCheck(Collider collider)
     {
+        // Make sure it's the player
         if (collider.tag == "Player")
         {
-            playerHit = true;
-            
-            if (gameManager.instance.playerScript.blockTime > .2f && meleeSwordsmanAIScript.isSwinging || 
-                !gameManager.instance.playerScript.isBlocking && meleeSwordsmanAIScript.isSwinging)
+            // Check if canBlock & isBlocking is true & that the blockTime is less than the perfect block time limit
+            if (meleeSwordsmanAIScript.canBlock && gameManager.instance.playerScript.isBlocking &&
+                gameManager.instance.playerScript.blockTime < meleeSwordsmanAIScript.perfectBlockTimeLimit)
             {
-                gameManager.instance.playerScript.damage(weaponDmg);
+                perfectBlock = true; 
             }
-            yield return new WaitForSeconds(1); 
-            playerHit = false;
+            else
+            {
+                gameManager.instance.playerScript.damage(meleeSwordsmanAIScript.swordDamage);
+            }
         }
     }
 }

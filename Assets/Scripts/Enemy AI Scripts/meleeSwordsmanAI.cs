@@ -18,8 +18,10 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     [SerializeField] GameObject UI;
     [SerializeField] enemyMelee meleeScript;
     [SerializeField] MeshCollider swordCollider;
+    [SerializeField] GameObject perfectBlockVFX;
+    [SerializeField] Transform perfectBlockVFXPos;
     [SerializeField] AudioSource source;
-    [SerializeField] AudioClip[] hurtSounds; 
+    [SerializeField] AudioClip[] hurtSounds;
 
     [Header("---- Enemy Stats ----")]
     [Range(1, 100)][SerializeField] int HP;
@@ -28,22 +30,24 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     [Range(25, 75)][SerializeField] int sightAngle; // The angle that the player has to be under to be seen
     [Range(0, 50)][SerializeField] int roamDist; // How far the enemy can roam from orig position
     [Range(1, 15)][SerializeField] int playerPursuitStoppingDistance;
-    [Range(1, 8)][SerializeField] float stunnedTime;
 
-    [Header("---- Sword Stats ----")]
-    [Range(1, 5)][SerializeField] int swingDelay; 
+
+    [Header("---- Combat Stats ----")]
+    [Range(1, 8)][SerializeField] float stunnedTime; // How long enemy is stunned on a perfect block 
+    [Range(1, 10)][SerializeField] public float swordDamage; 
+    [Range(.1f, 1)][SerializeField] public float perfectBlockTimeLimit; // How quick the player has to block for it to perfect block (the lower the harder)
 
     Vector3 playerDir;
     Vector3 startingPos;
 
-    public bool isSwinging;
+    [HideInInspector]public bool isSwinging;
+    [HideInInspector]public bool canBlock;
+    [HideInInspector]public bool canSeePlayer;
 
     bool playerInRange;
-    public bool canSeePlayer;
     bool inPursuit;
     bool isRoaming;
-    bool isStunned;
-    bool isTakingDmg;
+    bool isTakingDmg; 
     bool goingToLocation;
 
     float origStoppingDist;
@@ -124,9 +128,10 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
                     FacePlayer();
                 }
 
-                if (!isSwinging && agent.remainingDistance <= agent.stoppingDistance)
+                if (!isSwinging && agent.remainingDistance <= agent.stoppingDistance && !anim.GetBool("Stun"))
                 {
-                    StartCoroutine(SwingSword()); 
+                    //StartCoroutine(SwingSword()); 
+                    SwingSword(); 
                 }
             }
             else
@@ -202,18 +207,17 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
         }
     }
 
-    IEnumerator CheckForStun()
+    public IEnumerator StunEnemy()
     {
-        // Check that the player is blocking but not over 1/2 a second & that the player was hit
-        if (gameManager.instance.playerScript.isBlocking && gameManager.instance.playerScript.blockTime < .2f 
-            && meleeScript.playerHit && agent.enabled)
+        if (agent.enabled && meleeScript.perfectBlock)
         {
-            // Play sword clashing audio on perfect block
-            meleeScript.audSource.Play(); 
-            
-            // Stop movement & stun animation to true
-            isStunned = true;
+            // Play sword clashing audio & spawn vfx
+            meleeScript.audSource.Play();
+            Instantiate(perfectBlockVFX, perfectBlockVFXPos.position, perfectBlockVFX.transform.rotation);
+
+            // Start stun animation, reset swing trigger so it does not swing when stunned, and stop movement
             anim.SetBool("Stun", true);
+            anim.ResetTrigger("Swing");
             agent.isStopped = true; 
 
             // Wait before stopping stun animation & make sure agent is still alive before resuming movement
@@ -222,31 +226,44 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
             if (agent.enabled)
             {
                 agent.isStopped = false;
-            } 
-            isStunned = false; 
+            }
+            meleeScript.perfectBlock = false; 
         }
     }
 
-    IEnumerator SwingSword()
+    void SwingSword()
     {
-        if (!isStunned && agent.enabled && !isTakingDmg)
+        if (!anim.GetBool("Stun") && agent.enabled && !isTakingDmg)
         {
             anim.SetTrigger("Swing");
-            StartCoroutine(CheckForStun());
-            yield return new WaitForSeconds(swingDelay);
-        }  
+            StartCoroutine(StunEnemy());
+        }
     }
 
+    // Enables collider on sword
     void EnableSwordCollider()
     {
         swordCollider.enabled = true;
         isSwinging = true; 
     }
 
+    // Disables collider on sword
     void DisableSwordCollider()
     {
         swordCollider.enabled = false;
         isSwinging = false; 
+    }
+
+    // Called during attack animation starting the blocking window
+    void CanBlock()
+    {
+        canBlock = true;
+    }
+
+    // Called during attack animation after blocking window
+    void CannotBlock()
+    {
+        canBlock = false; 
     }
 
     public void UpdateHpBar()

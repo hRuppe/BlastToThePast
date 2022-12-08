@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class healthPickup : MonoBehaviour
 {
+    [Header("---- Health ----")]
+    [SerializeField] float healthToGive;
+    
+    [Header("---- Pickup Movement ----")]
     [SerializeField] float moveIncrement;
     [SerializeField] float hoverMax;
     [SerializeField] float rotationSpeed;
-    [SerializeField] float healthToGive;
-
+    
+    [Header("---- Components ----")]
     [SerializeField] AudioSource source;
     [SerializeField] AudioClip potionSound;
     [SerializeField] GameObject vfx; 
@@ -36,6 +40,7 @@ public class healthPickup : MonoBehaviour
     {
         if (other.CompareTag("Player") && gameManager.instance.playerScript.GetCurrentHealth() < gameManager.instance.playerScript.GetOriginalHealth())
         {
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameManager.instance.playerScript.GiveHealth(healthToGive);
             source.PlayOneShot(potionSound);
             Instantiate(vfx, transform.position, vfx.transform.rotation);

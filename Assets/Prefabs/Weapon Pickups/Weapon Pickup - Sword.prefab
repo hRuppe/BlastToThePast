@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunStat: {fileID: 11400000, guid: 186d3f6afa0e7224f83b3e2c00c15ed7, type: 2}
   weapon: {fileID: 829887073046348096, guid: bbbd6ca6ba1a14c4f956f942e40b6bfd, type: 3}
+  pickupSound: {fileID: 8300000, guid: 9485195ec8077b44fa4655ef4a81b2be, type: 3}
   moveIncrement: 0.75
   hoverMax: 0.5
   rotationSpeed: 2.5
