@@ -27,11 +27,14 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
     [Range(1, 10)][SerializeField] int animLerpSpeed; // How fast the animation transitions happen
     [Range(25, 75)][SerializeField] int sightAngle; // The angle that the player has to be under to be seen
     [Range(0, 50)][SerializeField] int roamDist; // How far the enemy can roam from orig position
-    [Range(1, 15)][SerializeField] int playerPursuitStoppingDistance; 
-
+    [Range(1, 15)][SerializeField] int playerPursuitStoppingDistance;
+    [SerializeField] int checkpointWaitTime; // the time the enemy waits at the checkpoint
+    [SerializeField] List<Transform> routeCheckpoints;
 
     [Header("---- Gun Stats ----")]
     [Range(1, 5)][SerializeField] int shootDelay;
+
+    int currentCheckpoint;
 
     Vector3 playerDir;
     Vector3 startingPos;
@@ -40,7 +43,9 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
     public bool canSeePlayer;
     bool isShooting;
     bool inPursuit;
-    bool isRoaming;
+    bool isRoaming; 
+    bool followRoute;
+    bool isAtCheckpoint;
 
     float origStoppingDist;
     float origSpeed;
@@ -68,25 +73,23 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
             if (playerInRange)
             {
                 CanSeePlayer();
-                if (!canSeePlayer)
-                {
-                    if (!isRoaming && agent.destination != gameManager.instance.player.transform.position)
-                    {
-                        Roam();
-                    }
-                }
                 if (inPursuit)
                 {
                     FacePlayer();
                 }
             }
-            else if (!isRoaming && agent.destination != gameManager.instance.player.transform.position)
+            if (!canSeePlayer)
             {
-                Roam();
-            }
-            if (agent.remainingDistance < .1f && agent.destination != gameManager.instance.player.transform.position)
-            {
-                isRoaming = false;
+                if (followRoute)
+                {
+                    NextCheckpoint();
+                }
+
+                else if (!followRoute && agent.remainingDistance < 0.1f && !isAtCheckpoint)
+                {
+                    StartCoroutine(WaitAtCheckpoint());
+                }
+
             }
         }
     }
@@ -131,7 +134,30 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
             }
         }
     }
+    void NextCheckpoint()
+    {
+        if (currentCheckpoint == routeCheckpoints.Count)
+        {
+            currentCheckpoint = 0;
+        }
 
+        if (currentCheckpoint < routeCheckpoints.Count && followRoute)
+        {
+            agent.SetDestination(routeCheckpoints[currentCheckpoint].position);
+            followRoute = false;
+            currentCheckpoint++;
+        }
+    }
+
+    IEnumerator WaitAtCheckpoint()
+    {
+        isAtCheckpoint = true;
+
+        yield return new WaitForSeconds(checkpointWaitTime);
+
+        isAtCheckpoint = false;
+        followRoute = true;
+    }
     IEnumerator Pursuit()
     {
         inPursuit = true;

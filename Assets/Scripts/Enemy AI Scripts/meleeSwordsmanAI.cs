@@ -30,12 +30,15 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     [Range(25, 75)][SerializeField] int sightAngle; // The angle that the player has to be under to be seen
     [Range(0, 50)][SerializeField] int roamDist; // How far the enemy can roam from orig position
     [Range(1, 15)][SerializeField] int playerPursuitStoppingDistance;
-
+    [SerializeField] int checkpointWaitTime; // the time the enemy waits at the checkpoint
+    [SerializeField] List<Transform> routeCheckpoints;
 
     [Header("---- Combat Stats ----")]
     [Range(1, 8)][SerializeField] float stunnedTime; // How long enemy is stunned on a perfect block 
     [Range(1, 10)][SerializeField] public float swordDamage; 
     [Range(.1f, 1)][SerializeField] public float perfectBlockTimeLimit; // How quick the player has to block for it to perfect block (the lower the harder)
+
+    int currentCheckpoint;
 
     Vector3 playerDir;
     Vector3 startingPos;
@@ -49,6 +52,8 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     bool isRoaming;
     bool isTakingDmg; 
     bool goingToLocation;
+    bool followRoute;
+    bool isAtCheckpoint;
 
     float origStoppingDist;
     float origSpeed;
@@ -58,6 +63,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     void Start()
     {
         // Store original values
+        followRoute = true;
         origStoppingDist = agent.stoppingDistance;
         origSpeed = agent.speed;
         startingPos = transform.position;
@@ -76,25 +82,23 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
             if (playerInRange)
             {
                 CanSeePlayer();
-                if (!canSeePlayer)
-                {
-                    if (!inPursuit && !isRoaming && agent.destination != gameManager.instance.player.transform.position)
-                    {
-                        Roam();
-                    }
-                }
                 if (inPursuit)
                 {
                     FacePlayer(); 
                 }
             }
-            else if (!inPursuit && !isRoaming && agent.destination != gameManager.instance.player.transform.position)
+            if (!canSeePlayer)
             {
-                Roam();
-            }
-            if (agent.remainingDistance < .1f && agent.destination != gameManager.instance.player.transform.position)
-            {
-                isRoaming = false;
+                if (followRoute)
+                {
+                    NextCheckpoint();
+                }
+                    
+                else if (!followRoute && agent.remainingDistance < 0.1f && !isAtCheckpoint)
+                {
+                    StartCoroutine(WaitAtCheckpoint());
+                }
+
             }
         }
     }
@@ -139,6 +143,31 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
                 canSeePlayer = false;
             }
         }
+    }
+
+    void NextCheckpoint()
+    {
+        if (currentCheckpoint == routeCheckpoints.Count)
+        {
+            currentCheckpoint = 0;
+        }
+        
+        if (currentCheckpoint < routeCheckpoints.Count && followRoute)
+        {
+            agent.SetDestination(routeCheckpoints[currentCheckpoint].position);
+            followRoute = false;
+            currentCheckpoint++;
+        }
+    }
+
+    IEnumerator WaitAtCheckpoint()
+    {
+        isAtCheckpoint = true;
+
+        yield return new WaitForSeconds(checkpointWaitTime);
+        
+        isAtCheckpoint = false;
+        followRoute = true;
     }
 
     IEnumerator Pursuit()

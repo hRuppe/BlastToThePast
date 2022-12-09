@@ -30,12 +30,16 @@ public class bossAI : MonoBehaviour, IDamage
     [Range(1, 10)][SerializeField] int animLerpSpeed; // How fast the animation transitions happen
     [Range(25, 75)][SerializeField] int sightAngle; // The angle that the player has to be under to be seen
     [Range(0, 50)][SerializeField] int roamDist; // How far the enemy can roam from orig position
-    [Range(1, 15)][SerializeField] int playerPursuitStoppingDistance; 
+    [Range(1, 15)][SerializeField] int playerPursuitStoppingDistance;
+    [SerializeField] int checkpointWaitTime; // the time the enemy waits at the checkpoint
+    [SerializeField] List<Transform> routeCheckpoints;
 
 
     [Header("---- Attack Stats ----")]
     [Range(1, 20)][SerializeField] int magicAttackDelay;
     [Range(1, 15)][SerializeField] int enemySummonTimer;
+
+    int currentCheckpoint;
 
     Vector3 playerDir;
     Vector3 startingPos;
@@ -46,6 +50,8 @@ public class bossAI : MonoBehaviour, IDamage
     bool isSummoning; 
     bool inPursuit;
     bool isRoaming;
+    bool followRoute;
+    bool isAtCheckpoint;
 
     float origStoppingDist;
     float origSpeed;
@@ -62,6 +68,8 @@ public class bossAI : MonoBehaviour, IDamage
         UpdateHpBar();
 
         UI.gameObject.SetActive(false);
+        currentCheckpoint = 0;
+        followRoute = false;
     }
 
     void Update()
@@ -73,25 +81,24 @@ public class bossAI : MonoBehaviour, IDamage
             if (playerInRange)
             {
                 CanSeePlayer();
-                if (!canSeePlayer)
-                {
-                    if (!isRoaming && agent.destination != gameManager.instance.player.transform.position)
-                    {
-                        Roam();
-                    }
-                }
                 if (inPursuit)
                 {
                     FacePlayer();
                 }
-            }
-            else if (!isRoaming && agent.destination != gameManager.instance.player.transform.position)
-            {
-                Roam();
-            }
-            if (agent.remainingDistance < .1f && agent.destination != gameManager.instance.player.transform.position)
-            {
-                isRoaming = false;
+
+                if (!canSeePlayer)
+                {
+                    if (followRoute)
+                    {
+                        NextCheckpoint();
+                    }
+
+                    else if (!followRoute && agent.remainingDistance < 0.1f && !isAtCheckpoint)
+                    {
+                        StartCoroutine(WaitAtCheckpoint());
+                    }
+
+                }
             }
         }
     }
@@ -141,6 +148,30 @@ public class bossAI : MonoBehaviour, IDamage
                 canSeePlayer = false;
             }
         }
+    }
+    void NextCheckpoint()
+    {
+        if (currentCheckpoint == routeCheckpoints.Count)
+        {
+            currentCheckpoint = 0;
+        }
+
+        if (currentCheckpoint < routeCheckpoints.Count && followRoute)
+        {
+            agent.SetDestination(routeCheckpoints[currentCheckpoint].position);
+            followRoute = false;
+            currentCheckpoint++;
+        }
+    }
+
+    IEnumerator WaitAtCheckpoint()
+    {
+        isAtCheckpoint = true;
+
+        yield return new WaitForSeconds(checkpointWaitTime);
+
+        isAtCheckpoint = false;
+        followRoute = true;
     }
 
     IEnumerator Pursuit()
