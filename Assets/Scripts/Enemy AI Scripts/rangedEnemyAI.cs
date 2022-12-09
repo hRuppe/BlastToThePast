@@ -201,6 +201,12 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
 
     public void TakeDamage(int dmg)
     {
+        // Sneak Attack
+        if (!canSeePlayer && !inPursuit && gameManager.instance.playerScript.selectedWeaponType == enums.WeaponType.Melee)
+        {
+            dmg = HP;
+        }
+
         source.PlayOneShot(hurtSounds[Random.Range(0, hurtSounds.Length)]);
         HP -= dmg;
         UI.gameObject.SetActive(true);

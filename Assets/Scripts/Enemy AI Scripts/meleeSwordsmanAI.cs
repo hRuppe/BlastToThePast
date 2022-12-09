@@ -94,7 +94,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
                     NextCheckpoint();
                 }
                     
-                else if (!followRoute && agent.remainingDistance < 0.1f && !isAtCheckpoint)
+                else if (!followRoute && agent.remainingDistance < 0.25f && !isAtCheckpoint)
                 {
                     StartCoroutine(WaitAtCheckpoint());
                 }
@@ -154,6 +154,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
         
         if (currentCheckpoint < routeCheckpoints.Count && followRoute)
         {
+            agent.stoppingDistance = 0;
             agent.SetDestination(routeCheckpoints[currentCheckpoint].position);
             followRoute = false;
             currentCheckpoint++;
@@ -172,9 +173,11 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
 
     IEnumerator Pursuit()
     {
+        followRoute = false;
         inPursuit = true; 
         yield return new WaitForSeconds(5f);
         inPursuit = false;
+        followRoute = true;
     }
 
     void Roam()
@@ -215,6 +218,12 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
 
     public void TakeDamage(int dmg)
     {
+        // Sneak Attack
+        if (!canSeePlayer && !inPursuit && gameManager.instance.playerScript.selectedWeaponType == enums.WeaponType.Melee)
+        {
+            dmg = HP;
+        }
+
         // Play animation & hit sound
         anim.SetTrigger("GetHit");
         source.PlayOneShot(hurtSounds[Random.Range(0, hurtSounds.Length)]);

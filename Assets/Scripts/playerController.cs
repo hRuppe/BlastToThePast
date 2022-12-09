@@ -48,6 +48,8 @@ public class playerController : MonoBehaviour
     [SerializeField] AudioClip[] audioHurt;
     [SerializeField] AudioClip audioGunSwap;
 
+    public enums.WeaponType selectedWeaponType;
+
     public float playerSoundLevel;
     public float blockTime;
 
@@ -220,71 +222,6 @@ public class playerController : MonoBehaviour
         }
     }
 
-    // Function handles genric right click actions based on the type of weapon equipped
-   /* void AltFire()
-    {
-        if (gunStatList.Count <= 0) return;
-
-        if (Input.GetButtonDown("Alt Fire"))
-        {
-            switch (gunStatList[selectedGun].weaponType)
-            {
-                // Block
-                case enums.WeaponType.Melee:
-                     
-                    break;
-                
-                // Aim down sight
-                case enums.WeaponType.Hitscan:
-                    isAds = true;
-                    timeSinceAdsStart = 0;
-                    freeLook.m_XAxis.m_MaxSpeed = originalHorizontalSens / 2;
-                    freeLook.m_YAxis.m_MaxSpeed = originalVerticalSens / 2;
-                    break;
-                
-                case enums.WeaponType.Projectile:
-
-                    break;
-            }
-        } 
-        
-        // Resets all values changed when using right click
-        else if (Input.GetButtonUp("Alt Fire"))
-        {
-            switch (gunStatList[selectedGun].weaponType)
-            {
-                case enums.WeaponType.Melee:
-                    blockTime = 0; 
-                    isBlocking = false;
-                    anim.SetBool("Block", false);
-                    break;
-                case enums.WeaponType.Hitscan:
-                    isAds = false;
-                    freeLook.m_XAxis.m_MaxSpeed = originalHorizontalSens;
-                    freeLook.m_YAxis.m_MaxSpeed = originalVerticalSens;
-                    break;
-                case enums.WeaponType.Projectile:
-                    break;
-            }
-        }
-
-        // Calculations for lerping the aim down sight zoom
-        if (isAds)
-        {
-            timeSinceAdsStart += Time.deltaTime;
-
-            freeLook.m_Lens.FieldOfView = Mathf.Lerp(originalFov, adsFov, Mathf.Clamp(timeSinceAdsStart / adsSpeed, 0, 1));
-        } else if (!isAds)
-        {
-            timeSinceAdsStart -= Time.deltaTime;
-
-            freeLook.m_Lens.FieldOfView = Mathf.Lerp(originalFov, adsFov, Mathf.Clamp(timeSinceAdsStart / adsSpeed, 0, 1));
-        }
-
-        timeSinceAdsStart = Mathf.Clamp(timeSinceAdsStart, 0, adsSpeed);
-    }
-   */
-
     // Resets canCombo, which determines if the player can combo sword swings. Called by an animation event.
     void ResetCombo()
     {
@@ -317,77 +254,6 @@ public class playerController : MonoBehaviour
         {
             blockTime = 0; 
         }
-    }
-
-    /*IEnumerator Shoot()
-    {
-        // Makes sure the player has a weapon and is trying to shoot
-        if (gunStatList.Count > 0 && !isShooting && Input.GetButton("Shoot"))
-        {
-            isShooting = true;
-
-            if (gunStatList.Count > 0)
-                audioSource.PlayOneShot(gunStatList[selectedGun].gunSound, audioGunshotVolume);
-
-            // Tracks shoot sound for use in sound detection. Will probably get changed.
-            trackShootSound = true;
-            RaycastHit hit;
-
-            if (gunStatList[selectedGun].weaponType == enums.WeaponType.Melee)
-            {
-
-                
-
-            } else if (gunStatList[selectedGun].weaponType == enums.WeaponType.Projectile)
-            {
-                
-            } else if (gunStatList[selectedGun].weaponType == enums.WeaponType.Hitscan)
-            {
-                if (Physics.Raycast(cam.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootRange, 3))
-                {
-                    if (hit.collider.gameObject.GetComponent<IDamage>() != null)
-                    {
-                        hit.collider.gameObject.GetComponent<IDamage>().TakeDamage(shootDamage);
-                        Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
-                    }
-                }
-            }
-
-            
-
-            yield return new WaitForSeconds(1.0f / shootRate);
-
-            if (gunStatList[selectedGun].isLeftHanded)
-                leftHandWeaponContainer.GetComponent<BoxCollider>().enabled = false;
-            else
-                rightHandWeaponContainer.GetComponent<BoxCollider>().enabled = false;
-
-            isShooting = false;
-        }
-    }
-    */
-
-    void CalculateSound()
-    {
-        playerSoundLevel = 0;
-
-        // Sound is on a scale from 0 - 1
-        if (isSprinting)
-            playerSoundLevel += 0.3f;
-
-        if ((move.x > 0 || move.x < 0) || (move.y > 0 || move.y < 0))
-            playerSoundLevel += 0.2f;
-
-        if (isSneaking)
-            playerSoundLevel /= 2f;
-
-        // Shooting is tracked last since sneaking shouldn't influence the sound level
-        if (trackShootSound)
-        {
-            playerSoundLevel += 0.5f;
-            trackShootSound = false;
-        }
-        gameManager.instance.soundBar.fillAmount = playerSoundLevel;
     }
 
     public void damage(float damageValue)
@@ -475,6 +341,7 @@ public class playerController : MonoBehaviour
         shootRange = gunStatList[selectedGun].shootDistance;
         shootDamage = gunStatList[selectedGun].shootDamage;
         hitEffect = gunStatList[selectedGun].hitEffect;
+        selectedWeaponType = gunStatList[selectedGun].weaponType;
 
         // Destroy both hand's weapons if they exist. We reinstantiate them below
         if (leftHandWeaponContainer.transform.childCount != 0)
