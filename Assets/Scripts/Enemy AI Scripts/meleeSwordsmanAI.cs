@@ -271,7 +271,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
 
     void SwingSword()
     {
-        if (!anim.GetBool("Stun") && agent.enabled && !isTakingDmg)
+        if (!anim.GetBool("Stun") && agent.enabled && !isTakingDmg && !gameManager.instance.playerScript.anim.GetBool("Dead"))
         {
             anim.SetTrigger("Swing");
             StartCoroutine(StunEnemy());

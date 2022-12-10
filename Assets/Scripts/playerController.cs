@@ -263,10 +263,13 @@ public class playerController : MonoBehaviour
         else
             playerHealth -= damageValue;
 
-        StartCoroutine(gameManager.instance.playerDamageFlash());
+        if (!anim.GetBool("Dead"))
+        {
+            StartCoroutine(gameManager.instance.playerDamageFlash());
 
-        if (audioHurt.Length > 0)
-            audioSource.PlayOneShot(audioHurt[Random.Range(0, audioHurt.Length)], 1);
+            if (audioHurt.Length > 0)
+                audioSource.PlayOneShot(audioHurt[Random.Range(0, audioHurt.Length)], 1);
+        }
 
         UpdatePlayerHPBar();
 

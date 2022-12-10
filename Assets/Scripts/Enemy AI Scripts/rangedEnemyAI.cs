@@ -123,7 +123,7 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
                     FacePlayer();
                 }
 
-                if (!isShooting)
+                if (!isShooting && !gameManager.instance.playerScript.anim.GetBool("Dead"))
                 {
                     StartCoroutine(Shoot());
                 }

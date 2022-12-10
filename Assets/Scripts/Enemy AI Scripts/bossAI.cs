@@ -132,12 +132,12 @@ public class bossAI : MonoBehaviour, IDamage
                     FacePlayer();
                 }
 
-                if (!usingMagic)
+                if (!usingMagic && !gameManager.instance.playerScript.anim.GetBool("Dead"))
                 {
                     StartCoroutine(MagicAttack());
                 }
 
-                if (!isSummoning)
+                if (!isSummoning && !gameManager.instance.playerScript.anim.GetBool("Dead"))
                 {
                     StartCoroutine(SummonEnemies());
                 }
