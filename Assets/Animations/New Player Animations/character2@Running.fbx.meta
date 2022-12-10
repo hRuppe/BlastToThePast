@@ -20,7 +20,13 @@ ModelImporter:
     removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: 
+    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
+      copied configuration does not match position in animation file:\n\t'LeftUpLeg'
+      : position error = 12.584992 mm\n\t'LeftLeg' : position error = 43.408871 mm\n\t'LeftFoot'
+      : position error = 80.431915 mm\n\t'LeftToeBase' : position error = 25.824850
+      mm\n\t'RightUpLeg' : position error = 12.400520 mm\n\t'RightLeg' : position
+      error = 43.315876 mm\n\t'RightFoot' : position error = 80.276024 mm\n\t'RightToeBase'
+      : position error = 17.509228 mm\n"
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -59,7 +65,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.15625
+        functionName: GenerateSoundTrigger
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 36
+        messageOptions: 0
+      - time: 0.6417272
+        functionName: GenerateSoundTrigger
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 36
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

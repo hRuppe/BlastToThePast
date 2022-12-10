@@ -9,6 +9,12 @@ using System.Globalization;
 
 public class rangedEnemyAI : MonoBehaviour, IDamage
 {
+    [Header("---- UI ----")]
+    [SerializeField] Image playerSeenImage;
+    [SerializeField] Image investigateImage;
+    [SerializeField] Image healthBar;
+    [SerializeField] GameObject UI;
+
     [Header("---- Components ----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
@@ -16,8 +22,6 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
     [SerializeField] Transform bulletSpawnPos;
     [SerializeField] Animator anim;
     [SerializeField] GameObject headPos;
-    [SerializeField] Image healthBar;
-    [SerializeField] GameObject UI;
     [SerializeField] AudioSource source;
     [SerializeField] AudioClip[] hurtSounds; 
 
@@ -46,6 +50,7 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
     bool isRoaming; 
     bool followRoute;
     bool isAtCheckpoint;
+    bool investigatingSound;
 
     float origStoppingDist;
     float origSpeed;
@@ -60,8 +65,6 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
         startingPos = transform.position;
         origHealth = HP;
         UpdateHpBar();
-
-        UI.gameObject.SetActive(false);
     }
 
     void Update()
@@ -92,8 +95,35 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
 
             }
         }
+
+        UpdateUI();
     }
 
+    private void UpdateUI()
+    {
+        if (HP != origHealth)
+            healthBar.enabled = true;
+        else
+            healthBar.enabled = false;
+
+        if (investigatingSound)
+        {
+            investigateImage.enabled = true;
+        }
+        else
+        {
+            investigateImage.enabled = false;
+        }
+
+        if (inPursuit)
+        {
+            playerSeenImage.enabled = true;
+        }
+        else
+        {
+            playerSeenImage.enabled = false;
+        }
+    }
     void CanSeePlayer()
     {
         playerDir = gameManager.instance.playerScript.torsoPos.transform.position - headPos.transform.position;
@@ -160,9 +190,11 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
     }
     IEnumerator Pursuit()
     {
+        followRoute = false;
         inPursuit = true;
         yield return new WaitForSeconds(5f);
         inPursuit = false;
+        followRoute = true;
     }
 
     void Roam()
@@ -199,6 +231,15 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
         }
     }
 
+    public void InvestigateSound(Vector3 position)
+    {
+        if (HP > 0 && !inPursuit)
+        {
+            investigatingSound = true;
+            agent.stoppingDistance = playerPursuitStoppingDistance;
+            agent.SetDestination(position);
+        }
+    }
     public void TakeDamage(int dmg)
     {
         // Sneak Attack

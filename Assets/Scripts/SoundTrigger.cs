@@ -25,20 +25,17 @@ public class SoundTrigger : MonoBehaviour
         if (other.gameObject.GetComponent<meleeSwordsmanAI>() != null)
         {
             meleeSwordsmanAI enemy = other.gameObject.GetComponent<meleeSwordsmanAI>();
-            enemy.GotoLocation(transform.position);
-            Debug.Log("Going to Location");
+            enemy.InvestigateSound(transform.position);
         }
         else if (other.gameObject.GetComponent<rangedEnemyAI>() != null)
         {
             rangedEnemyAI enemy = other.gameObject.GetComponent<rangedEnemyAI>();
-            enemy.GotoLocation(transform.position);
-            Debug.Log("Going to Location");
+            enemy.InvestigateSound(transform.position);
         }
         else if (other.gameObject.GetComponent<bossAI>() != null)
         {
             bossAI enemy = other.gameObject.GetComponent<bossAI>();
-            enemy.GotoLocation(transform.position);
-            Debug.Log("Going to Location");
+            enemy.InvestigateSound(transform.position);
         }
     }
 }

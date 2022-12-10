@@ -9,13 +9,17 @@ using System.Globalization;
 
 public class meleeSwordsmanAI : MonoBehaviour, IDamage
 {
+    [Header("---- UI ----")]
+    [SerializeField] Image playerSeenImage;
+    [SerializeField] Image investigateImage;
+    [SerializeField] Image healthBar;
+    [SerializeField] GameObject UI;
+
     [Header("---- Components ----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
     [SerializeField] GameObject headPos;
-    [SerializeField] Image healthBar;
-    [SerializeField] GameObject UI;
     [SerializeField] enemyMelee meleeScript;
     [SerializeField] MeshCollider swordCollider;
     [SerializeField] GameObject perfectBlockVFX;
@@ -54,6 +58,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     bool goingToLocation;
     bool followRoute;
     bool isAtCheckpoint;
+    bool investigatingSound;
 
     float origStoppingDist;
     float origSpeed;
@@ -96,10 +101,38 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
                     
                 else if (!followRoute && agent.remainingDistance < 0.25f && !isAtCheckpoint)
                 {
+                    investigatingSound = false;
                     StartCoroutine(WaitAtCheckpoint());
                 }
 
             }
+        }
+
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        if (HP != origHealth)
+            healthBar.enabled = true;
+        else
+
+            healthBar.enabled = false;
+        if (investigatingSound)
+        {
+            investigateImage.enabled = true;
+        } else
+        {
+            investigateImage.enabled = false;
+        }
+
+        if (inPursuit)
+        {
+            playerSeenImage.enabled = true;
+        }
+        else
+        {
+            playerSeenImage.enabled = false;
         }
     }
 
@@ -174,7 +207,8 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     IEnumerator Pursuit()
     {
         followRoute = false;
-        inPursuit = true; 
+        inPursuit = true;
+        investigatingSound = false;
         yield return new WaitForSeconds(5f);
         inPursuit = false;
         followRoute = true;
@@ -211,6 +245,16 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
         {
             StopCoroutine(Pursuit());
             StartCoroutine(Pursuit());
+            agent.stoppingDistance = playerPursuitStoppingDistance;
+            agent.SetDestination(position);
+        }
+    }
+
+    public void InvestigateSound(Vector3 position)
+    {
+        if (HP > 0 && !inPursuit)
+        {
+            investigatingSound = true;
             agent.stoppingDistance = playerPursuitStoppingDistance;
             agent.SetDestination(position);
         }

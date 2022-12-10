@@ -9,6 +9,12 @@ using System.Globalization;
 
 public class bossAI : MonoBehaviour, IDamage
 {
+    [Header("---- UI ----")]
+    [SerializeField] Image playerSeenImage;
+    [SerializeField] Image investigateImage;
+    [SerializeField] Image healthBar;
+    [SerializeField] GameObject UI;
+
     [Header("---- Components ----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
@@ -16,8 +22,6 @@ public class bossAI : MonoBehaviour, IDamage
     [SerializeField] GameObject summonEffect; 
     [SerializeField] Animator anim;
     [SerializeField] GameObject headPos;
-    [SerializeField] Image healthBar;
-    [SerializeField] GameObject UI;
     [SerializeField] GameObject enemyToSummon; 
     [SerializeField] Transform enemySummonPos1; 
     [SerializeField] Transform enemySummonPos2;
@@ -52,6 +56,7 @@ public class bossAI : MonoBehaviour, IDamage
     bool isRoaming;
     bool followRoute;
     bool isAtCheckpoint;
+    bool investigatingSound;
 
     float origStoppingDist;
     float origSpeed;
@@ -100,6 +105,34 @@ public class bossAI : MonoBehaviour, IDamage
 
                 }
             }
+        }
+
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        if (HP != origHealth)
+            healthBar.enabled = true;
+        else
+            healthBar.enabled = false;
+
+        if (investigatingSound)
+        {
+            investigateImage.enabled = true;
+        }
+        else
+        {
+            investigateImage.enabled = false;
+        }
+
+        if (inPursuit)
+        {
+            playerSeenImage.enabled = true;
+        }
+        else
+        {
+            playerSeenImage.enabled = false;
         }
     }
 
@@ -176,9 +209,11 @@ public class bossAI : MonoBehaviour, IDamage
 
     IEnumerator Pursuit()
     {
+        followRoute = false;
         inPursuit = true;
         yield return new WaitForSeconds(5f);
         inPursuit = false;
+        followRoute = true;
     }
 
     void Roam()
@@ -210,6 +245,16 @@ public class bossAI : MonoBehaviour, IDamage
     {
         if (HP > 0)
         {
+            agent.stoppingDistance = playerPursuitStoppingDistance;
+            agent.SetDestination(position);
+        }
+    }
+
+    public void InvestigateSound(Vector3 position)
+    {
+        if (HP > 0 && !inPursuit)
+        {
+            investigatingSound = true;
             agent.stoppingDistance = playerPursuitStoppingDistance;
             agent.SetDestination(position);
         }
