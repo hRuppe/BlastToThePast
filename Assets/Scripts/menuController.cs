@@ -11,6 +11,7 @@ public class menuController : MonoBehaviour
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject settingsMenu;
     [SerializeField] GameObject creditsMenu;
+    [SerializeField] Image bttpLogo;
 
     [SerializeField] AudioClip btnHoverClip;
     [SerializeField] AudioClip btnClickClip;
@@ -57,6 +58,7 @@ public class menuController : MonoBehaviour
 
     public void closeOverlapMenu()
     {
+        if (!bttpLogo.IsActive()) bttpLogo.gameObject.SetActive(true); 
         mainMenu.SetActive(true);
         settingsMenu.SetActive(false);
         creditsMenu.SetActive(false); 
@@ -66,6 +68,7 @@ public class menuController : MonoBehaviour
     {
         creditsMenu.SetActive(true);
         mainMenu.SetActive(false);
+        bttpLogo.gameObject.SetActive(false); 
     }
 
     public void MasterSliderChanged()

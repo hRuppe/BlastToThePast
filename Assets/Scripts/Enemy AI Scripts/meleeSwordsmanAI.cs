@@ -117,8 +117,8 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
         if (HP != origHealth)
             healthBar.enabled = true;
         else
-
             healthBar.enabled = false;
+        
         if (investigatingSound)
         {
             investigateImage.enabled = true;
@@ -348,6 +348,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     void CannotBlock()
     {
         canBlock = false;
+        // Changes the color of the block indicator object
         blockIndicatorObject.GetComponent<MeshRenderer>().material.color = Color.white;
     }
 
