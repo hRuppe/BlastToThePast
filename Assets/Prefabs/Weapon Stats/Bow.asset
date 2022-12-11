@@ -23,4 +23,4 @@ MonoBehaviour:
   hitEffect: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
   muzzleFlash: {fileID: 0}
   gunSound: {fileID: 0}
-  handScale: {x: 0.25, y: 0.25, z: 0.25}
+  handScale: {x: 0.17, y: 0.17, z: 0.17}

@@ -24,6 +24,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     [SerializeField] MeshCollider swordCollider;
     [SerializeField] GameObject perfectBlockVFX;
     [SerializeField] Transform perfectBlockVFXPos;
+    [SerializeField] GameObject blockIndicatorObject;
     [SerializeField] AudioSource source;
     [SerializeField] AudioClip[] hurtSounds;
 
@@ -340,12 +341,14 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     void CanBlock()
     {
         canBlock = true;
+        blockIndicatorObject.GetComponent<MeshRenderer>().material.color = Color.magenta;
     }
 
     // Called during attack animation after blocking window
     void CannotBlock()
     {
-        canBlock = false; 
+        canBlock = false;
+        blockIndicatorObject.GetComponent<MeshRenderer>().material.color = Color.white;
     }
 
     public void UpdateHpBar()

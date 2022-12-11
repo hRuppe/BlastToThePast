@@ -209,13 +209,14 @@ public class playerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Sneak"))
         {
+            anim.SetBool("Stopped Crouching", false); 
             anim.SetBool("Is Crouching", true);
             playerCurrentSpeed = playerBaseSpeed / 2;
             isSneaking = true;
-
         }
         else if (Input.GetButtonUp("Sneak"))
         {
+            anim.SetBool("Stopped Crouching", true); 
             anim.SetBool("Is Crouching", false);
             playerCurrentSpeed = playerBaseSpeed;
             isSneaking = false;
@@ -294,12 +295,14 @@ public class playerController : MonoBehaviour
         {
             if (leftHandWeaponContainer.transform.childCount == 0)
             {
+                newWeapon.transform.localScale = gunStat.handScale; 
                 Instantiate(newWeapon, leftHandWeaponContainer.transform.position, leftHandWeaponContainer.transform.rotation, leftHandWeaponContainer.transform);
             }
         } else
         {
             if (rightHandWeaponContainer.transform.childCount == 0)
             {
+                newWeapon.transform.localScale = gunStat.handScale;
                 Instantiate(newWeapon, rightHandWeaponContainer.transform.position, rightHandWeaponContainer.transform.rotation, rightHandWeaponContainer.transform);
             }
         }
