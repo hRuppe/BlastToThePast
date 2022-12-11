@@ -45,8 +45,8 @@ ModelImporter:
       name: Jumping
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 17
-      lastFrame: 39
+      firstFrame: 12
+      lastFrame: 45
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -73,7 +73,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.1585628
+      - time: 0.14641434
         functionName: ResetJump
         data: 
         objectReferenceParameter: {instanceID: 0}

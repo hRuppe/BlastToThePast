@@ -214,7 +214,7 @@ public class playerController : MonoBehaviour
 
     void PlayerSneak()
     {
-        if (Input.GetButtonDown("Sneak") && !isSprinting && anim.GetFloat("Vertical") == 0 && anim.GetFloat("Horizontal") == 0)
+        if (Input.GetButtonDown("Sneak") && !isSprinting)
         {
             anim.SetBool("Stopped Crouching", false); 
             anim.SetBool("Is Crouching", true);

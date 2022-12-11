@@ -37,11 +37,11 @@ public class sword : weapon
         if (Input.GetButton("Alt Fire"))
         {
             gameManager.instance.playerScript.isBlocking = true;
-            gameManager.instance.playerScript.anim.SetBool("Block", true);
+            gameManager.instance.playerScript.anim.SetBool("Blocking", true);
         } else
         {
             gameManager.instance.playerScript.isBlocking = false;
-            gameManager.instance.playerScript.anim.SetBool("Block", false);
+            gameManager.instance.playerScript.anim.SetBool("Blocking", false);
         }
     }
 
