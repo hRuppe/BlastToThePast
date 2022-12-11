@@ -1845,11 +1845,8 @@ MonoBehaviour:
   sightAngle: 65
   roamDist: 0
   playerPursuitStoppingDistance: 2
-  checkpointWaitTime: 5
+  checkpointWaitTime: 2
   routeCheckpoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   stunnedTime: 2
