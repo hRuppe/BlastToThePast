@@ -134,7 +134,6 @@ public class playerController : MonoBehaviour
             //StartCoroutine(PlaceMine());
             GunSelect();
             StartBlockTimer();
-            anim.SetBool("Jump", isJumping);
         }
     }
 
@@ -143,7 +142,6 @@ public class playerController : MonoBehaviour
         // Jump reset
         if (controller.isGrounded && playerVelocity.y < 0)
         {
-            isJumping = false;
             jumpTimes = 0;
             playerVelocity.y = 0f;
         }
@@ -159,17 +157,26 @@ public class playerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && jumpTimes < jumpMax)
         {
-            isJumping = true;
-            if (audioJump.Length > 0)
-                audioSource.PlayOneShot(audioJump[Random.Range(0, audioJump.Length)], 1);
-            
-            anim.SetTrigger("Jump");
-            playerVelocity.y = jumpHeight;
-            jumpTimes++;
+            anim.SetBool("Jumping", true);
+            Debug.Log(anim.GetBool("Jumping"));
         }
 
         playerVelocity.y -= gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+    }
+
+    private void Jump()
+    {
+        if (audioJump.Length > 0)
+            audioSource.PlayOneShot(audioJump[Random.Range(0, audioJump.Length)], 1);
+
+        playerVelocity.y = jumpHeight;
+        jumpTimes++;
+    }
+
+    private void ResetJump()
+    {
+        anim.SetBool("Jumping", false);
     }
 
     void PlayerSprint()

@@ -35,7 +35,7 @@ public class bow : weapon
             AltFire();
         }
         
-        anim.SetBool("DrawBow", drawBow);
+        anim.SetBool("Draw Bow", drawBow);
     }
 
     public override void PrimaryFire()
@@ -48,6 +48,7 @@ public class bow : weapon
         if (Input.GetButton("Shoot") && !bowReset)
         {
             drawBow = true;
+            Debug.Log("Draw Bow");
 
             // Charges the bow. If you release before fully charged, it starts to uncharge it
             currentLoadTime += Time.deltaTime;
