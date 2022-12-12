@@ -126,7 +126,7 @@ public class playerController : MonoBehaviour
         shootPos.transform.rotation = cam.transform.rotation;
 
         // If the player is dead, don't run any of this stuff
-        if (!anim.GetBool("Dead"))
+        if (!anim.GetBool("Dead") && controller.enabled == true)
         {
             PlayerMove();
             PlayerSprint();
@@ -134,7 +134,6 @@ public class playerController : MonoBehaviour
             //StartCoroutine(PlaceMine());
             GunSelect();
             StartBlockTimer();
-            anim.SetBool("Jump", isJumping);
         }
     }
 
@@ -143,7 +142,6 @@ public class playerController : MonoBehaviour
         // Jump reset
         if (controller.isGrounded && playerVelocity.y < 0)
         {
-            isJumping = false;
             jumpTimes = 0;
             playerVelocity.y = 0f;
         }
@@ -159,23 +157,32 @@ public class playerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && jumpTimes < jumpMax)
         {
-            isJumping = true;
-            if (audioJump.Length > 0)
-                audioSource.PlayOneShot(audioJump[Random.Range(0, audioJump.Length)], 1);
-            
-            anim.SetTrigger("Jump");
-            playerVelocity.y = jumpHeight;
-            jumpTimes++;
+            anim.SetBool("Jumping", true);
+            Debug.Log(anim.GetBool("Jumping"));
         }
 
         playerVelocity.y -= gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
+    private void Jump()
+    {
+        if (audioJump.Length > 0)
+            audioSource.PlayOneShot(audioJump[Random.Range(0, audioJump.Length)], 1);
+
+        playerVelocity.y = jumpHeight;
+        jumpTimes++;
+    }
+
+    private void ResetJump()
+    {
+        anim.SetBool("Jumping", false);
+    }
+
     void PlayerSprint()
     {
         // Don't sprint while sneaking
-        if (isSneaking) return;
+        if (isSneaking || isBlocking) return;
 
         if (Input.GetButtonDown("Sprint"))
         {
@@ -207,7 +214,7 @@ public class playerController : MonoBehaviour
 
     void PlayerSneak()
     {
-        if (Input.GetButtonDown("Sneak") && !isSprinting && anim.GetFloat("Vertical") == 0 && anim.GetFloat("Horizontal") == 0)
+        if (Input.GetButtonDown("Sneak") && !isSprinting)
         {
             anim.SetBool("Stopped Crouching", false); 
             anim.SetBool("Is Crouching", true);
@@ -221,6 +228,14 @@ public class playerController : MonoBehaviour
             playerCurrentSpeed = playerBaseSpeed;
             isSneaking = false;
         }
+    }
+
+    void ControllerEnabled(int state)
+    {
+        if (state == 0)
+            controller.enabled = false;
+        else if (state == 1)
+            controller.enabled = true;
     }
 
     // Resets canCombo, which determines if the player can combo sword swings. Called by an animation event.

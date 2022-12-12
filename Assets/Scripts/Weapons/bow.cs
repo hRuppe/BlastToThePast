@@ -35,7 +35,7 @@ public class bow : weapon
             AltFire();
         }
         
-        anim.SetBool("DrawBow", drawBow);
+        anim.SetBool("Draw Bow", drawBow);
     }
 
     public override void PrimaryFire()
