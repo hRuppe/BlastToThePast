@@ -22,6 +22,7 @@ public class gameManager : MonoBehaviour
     public GameObject pauseMenu; //UI element for the pause screen
     public GameObject playerDeadMenu; //UI element for the death screen
     public GameObject playerWinMenu; //UI element for the win screen
+    public GameObject controlsMenu; // UI element for controls
     public TextMeshProUGUI enemyCounter; //UI element to count the enemies remaining in the level
     public Image healthBar;
     public Image soundBar;

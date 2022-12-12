@@ -46,4 +46,16 @@ public class buttonFunctions : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
     }
+
+    public void OpenControlsMenu()
+    {
+        gameManager.instance.controlsMenu.SetActive(true);
+        gameManager.instance.pauseMenu.SetActive(false); 
+    }
+
+    public void CloseControlsMenu()
+    {
+        gameManager.instance.controlsMenu.SetActive(false);
+        gameManager.instance.pauseMenu.SetActive(true);
+    }
 }

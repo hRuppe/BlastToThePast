@@ -11,6 +11,7 @@ public class menuController : MonoBehaviour
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject settingsMenu;
     [SerializeField] GameObject creditsMenu;
+    [SerializeField] GameObject controlsMenu;
     [SerializeField] Image bttpLogo;
 
     [SerializeField] AudioClip btnHoverClip;
@@ -69,6 +70,20 @@ public class menuController : MonoBehaviour
         creditsMenu.SetActive(true);
         mainMenu.SetActive(false);
         bttpLogo.gameObject.SetActive(false); 
+    }
+
+    public void OpenControlsMenu()
+    {
+        controlsMenu.SetActive(true);
+        mainMenu.SetActive(false);
+        bttpLogo.gameObject.SetActive(false); 
+    }
+
+    public void CloseControlsMenu()
+    {
+        controlsMenu.SetActive(false);
+        mainMenu.SetActive(true);
+        bttpLogo.gameObject.SetActive(true); 
     }
 
     public void MasterSliderChanged()
