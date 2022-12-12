@@ -103,7 +103,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
                         NextCheckpoint();
                     }
 
-                    else if (!followRoute && agent.remainingDistance < 0.25f && !isAtCheckpoint)
+                    else if (!followRoute && agent.remainingDistance < playerPursuitStoppingDistance && !isAtCheckpoint)
                     {
                         investigatingSound = false;
                         StartCoroutine(WaitAtCheckpoint());
@@ -281,6 +281,8 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
         if (HP > 0 && !inPursuit)
         {
             investigatingSound = true;
+            followRoute = false;
+            isAtCheckpoint = false;
             agent.stoppingDistance = playerPursuitStoppingDistance;
             agent.SetDestination(position);
         }

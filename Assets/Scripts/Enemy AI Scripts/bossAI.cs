@@ -98,7 +98,7 @@ public class bossAI : MonoBehaviour, IDamage
                         NextCheckpoint();
                     }
 
-                    else if (!followRoute && agent.remainingDistance < 0.1f && !isAtCheckpoint)
+                    else if (!followRoute && agent.remainingDistance < playerPursuitStoppingDistance && !isAtCheckpoint)
                     {
                         StartCoroutine(WaitAtCheckpoint());
                     }
