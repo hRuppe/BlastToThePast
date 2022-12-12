@@ -257,7 +257,7 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
         StartCoroutine(FlashDamage());
         // Turn stopping distance to 0 so enemy goes exactly where he was shot from
         agent.stoppingDistance = 0;
-        agent.SetDestination(gameManager.instance.player.transform.position);
+        InvestigateSound(gameManager.instance.player.transform.position);
 
         if (HP <= 0)
         {

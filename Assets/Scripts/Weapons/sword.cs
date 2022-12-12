@@ -16,7 +16,7 @@ public class sword : weapon
     
     void Update()
     {
-        if (!gameManager.instance.playerScript.anim.GetBool("Dead"))
+        if (!gameManager.instance.playerScript.anim.GetBool("Dead") && !gameManager.instance.playerScript.anim.GetBool("Jumping"))
         {
             PrimaryFire();
             AltFire();
