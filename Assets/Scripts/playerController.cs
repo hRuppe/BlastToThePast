@@ -182,7 +182,7 @@ public class playerController : MonoBehaviour
     void PlayerSprint()
     {
         // Don't sprint while sneaking
-        if (isSneaking) return;
+        if (isSneaking || isBlocking) return;
 
         if (Input.GetButtonDown("Sprint"))
         {

@@ -20,6 +20,7 @@ public class sword : weapon
         {
             PrimaryFire();
             AltFire();
+            gameManager.instance.playerScript.anim.SetBool("Blocking", gameManager.instance.playerScript.isBlocking);
         }
     }
 
@@ -38,11 +39,10 @@ public class sword : weapon
         if (Input.GetButton("Alt Fire"))
         {
             gameManager.instance.playerScript.isBlocking = true;
-            gameManager.instance.playerScript.anim.SetBool("Blocking", true);
+            
         } else
         {
             gameManager.instance.playerScript.isBlocking = false;
-            gameManager.instance.playerScript.anim.SetBool("Blocking", false);
         }
     }
 
