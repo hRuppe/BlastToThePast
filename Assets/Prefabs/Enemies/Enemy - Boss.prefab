@@ -1049,7 +1049,7 @@ MonoBehaviour:
   HP: 20
   playerFaceSpeed: 3
   animLerpSpeed: 2
-  sightAngle: 65
+  sightAngle: 55
   roamDist: 0
   playerPursuitStoppingDistance: 7
   checkpointWaitTime: 0

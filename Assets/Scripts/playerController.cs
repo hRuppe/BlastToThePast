@@ -55,6 +55,7 @@ public class playerController : MonoBehaviour
 
     private Vector3 move;
     private Vector3 playerVelocity;
+    private Vector3 lastPos; 
 
     private weapon weaponScript;
 
@@ -72,6 +73,7 @@ public class playerController : MonoBehaviour
 
     public bool isBlocking;
 
+    private bool isIdle; 
     private bool isJumping;
     private bool isDodging; 
     private bool isAds;
@@ -95,6 +97,8 @@ public class playerController : MonoBehaviour
         playerCurrentSpeed = playerBaseSpeed;
 
         freeLook.transform.rotation = new Quaternion(0, 0, 0, 0);
+
+        lastPos = transform.position; 
 
         Respawn();
     }
@@ -133,7 +137,7 @@ public class playerController : MonoBehaviour
             PlayerSneak();
             //StartCoroutine(PlaceMine());
             GunSelect();
-            StartBlockTimer();
+            StartBlockTimer(); 
         }
     }
 
@@ -216,14 +220,12 @@ public class playerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Sneak") && !isSprinting)
         {
-            anim.SetBool("Stopped Crouching", false); 
-            anim.SetBool("Is Crouching", true);
+            anim.SetBool("Is Crouching", true); 
             playerCurrentSpeed = playerBaseSpeed / 2;
             isSneaking = true;
         }
         else if (Input.GetButtonUp("Sneak") && isSneaking)
         {
-            anim.SetBool("Stopped Crouching", true); 
             anim.SetBool("Is Crouching", false);
             playerCurrentSpeed = playerBaseSpeed;
             isSneaking = false;

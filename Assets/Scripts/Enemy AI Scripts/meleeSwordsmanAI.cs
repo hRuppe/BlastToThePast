@@ -37,6 +37,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
     [Range(1, 15)][SerializeField] int playerPursuitStoppingDistance;
     [SerializeField] int checkpointWaitTime; // the time the enemy waits at the checkpoint
     [SerializeField] List<Transform> routeCheckpoints;
+    [SerializeField] bool randomRoam; // If the enenmy roams randomly or goes to checkpoints
 
     [Header("---- Combat Stats ----")]
     [Range(1, 8)][SerializeField] float stunnedTime; // How long enemy is stunned on a perfect block 
@@ -95,17 +96,33 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
             }
             if (!canSeePlayer)
             {
-                if (followRoute)
+                if (!randomRoam) // Enemy set to checkpoints
                 {
-                    NextCheckpoint();
-                }
-                    
-                else if (!followRoute && agent.remainingDistance < 0.25f && !isAtCheckpoint)
-                {
-                    investigatingSound = false;
-                    StartCoroutine(WaitAtCheckpoint());
-                }
+                    if (followRoute)
+                    {
+                        NextCheckpoint();
+                    }
 
+                    else if (!followRoute && agent.remainingDistance < 0.25f && !isAtCheckpoint)
+                    {
+                        investigatingSound = false;
+                        StartCoroutine(WaitAtCheckpoint());
+                    }
+                }
+                else // Enemy set to random roam
+                {
+                    if (isRoaming)
+                    {
+                        if (agent.remainingDistance < .01 && agent.destination != gameManager.instance.player.transform.position)
+                        {
+                            isRoaming = false;
+                        }
+                    }
+                    else
+                    {
+                        Roam();
+                    } 
+                }
             }
         }
 
@@ -114,13 +131,18 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
 
     private void UpdateUI()
     {
-        if (HP != origHealth)
-            healthBar.enabled = true;
-        else
-            healthBar.enabled = false;
-        
+        // UI as a whole is turned off so this won't work
+        //if (HP != origHealth)
+        //    healthBar.enabled = true;
+        //else
+        //    healthBar.enabled = false;
+
         if (investigatingSound)
         {
+            if (!UI.activeSelf)
+            {
+                UI.SetActive(true);
+            } 
             investigateImage.enabled = true;
         } else
         {
@@ -129,6 +151,10 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
 
         if (inPursuit)
         {
+            if (!UI.activeSelf)
+            {
+                UI.SetActive(true); 
+            }
             playerSeenImage.enabled = true;
         }
         else
@@ -167,8 +193,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
                 }
 
                 if (!isSwinging && agent.remainingDistance <= agent.stoppingDistance && !anim.GetBool("Stun"))
-                {
-                    //StartCoroutine(SwingSword()); 
+                { 
                     SwingSword(); 
                 }
             }
@@ -263,6 +288,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
 
     public void TakeDamage(int dmg)
     {
+        isTakingDmg = true; 
         // Sneak Attack
         if (!canSeePlayer && !inPursuit && gameManager.instance.playerScript.selectedWeaponType == enums.WeaponType.Melee)
         {
@@ -285,9 +311,10 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
             gameManager.instance.updateEnemyNumber(); //Decrement enemy number on kill
             anim.SetBool("Dead", true);
             agent.enabled = false;
-            UI.SetActive(false);
+            UI.gameObject.SetActive(false);
             GetComponent<Collider>().enabled = false;
         }
+        isTakingDmg = false; 
     }
 
     public IEnumerator StunEnemy()

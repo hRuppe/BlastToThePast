@@ -65,6 +65,8 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
         startingPos = transform.position;
         origHealth = HP;
         UpdateHpBar();
+
+        UI.gameObject.SetActive(false);
     }
 
     void Update()

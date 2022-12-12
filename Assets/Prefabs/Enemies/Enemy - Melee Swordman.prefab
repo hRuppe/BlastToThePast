@@ -1842,13 +1842,12 @@ MonoBehaviour:
   HP: 6
   playerFaceSpeed: 3
   animLerpSpeed: 2
-  sightAngle: 65
-  roamDist: 0
+  sightAngle: 55
+  roamDist: 5
   playerPursuitStoppingDistance: 2
-  checkpointWaitTime: 2
-  routeCheckpoints:
-  - {fileID: 0}
-  - {fileID: 0}
+  checkpointWaitTime: 0
+  routeCheckpoints: []
+  randomRoam: 1
   stunnedTime: 2
   swordDamage: 2
   perfectBlockTimeLimit: 0.3
