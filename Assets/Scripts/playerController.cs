@@ -126,7 +126,7 @@ public class playerController : MonoBehaviour
         shootPos.transform.rotation = cam.transform.rotation;
 
         // If the player is dead, don't run any of this stuff
-        if (!anim.GetBool("Dead"))
+        if (!anim.GetBool("Dead") && controller.enabled == true)
         {
             PlayerMove();
             PlayerSprint();
@@ -228,6 +228,14 @@ public class playerController : MonoBehaviour
             playerCurrentSpeed = playerBaseSpeed;
             isSneaking = false;
         }
+    }
+
+    void ControllerEnabled(int state)
+    {
+        if (state == 0)
+            controller.enabled = false;
+        else if (state == 1)
+            controller.enabled = true;
     }
 
     // Resets canCombo, which determines if the player can combo sword swings. Called by an animation event.

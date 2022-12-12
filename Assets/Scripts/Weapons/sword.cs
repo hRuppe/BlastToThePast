@@ -28,6 +28,7 @@ public class sword : weapon
         if (Input.GetButton("Shoot") && canSwing)
         {
             gameManager.instance.playerScript.anim.SetTrigger("SwordCombo");
+            StopCoroutine(Swing());
             StartCoroutine(Swing());
         }
     }

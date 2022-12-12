@@ -48,7 +48,6 @@ public class bow : weapon
         if (Input.GetButton("Shoot") && !bowReset)
         {
             drawBow = true;
-            Debug.Log("Draw Bow");
 
             // Charges the bow. If you release before fully charged, it starts to uncharge it
             currentLoadTime += Time.deltaTime;
