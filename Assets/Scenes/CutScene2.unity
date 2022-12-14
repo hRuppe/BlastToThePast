@@ -515,10 +515,30 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Cutscene 2\n\t\n\tWin Scene\n\n\t\n\n"
+  m_text: 'Standing over the fallen Lord, you take a moment to catch your breath
+    before retreiving your stolen device.
+
+
+
+    You inspect the contraption, rotating
+    it slowly in your hands. It seems heavier than you remember, or maybe you had
+    simply forgotten its weight over the course of your long journey.
+
+
+
+    Almost
+    instictually, your fingers glide over the controls, swiftly typing in the exact
+    date of your departure. The device warbles as a swirling green tear forms in
+    front of you.
+
+
+
+    As you approach the portal, you take one last look at your
+    surroundings, basking in the glow of the past. You say your final goodbyes before
+    stepping into the portal and back in to your normal life.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b0258d78f78ed0b4887d391943d85354, type: 2}
+  m_sharedMaterial: {fileID: 940607445757219856, guid: b0258d78f78ed0b4887d391943d85354, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

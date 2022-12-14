@@ -7,11 +7,10 @@ using UnityEngine.EventSystems;
 public class playerController : MonoBehaviour
 {
     [Header("----- Components -----")]
-    [SerializeField] CharacterController controller;
+    [SerializeField] public CharacterController controller;
     [SerializeField] public Camera cam;
     [SerializeField] CinemachineFreeLook freeLook;
     [SerializeField] public Animator anim;
-    [SerializeField] GameObject arrow; // This will eventually be determined by the weapon the player is holding
     [SerializeField] public Transform shootPos;
     [SerializeField] public Transform torsoPos; 
     [SerializeField] GameObject rightHandWeaponContainer;
@@ -70,18 +69,16 @@ public class playerController : MonoBehaviour
     private float timeSinceAdsStart;
     private float originalHorizontalSens;
     private float originalVerticalSens;
+    private float soundBarLerpSpeed = 2.5f;
 
     public bool isBlocking;
+    public bool grounded;
 
-    private bool isIdle; 
     private bool isJumping;
     private bool isDodging; 
-    private bool isAds;
     private bool isShooting;
     private bool isSprinting;
     private bool isSneaking;
-    private bool isPlacingMine;
-    private bool trackShootSound;
     private bool canCombo;
 
 
@@ -105,6 +102,7 @@ public class playerController : MonoBehaviour
 
     void Update()
     {
+        gameManager.instance.soundBar.fillAmount = Mathf.Lerp(gameManager.instance.soundBar.fillAmount, 0, Time.deltaTime * soundBarLerpSpeed);
         // These values are so we can manipulate the axis values later
         float horizontalAxis = Input.GetAxis("Horizontal");
         float verticalAxis = Input.GetAxis("Vertical");
@@ -148,6 +146,7 @@ public class playerController : MonoBehaviour
         {
             jumpTimes = 0;
             playerVelocity.y = 0f;
+            grounded = true;
         }
 
         move = transform.right * Input.GetAxis("Horizontal") +
@@ -162,7 +161,7 @@ public class playerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && jumpTimes < jumpMax)
         {
             anim.SetBool("Jumping", true);
-            Debug.Log(anim.GetBool("Jumping"));
+            grounded = false;
         }
 
         playerVelocity.y -= gravityValue * Time.deltaTime;
@@ -332,6 +331,8 @@ public class playerController : MonoBehaviour
     {
         GameObject newTrigger = Instantiate(soundTrigger, transform.position, soundTrigger.transform.rotation);
         SoundTrigger triggerScript = newTrigger.GetComponent<SoundTrigger>();
+
+        gameManager.instance.soundBar.fillAmount = Mathf.Lerp(gameManager.instance.soundBar.fillAmount, size / 40f, Time.deltaTime * soundBarLerpSpeed * 100);
 
         triggerScript.SetTriggerSize(size);
     }

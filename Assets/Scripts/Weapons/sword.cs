@@ -16,7 +16,7 @@ public class sword : weapon
     
     void Update()
     {
-        if (!gameManager.instance.playerScript.anim.GetBool("Dead") && !gameManager.instance.playerScript.anim.GetBool("Jumping"))
+        if (!gameManager.instance.playerScript.anim.GetBool("Dead") && gameManager.instance.playerScript.controller.isGrounded)
         {
             PrimaryFire();
             AltFire();
@@ -26,6 +26,8 @@ public class sword : weapon
 
     public override void PrimaryFire()
     {
+        if (!base.CanFire()) return;
+
         if (Input.GetButton("Shoot") && canSwing)
         {
             gameManager.instance.playerScript.anim.SetTrigger("SwordCombo");
@@ -36,6 +38,8 @@ public class sword : weapon
 
     public override void AltFire()
     {
+        if (!base.CanFire()) return;
+
         if (Input.GetButton("Alt Fire"))
         {
             gameManager.instance.playerScript.isBlocking = true;

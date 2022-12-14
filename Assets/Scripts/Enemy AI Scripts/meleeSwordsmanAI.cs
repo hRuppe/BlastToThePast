@@ -131,6 +131,12 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
 
     private void UpdateUI()
     {
+        if (HP <= 0)
+        {
+            UI.SetActive(false);
+            return;
+        }
+
         // UI as a whole is turned off so this won't work
         //if (HP != origHealth)
         //    healthBar.enabled = true;
@@ -149,7 +155,7 @@ public class meleeSwordsmanAI : MonoBehaviour, IDamage
             investigateImage.enabled = false;
         }
 
-        if (inPursuit)
+        if (inPursuit || canSeePlayer)
         {
             if (!UI.activeSelf)
             {

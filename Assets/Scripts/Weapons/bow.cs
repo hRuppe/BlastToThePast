@@ -40,6 +40,8 @@ public class bow : weapon
 
     public override void PrimaryFire()
     {
+        if (!base.CanFire()) return;
+
         // Allows the player to draw the bow again after resetting with alt fire
         if (Input.GetButtonUp("Shoot"))
             bowReset = false;
@@ -94,6 +96,8 @@ public class bow : weapon
     // Un-notches the arrow from bow if the player already charged the bow
     public override void AltFire()
     {
+        if (!base.CanFire()) return;
+
         if (Input.GetButton("Alt Fire"))
         {
             isLoaded = false;

@@ -103,6 +103,12 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
 
     private void UpdateUI()
     {
+        if (HP <= 0)
+        {
+            UI.SetActive(false);
+            return;
+        }
+
         if (HP != origHealth)
             healthBar.enabled = true;
         else
@@ -117,7 +123,7 @@ public class rangedEnemyAI : MonoBehaviour, IDamage
             investigateImage.enabled = false;
         }
 
-        if (inPursuit)
+        if (inPursuit || canSeePlayer)
         {
             playerSeenImage.enabled = true;
         }

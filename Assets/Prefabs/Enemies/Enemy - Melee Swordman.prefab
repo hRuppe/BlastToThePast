@@ -3336,6 +3336,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5070269272176470731, guid: 5f8136ca16a293a42bb21be407bad1e4, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070269272176470731, guid: 5f8136ca16a293a42bb21be407bad1e4, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070269272176470731, guid: 5f8136ca16a293a42bb21be407bad1e4, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5346189546778183239, guid: 5f8136ca16a293a42bb21be407bad1e4, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5346189546778183239, guid: 5f8136ca16a293a42bb21be407bad1e4, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8114754
+      objectReference: {fileID: 0}
+    - target: {fileID: 5346189546778183239, guid: 5f8136ca16a293a42bb21be407bad1e4, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f8136ca16a293a42bb21be407bad1e4, type: 3}
 --- !u!224 &22055749607582838 stripped
