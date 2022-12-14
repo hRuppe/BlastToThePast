@@ -20871,7 +20871,7 @@ GameObject:
   - component: {fileID: 1692401988}
   m_Layer: 0
   m_Name: Music Player
-  m_TagString: Untagged
+  m_TagString: Music Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20888,6 +20888,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75fc37b66bbe7814a87283f3fcc11c0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  source: {fileID: 1692401989}
+  gameplayMusic: {fileID: 8300000, guid: 9489ff6686a906c4fa1d6213f1ca52db, type: 3}
 --- !u!82 &1692401989
 AudioSource:
   m_ObjectHideFlags: 0
@@ -25926,13 +25928,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 697763050}
     m_Modifications:
     - target: {fileID: 325625657689861944, guid: e2da5b4435a00f94c8aeb17dae4fee72, type: 3}
+      propertyPath: randomRoam
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 325625657689861944, guid: e2da5b4435a00f94c8aeb17dae4fee72, type: 3}
+      propertyPath: checkpointWaitTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 325625657689861944, guid: e2da5b4435a00f94c8aeb17dae4fee72, type: 3}
+      propertyPath: routeCheckpoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 325625657689861944, guid: e2da5b4435a00f94c8aeb17dae4fee72, type: 3}
       propertyPath: routeCheckpoints.Array.data[0]
       value: 
-      objectReference: {fileID: 455027013}
+      objectReference: {fileID: 1836307135}
     - target: {fileID: 325625657689861944, guid: e2da5b4435a00f94c8aeb17dae4fee72, type: 3}
       propertyPath: routeCheckpoints.Array.data[1]
       value: 
-      objectReference: {fileID: 1836307135}
+      objectReference: {fileID: 455027013}
     - target: {fileID: 1867033747893200920, guid: e2da5b4435a00f94c8aeb17dae4fee72, type: 3}
       propertyPath: m_IsActive
       value: 0

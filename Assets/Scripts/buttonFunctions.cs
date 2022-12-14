@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -41,6 +42,10 @@ public class buttonFunctions : MonoBehaviour
 
     public void OpenMainMenu()
     {
+        // Stops music & destroys the music player bc the main menu will create a new one
+        gameManager.instance.musicPlayer.Stop(); 
+        Destroy(gameManager.instance.musicPlayer.gameObject); 
+        
         SceneManager.LoadScene(0);
         resume();
         Cursor.lockState = CursorLockMode.Confined;

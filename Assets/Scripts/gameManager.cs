@@ -31,6 +31,8 @@ public class gameManager : MonoBehaviour
     public int enemiesToKill; //The required enemy kills to win the level
     public bossAI bossToWin;
 
+    public AudioSource musicPlayer; // The source that plays background music
+
     public GameObject spawnPos; //The spawn location of the level
 
     public bool isPaused; //Tracker to see if the game is currently paused
@@ -49,6 +51,8 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player"); // Find the Player & bind
         playerScript = player.GetComponent<playerController>(); // Find the playerController & bind
         spawnPos = GameObject.FindGameObjectWithTag("Spawn Pos"); // Find the spawn location of the level & bind
+
+        musicPlayer = GameObject.FindGameObjectWithTag("Music Player").GetComponent<AudioSource>(); // Finds the music player 
     }
 
     void Update()

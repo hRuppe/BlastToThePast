@@ -13,6 +13,7 @@ TagManager:
   - ThickWall
   - Retrieve Item
   - Enemy Melee Weapon
+  - Music Player
   layers:
   - Default
   - TransparentFX
