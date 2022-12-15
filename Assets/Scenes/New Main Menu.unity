@@ -21292,16 +21292,32 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Developers: Matthew Chadwick, Hunter Ruppe, Keegan Love\n\nMain Music:
-    \"Zion\" https://freemusicarchive.org/music/SalmonLikeTheFish/Music_for_the_Sleepy_Traveler
-    \r\nDrink potion SFX: https://freesound.org/people/Jamius/sounds/41529/\nEnvironment
-    Assets: https://www.kenney.nl/assets/fantasy-town-kit\r\nAnimations: https://www.mixamo.com/#/?page=1&type=Motion%2CMotionPack\r\nEnemy
-    Models: https://assetstore.unity.com/packages/3d/characters/humanoids/rpg-tiny-hero-duo-pbr-polyart-225148
-    & https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/mini-legion-lich-pbr-hp-polyart-91497\r\nVFX:
-    https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-remaster-free-109565\nSword
-    SFX: https://freesound.org/people/MissCellany/sounds/240640/\nWeapon Swap SFX:
-    https://freesound.org/people/Streety/sounds/30241/\r\nPlayer Hurt SFX: https://freesound.org/people/Christopherderp/\r\nPlayer
-    Jump SFX: https://freesound.org/people/FullStackSound/sounds/662463/"
+  m_text: 'Developers: Matthew Chadwick & Hunter Ruppe
+
+
+    Main Level Designer:
+    Keegen Love
+
+
+    Menu Music: "Zion" freemusicarchive.org
+
+    Gameplay Music:
+    "Whimsical Theme #2" freemusicarchive.org
+
+    SFX: freesound.org
+
+    Environment
+    Assets: kenney.nl
+
+    Animations: mixamo.com
+
+    Character Model: By EMD Assets
+    unityassetsstore.com
+
+    Enemy Models: By Dungeon Mason Unityasseetstore.com
+
+    VFX:
+    By Jean Moreno UnityAssetsstore.com'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b0258d78f78ed0b4887d391943d85354, type: 2}
   m_sharedMaterial: {fileID: 940607445757219856, guid: b0258d78f78ed0b4887d391943d85354, type: 2}
@@ -21328,8 +21344,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25.7
-  m_fontSizeBase: 25.7
+  m_fontSize: 36.2
+  m_fontSizeBase: 36.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -21340,7 +21356,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 10.3
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

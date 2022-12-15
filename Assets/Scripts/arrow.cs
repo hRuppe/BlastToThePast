@@ -13,12 +13,24 @@ public class arrow : MonoBehaviour
     [SerializeField] int bulletTimer;
     [SerializeField] int bulletVertOffset; // Controls the vertical aspect of the initial velocity for the arrow.
 
+    bool inEnemy; 
 
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         rb.velocity = (transform.forward * bulletSpeed) + new Vector3(0, bulletVertOffset, 0); // Use instead of trans.forward when game manager is set up with player (playerRef.transform.position - transform.position)
         Destroy(gameObject, bulletTimer);
+    }
+
+    private void Update()
+    {
+        if (inEnemy)
+        {
+            if (!gameObject.GetComponentInParent<CapsuleCollider>().enabled)
+            {
+                Destroy(gameObject);
+            }
+        }     
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,7 +43,9 @@ public class arrow : MonoBehaviour
 
         if (other.gameObject.GetComponent<IDamage>() != null)
         {
+
             other.gameObject.GetComponent<IDamage>().TakeDamage(bulletdamage);
+            inEnemy = true; 
         }
 
         // Stick arrow into wall

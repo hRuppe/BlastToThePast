@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1162429503418735557}
   - component: {fileID: 1162429503418735559}
   - component: {fileID: 1162429503418735558}
+  - component: {fileID: 5602135801457268367}
   m_Layer: 0
   m_Name: Weapon Pickup - Sword
   m_TagString: Untagged
@@ -112,7 +113,21 @@ SphereCollider:
   m_GameObject: {fileID: 6428966688124730919}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.01
-  m_Center: {x: 1.9718469e-10, y: -0.0013550876, z: -1.4551914e-10}
+  m_Radius: 0.05818356
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &5602135801457268367
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428966688124730919}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.26485747
+  m_Height: 1.3629743
+  m_Direction: 2
+  m_Center: {x: 0, y: -0.052517474, z: -0.25341958}
