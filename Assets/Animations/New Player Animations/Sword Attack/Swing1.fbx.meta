@@ -61,7 +61,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0
-        functionName: ControllerEnabled
+        functionName: SlowPlayer
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -82,7 +82,7 @@ ModelImporter:
         intParameter: 40
         messageOptions: 0
       - time: 1
-        functionName: ControllerEnabled
+        functionName: SlowPlayer
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -90,6 +90,13 @@ ModelImporter:
         messageOptions: 0
       - time: 1
         functionName: ResetCombo
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.70527107
+        functionName: PlayWeaponSound
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

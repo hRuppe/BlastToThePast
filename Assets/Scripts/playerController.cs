@@ -139,6 +139,11 @@ public class playerController : MonoBehaviour
         }
     }
 
+    private void PlayWeaponSound()
+    {
+        audioSource.PlayOneShot(gunStatList[selectedGun].gunSound, 1);
+    }
+
     void PlayerMove()
     {
         // Jump reset
@@ -231,12 +236,20 @@ public class playerController : MonoBehaviour
         }
     }
 
-    void ControllerEnabled(int state)
+    // Called by animation events when the sword is swung
+    void SlowPlayer(int state)
     {
-        if (state == 0)
-            controller.enabled = false;
-        else if (state == 1)
-            controller.enabled = true;
+        if (state == 1)
+        {
+            playerCurrentSpeed = playerBaseSpeed;
+        }
+        else if (state == 0)
+        {
+            isSprinting = false;
+            isSneaking = false;
+            anim.SetBool("Is Crouching", false);
+            playerCurrentSpeed = playerBaseSpeed / 2f;
+        }
     }
 
     // Resets canCombo, which determines if the player can combo sword swings. Called by an animation event.

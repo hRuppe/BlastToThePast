@@ -26,7 +26,7 @@ public class sword : weapon
 
     public override void PrimaryFire()
     {
-        if (!base.CanFire()) return;
+        if (!base.CanFire() || gameManager.instance.playerScript.isBlocking) return;
 
         if (Input.GetButton("Shoot") && canSwing)
         {
@@ -52,7 +52,6 @@ public class sword : weapon
 
     IEnumerator Swing()
     {
-        gameManager.instance.playerScript.audioSource.PlayOneShot(gunStats.gunSound);
         canSwing = false;
         
         yield return new WaitForSeconds(1.0f / gunStats.shooteRate);

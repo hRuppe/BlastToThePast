@@ -98,7 +98,7 @@ public class bow : weapon
     {
         if (!base.CanFire()) return;
 
-        if (Input.GetButton("Alt Fire"))
+        if (Input.GetButton("Alt Fire") && currentLoadTime > 0 && isLoaded)
         {
             isLoaded = false;
             currentLoadTime = 0;

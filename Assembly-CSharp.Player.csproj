@@ -755,6 +755,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Unity.Recorder.Base.Player.csproj">
+      <Project>{56DF0C72-C40C-E69A-088C-B3799B53A05C}</Project>
+      <Name>Unity.Recorder.Base.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Timeline.Player.csproj">
       <Project>{52F93D3D-7453-135B-4593-3760FCF09E10}</Project>
       <Name>Unity.Timeline.Player</Name>
@@ -806,6 +810,10 @@
     <ProjectReference Include="Unity.VisualScripting.State.Player.csproj">
       <Project>{EDE44141-605E-08A5-96D8-A23D03FC0C3F}</Project>
       <Name>Unity.VisualScripting.State.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.Player.csproj">
+      <Project>{98D37F17-0A38-DD95-B1E3-BDE4535F6011}</Project>
+      <Name>Unity.Recorder.Player</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
