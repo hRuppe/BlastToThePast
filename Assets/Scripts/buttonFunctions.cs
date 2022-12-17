@@ -21,7 +21,14 @@ public class buttonFunctions : MonoBehaviour
 
     public void quit()
     {
-        Application.Quit();
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            return; 
+        }
+        else
+        {
+            Application.Quit();
+        }   
     }
 
     public void respawn()
